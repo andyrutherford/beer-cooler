@@ -3,12 +3,17 @@ import { connect } from 'react-redux';
 
 import { coolerGetProducts } from '../actions/cooler';
 
-const Cooler = ({ coolerGetProducts, cooler }) => {
+const Cooler = ({ coolerGetProducts, cooler: { cooler } }) => {
   useEffect(() => {
     coolerGetProducts();
   }, [coolerGetProducts]);
 
-  return <div>My cooler</div>;
+  return (
+    <section>
+      <h1>My Cooler</h1>
+      {cooler.length} items
+    </section>
+  );
 };
 
 const mapStateToProps = (state) => ({
