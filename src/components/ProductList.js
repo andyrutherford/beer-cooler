@@ -24,6 +24,7 @@ const ProductList = ({ getProducts, products: { products } }) => {
 
 ProductList.propTypes = {
   getProducts: PropTypes.func.isRequired,
+  products: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
