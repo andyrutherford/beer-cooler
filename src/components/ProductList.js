@@ -6,20 +6,17 @@ import { ProductItem } from './ProductItem';
 
 import { getProducts } from '../actions/products';
 
-const ProductList = ({ getProducts }) => {
-  const [beers, setBeers] = useState();
-
+const ProductList = ({ getProducts, products: { products } }) => {
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]);
 
   return (
     <section>
       <ul className='product-list'>
-        {beers &&
-          beers
-            .map((beer) => <ProductItem key={beer.id} beer={beer} />)
-            .slice(0, beers.length - 1)}
+        {products.map((p) => (
+          <ProductItem key={p.id} beer={p} />
+        ))}
       </ul>
     </section>
   );
@@ -29,4 +26,8 @@ ProductList.propTypes = {
   getProducts: PropTypes.func.isRequired,
 };
 
-export default connect(null, { getProducts })(ProductList);
+const mapStateToProps = (state) => ({
+  products: state.products,
+});
+
+export default connect(mapStateToProps, { getProducts })(ProductList);
