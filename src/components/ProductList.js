@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { ProductItem } from './ProductItem';
 
-export const ProductList = () => {
+import { getProducts } from '../actions/products';
+
+const ProductList = ({ getProducts }) => {
   const [beers, setBeers] = useState();
 
   useEffect(() => {
-    fetchProducts();
+    getProducts();
   }, []);
-
-  const fetchProducts = async () => {
-    try {
-      const res = await axios.get('https://api.punkapi.com/v2/beers');
-      setBeers(res.data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
   return (
     <section>
       <ul className='product-list'>
         {beers &&
           beers
-            .map((beer) => <ProductItem beer={beer} />)
+            .map((beer) => <ProductItem key={beer.id} beer={beer} />)
             .slice(0, beers.length - 1)}
       </ul>
     </section>
   );
 };
+
+ProductList.propTypes = {
+  getProducts: PropTypes.func.isRequired,
+};
+
+export default connect(null, { getProducts })(ProductList);

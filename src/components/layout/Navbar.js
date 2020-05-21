@@ -5,7 +5,7 @@ export const Navbar = () => {
   return (
     <nav className='navbar bg-dark'>
       <h1>
-        <a href='!#'>
+        <a href='/'>
           <i className='fas fa-beer'></i> BeerCooler
         </a>
       </h1>
