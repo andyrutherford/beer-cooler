@@ -1,6 +1,7 @@
 const initialState = {
   products: [],
   selectedProduct: null,
+  loading: true,
 };
 
 export default function (state = initialState, action) {
@@ -9,6 +10,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         products: action.payload,
+        loading: false,
       };
     case 'GET_PRODUCT_BY_ID':
       return {

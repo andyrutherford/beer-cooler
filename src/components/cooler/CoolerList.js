@@ -7,14 +7,16 @@ import { coolerGetProducts, coolerGetQuantity } from '../../actions/cooler';
 export const CoolerList = ({
   coolerGetProducts,
   coolerGetQuantity,
-  cooler: { cooler, quantity },
+  cooler: { cooler, quantity, loading },
 }) => {
   useEffect(() => {
     coolerGetProducts();
     coolerGetQuantity();
   }, [coolerGetProducts]);
 
-  return (
+  return loading ? (
+    <p>Loading...</p>
+  ) : (
     <div>
       Quantity: {quantity}
       <ul className='cooler-items-list'>
@@ -29,6 +31,7 @@ export const CoolerList = ({
 const mapStateToProps = (state) => ({
   cooler: state.cooler,
   quantity: state.quantity,
+  loading: state.loading,
 });
 
 export default connect(mapStateToProps, {

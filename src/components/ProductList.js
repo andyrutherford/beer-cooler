@@ -9,14 +9,16 @@ import { getProducts, clearSelectedProduct } from '../actions/products';
 const ProductList = ({
   getProducts,
   clearSelectedProduct,
-  products: { products },
+  products: { products, loading },
 }) => {
   useEffect(() => {
     clearSelectedProduct();
     getProducts(1);
   }, [getProducts]);
 
-  return (
+  return loading ? (
+    <p>Loading...</p>
+  ) : (
     <section>
       <ul className='product-list'>
         {products.map((p) => (
@@ -64,6 +66,7 @@ ProductList.propTypes = {
 
 const mapStateToProps = (state) => ({
   products: state.products,
+  loading: state.products.loading,
 });
 
 export default connect(mapStateToProps, { getProducts, clearSelectedProduct })(

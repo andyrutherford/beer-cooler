@@ -1,6 +1,7 @@
 const initialState = {
   cooler: [],
   quantity: 0,
+  loading: true,
 };
 
 export default function (state = initialState, action) {
@@ -8,6 +9,7 @@ export default function (state = initialState, action) {
     case 'COOLER_GET_PRODUCTS':
       return {
         ...state,
+        loading: false,
       };
     case 'COOLER_GET_QUANTITY':
       console.log();
