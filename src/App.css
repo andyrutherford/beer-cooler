@@ -375,6 +375,12 @@ button {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
+.product-page {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
 /* Profiles Page */
 .profile {
   display: grid;

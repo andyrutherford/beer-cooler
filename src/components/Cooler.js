@@ -12,6 +12,13 @@ const Cooler = ({ coolerGetProducts, cooler: { cooler } }) => {
     <section>
       <h1>My Cooler</h1>
       {cooler.length} items
+      <div>
+        <ul>
+          {cooler.map((p) => (
+            <p>{p.name}</p>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 };

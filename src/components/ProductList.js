@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import ProductItem from './ProductItem';
 
-import { getProducts } from '../actions/products';
+import { getProducts, clearSelectedProduct } from '../actions/products';
 
-const ProductList = ({ getProducts, products: { products } }) => {
+const ProductList = ({
+  getProducts,
+  clearSelectedProduct,
+  products: { products },
+}) => {
   useEffect(() => {
+    clearSelectedProduct();
     getProducts();
   }, [getProducts]);
 
@@ -24,6 +29,7 @@ const ProductList = ({ getProducts, products: { products } }) => {
 
 ProductList.propTypes = {
   getProducts: PropTypes.func.isRequired,
+  clearSelectedProduct: PropTypes.func.isRequired,
   products: PropTypes.object.isRequired,
 };
 
@@ -31,4 +37,6 @@ const mapStateToProps = (state) => ({
   products: state.products,
 });
 
-export default connect(mapStateToProps, { getProducts })(ProductList);
+export default connect(mapStateToProps, { getProducts, clearSelectedProduct })(
+  ProductList
+);

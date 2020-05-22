@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 
-import { Navbar } from './components/layout/Navbar';
+import Navbar from './components/layout/Navbar';
 import { Routes } from './components/routing/Routes';
 
 const App = () => {

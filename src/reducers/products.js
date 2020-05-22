@@ -1,5 +1,6 @@
 const initialState = {
   products: [],
+  selectedProduct: null,
 };
 
 export default function (state = initialState, action) {
@@ -8,6 +9,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         products: action.payload,
+      };
+    case 'GET_PRODUCT_BY_ID':
+      return {
+        ...state,
+        selectedProduct: action.payload,
+      };
+    case 'CLEAR_SELECTED_PRODUCT':
+      return {
+        ...state,
+        selectedProduct: null,
       };
     default:
       return state;
