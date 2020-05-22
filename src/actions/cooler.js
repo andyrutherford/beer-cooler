@@ -5,6 +5,12 @@ export const coolerGetProducts = () => (dispatch) => {
   });
 };
 
+export const coolerGetQuantity = () => (dispatch) => {
+  dispatch({
+    type: 'COOLER_GET_QUANTITY',
+  });
+};
+
 export const coolerAddProduct = (beer) => (dispatch) => {
   // Add a quantity field to item
   const product = { ...beer, quantity: 1 };

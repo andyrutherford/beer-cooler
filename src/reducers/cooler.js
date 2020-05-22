@@ -1,5 +1,6 @@
 const initialState = {
   cooler: [],
+  quantity: 0,
 };
 
 export default function (state = initialState, action) {
@@ -7,6 +8,15 @@ export default function (state = initialState, action) {
     case 'COOLER_GET_PRODUCTS':
       return {
         ...state,
+      };
+    case 'COOLER_GET_QUANTITY':
+      console.log();
+      return {
+        ...state,
+        quantity:
+          state.cooler.length > 0
+            ? state.cooler.map((i) => i.quantity).reduce((a, b) => a + b)
+            : 0,
       };
     case 'COOLER_ADD_PRODUCT':
       // If item is already in cooler, increment quantity
