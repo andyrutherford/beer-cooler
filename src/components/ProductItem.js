@@ -15,7 +15,9 @@ const ProductItem = ({ beer, coolerAddProduct }) => {
         <img src={beer.image_url} alt={beer.name} />
       </Link>
       <div className='product-item'>{beer.name}</div>
-      <button onClick={addToCoolerHandler}>Add to Cooler</button>
+      <button className='btn' onClick={addToCoolerHandler}>
+        Add to Cooler
+      </button>
     </li>
   );
 };

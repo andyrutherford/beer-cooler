@@ -5,10 +5,12 @@ export const coolerGetProducts = () => (dispatch) => {
   });
 };
 
-export const coolerAddProduct = (id) => (dispatch) => {
-  console.log('cooler add product');
+export const coolerAddProduct = (beer) => (dispatch) => {
+  // Add a quantity field to item
+  const product = { ...beer, quantity: 1 };
+
   dispatch({
     type: 'COOLER_ADD_PRODUCT',
-    payload: id,
+    payload: product,
   });
 };

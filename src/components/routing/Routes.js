@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import ProductList from '../ProductList';
 import ProductPage from '../ProductPage';
-import Cooler from '../Cooler';
+import Cooler from '../cooler/Cooler';
 
 export const Routes = () => {
   return (

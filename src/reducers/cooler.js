@@ -9,10 +9,26 @@ export default function (state = initialState, action) {
         ...state,
       };
     case 'COOLER_ADD_PRODUCT':
-      return {
-        ...state,
-        cooler: state.cooler.concat(action.payload),
-      };
+      // If item is already in cooler, increment quantity
+      const itemExists = state.cooler.find((i) => i.id === action.payload.id);
+
+      if (itemExists) {
+        const updateQuantity = {
+          ...itemExists,
+          quantity: itemExists.quantity++,
+        };
+        return {
+          ...state,
+          cooler: state.cooler.filter((i) =>
+            i.id === updateQuantity.id ? updateQuantity : i
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          cooler: state.cooler.concat(action.payload),
+        };
+      }
     default:
       return state;
   }

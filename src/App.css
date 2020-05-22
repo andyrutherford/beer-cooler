@@ -381,6 +381,20 @@ button {
   grid-gap: 10px;
 }
 
+/* Cooler */
+
+.cooler-item {
+  display: grid;
+  border: 1px black dashed;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+.cooler-item img {
+  height: 200px;
+  width: 150px;
+}
+
 /* Profiles Page */
 .profile {
   display: grid;
