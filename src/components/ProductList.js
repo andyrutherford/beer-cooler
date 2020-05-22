@@ -13,7 +13,7 @@ const ProductList = ({
 }) => {
   useEffect(() => {
     clearSelectedProduct();
-    getProducts();
+    getProducts(1);
   }, [getProducts]);
 
   return (
@@ -23,6 +23,35 @@ const ProductList = ({
           <ProductItem key={p.id} beer={p} />
         ))}
       </ul>
+      <nav>
+        <ul className='pagination'>
+          <li onClick={() => getProducts(1)} className='page-item'>
+            <a href='#' className='page-link'>
+              {1}
+            </a>
+          </li>
+          <li onClick={() => getProducts(2)} className='page-item'>
+            <a href='#' className='page-link'>
+              {2}
+            </a>
+          </li>
+          <li className='page-item'>
+            <a onClick={() => getProducts(3)} href='#' className='page-link'>
+              {3}
+            </a>
+          </li>
+          <li className='page-item'>
+            <a onClick={() => getProducts(4)} href='#' className='page-link'>
+              {4}
+            </a>
+          </li>
+          <li className='page-item'>
+            <a onClick={() => getProducts(5)} href='#' className='page-link'>
+              {5}
+            </a>
+          </li>
+        </ul>
+      </nav>
     </section>
   );
 };

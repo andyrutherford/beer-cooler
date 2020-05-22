@@ -1,12 +1,14 @@
 import axios from 'axios';
 
-export const getProducts = () => async (dispatch) => {
+export const getProducts = (page) => async (dispatch) => {
   try {
-    const res = await axios.get('https://api.punkapi.com/v2/beers');
+    const res = await axios.get(
+      `https://api.punkapi.com/v2/beers?page=${page}`
+    );
 
     dispatch({
       type: 'GET_PRODUCTS',
-      payload: res.data,
+      payload: res.data.slice(0, res.data.length - 1),
     });
   } catch (err) {
     console.log(err.message);
