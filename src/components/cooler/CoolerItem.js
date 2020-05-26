@@ -4,7 +4,7 @@ export const CoolerItem = ({ item }) => {
   return (
     <li className='cooler-item'>
       <div>
-        <img src={item.image_url} />
+        <img src={item.image_url} alt={item.name} />
       </div>
       <div>
         <p>{item.name}</p>

@@ -12,7 +12,7 @@ export const CoolerList = ({
   useEffect(() => {
     coolerGetProducts();
     coolerGetQuantity();
-  }, [coolerGetProducts]);
+  }, [coolerGetProducts, coolerGetQuantity]);
 
   return loading ? (
     <p>Loading...</p>

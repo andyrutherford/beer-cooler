@@ -12,6 +12,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Navbar />
+
         <Switch>
           <Route component={Routes} />
         </Switch>

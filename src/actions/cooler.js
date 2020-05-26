@@ -1,5 +1,6 @@
+import { setAlert } from './alert';
+
 export const coolerGetProducts = () => (dispatch) => {
-  console.log('get items in cooler action');
   dispatch({
     type: 'COOLER_GET_PRODUCTS',
   });
@@ -12,6 +13,8 @@ export const coolerGetQuantity = () => (dispatch) => {
 };
 
 export const coolerAddProduct = (beer) => (dispatch) => {
+  dispatch(setAlert('Item added to cooler.'));
+
   // Add a quantity field to item
   const product = { ...beer, quantity: 1 };
 

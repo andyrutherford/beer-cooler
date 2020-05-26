@@ -42,7 +42,6 @@ img {
   padding: 0 2rem;
   margin-top: 6rem;
   margin-bottom: 3rem;
-  border: 1px black dotted;
 }
 
 /* Text Styles*/
@@ -357,18 +356,11 @@ button {
   grid-gap: 10px;
 }
 
-.product-item {
-  margin: auto;
-  max-width: 300px;
-  border: 1px black dotted;
-}
-
 .product-item img {
-  border: 1px solid #ddd;
-  border-radius: 4px;
   padding: 5px;
-  width: 150px;
-  max-height: 300px;
+  width: 50%;
+  max-height: 250px;
+  margin: auto;
 }
 
 .product-item img:hover {

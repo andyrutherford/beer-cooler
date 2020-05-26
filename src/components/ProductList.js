@@ -14,7 +14,7 @@ const ProductList = ({
   useEffect(() => {
     clearSelectedProduct();
     getProducts(1);
-  }, [getProducts]);
+  }, [getProducts, getProducts]);
 
   return loading ? (
     <p>Loading...</p>

@@ -12,7 +12,7 @@ export const ProductPage = ({
 }) => {
   useEffect(() => {
     getProductById(parseInt(match.params.id));
-  }, [getProductById]);
+  }, [getProductById, match.params.id]);
 
   const addToCoolerHandler = (e) => {
     coolerAddProduct(product);
@@ -22,7 +22,7 @@ export const ProductPage = ({
     <>
       {product && (
         <section className='product-page'>
-          <img src={product.image_url} />
+          <img src={product.image_url} alt={product.name} />
           <div>
             {' '}
             <h1>{product.name}</h1>

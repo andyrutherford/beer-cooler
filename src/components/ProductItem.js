@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -10,15 +10,17 @@ const ProductItem = ({ beer, coolerAddProduct }) => {
   };
 
   return (
-    <li className='product-item'>
-      <Link to={`/beers/${beer.id}`}>
-        <img src={beer.image_url} alt={beer.name} />
-      </Link>
-      <div className='product-item'>{beer.name}</div>
-      <button className='btn' onClick={addToCoolerHandler}>
-        Add to Cooler
-      </button>
-    </li>
+    <div className='card product-item'>
+      <img className='card-img-top' src={beer.image_url} alt={beer.name} />
+      <div className='card-body'>
+        <Link to={`/beers/${beer.id}`}>
+          <h5 className='card-title product-item'>{beer.name}</h5>
+        </Link>
+        <button className='btn btn-primary' onClick={addToCoolerHandler}>
+          Add to Cooler
+        </button>
+      </div>
+    </div>
   );
 };
 
