@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { CoolerItem } from './CoolerItem';
+import CoolerItem from './CoolerItem';
 import { coolerGetProducts, coolerGetQuantity } from '../../actions/cooler';
 
 export const CoolerList = ({

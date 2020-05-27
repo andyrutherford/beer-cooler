@@ -373,13 +373,16 @@ button {
 
 .cooler-item {
   display: grid;
-  border: 1px black dashed;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
 }
 
+.cooler-item-image {
+  text-align: center;
+}
+
 .cooler-item img {
-  height: 200px;
+  height: 300px;
   width: 150px;
 }
 

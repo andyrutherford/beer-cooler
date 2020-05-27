@@ -23,3 +23,19 @@ export const coolerAddProduct = (beer, quantity) => (dispatch) => {
     payload: product,
   });
 };
+
+export const coolerRemoveProduct = (id) => (dispatch) => {
+  dispatch(setAlert('Item removed.'));
+  dispatch({
+    type: 'COOLER_REMOVE_PRODUCT',
+    payload: id,
+  });
+  dispatch(coolerGetQuantity());
+};
+
+export const coolerUpdateQuantity = (id, quantity) => (dispatch) => {
+  dispatch({
+    type: 'COOLER_UPDATE_QUANTITY',
+    payload: { id, quantity },
+  });
+};

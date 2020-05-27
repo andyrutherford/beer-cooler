@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { coolerAddProduct } from '../actions/cooler';
+import { coolerAddProduct, coolerUpdateQuantity } from '../actions/cooler';
 
-const ProductItem = ({ beer, coolerAddProduct }) => {
+const ProductItem = ({ beer, coolerAddProduct, coolerUpdateQuantity }) => {
   const [quantity, setQuantity] = useState(1);
 
   const addToCoolerHandler = (e) => {
     e.preventDefault();
     coolerAddProduct(beer, parseInt(quantity));
     setQuantity(1);
+    coolerUpdateQuantity();
   };
 
   return (
@@ -41,4 +42,6 @@ const ProductItem = ({ beer, coolerAddProduct }) => {
   );
 };
 
-export default connect(null, { coolerAddProduct })(ProductItem);
+export default connect(null, { coolerAddProduct, coolerUpdateQuantity })(
+  ProductItem
+);

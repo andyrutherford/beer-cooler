@@ -41,6 +41,13 @@ export default function (state = initialState, action) {
           cooler: state.cooler.concat(action.payload),
         };
       }
+    case 'COOLER_REMOVE_PRODUCT':
+      return {
+        ...state,
+        cooler: state.cooler.filter((i) => i.id !== action.payload),
+      };
+    case 'COOLER_UPDATE_QUANTITY':
+      return state;
     default:
       return state;
   }

@@ -3,7 +3,7 @@ import CoolerList from './CoolerList';
 
 const Cooler = () => {
   return (
-    <section className='card'>
+    <section>
       <h1>My Cooler</h1>
 
       <div>
