@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { coolerAddProduct } from '../actions/cooler';
 
 const ProductItem = ({ beer, coolerAddProduct }) => {
+  const [quantity, setQuantity] = useState(1);
+
   const addToCoolerHandler = (e) => {
-    coolerAddProduct(beer);
+    e.preventDefault();
+    coolerAddProduct(beer, parseInt(quantity));
+    setQuantity(1);
   };
 
   return (
@@ -16,9 +20,22 @@ const ProductItem = ({ beer, coolerAddProduct }) => {
         <Link to={`/beers/${beer.id}`}>
           <h5 className='card-title product-item'>{beer.name}</h5>
         </Link>
-        <button className='btn btn-primary' onClick={addToCoolerHandler}>
-          Add to Cooler
-        </button>
+        <form onSubmit={addToCoolerHandler}>
+          <div className='form-row'>
+            <div className='col'>
+              <input
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                type='number'
+                className='form-control'
+                placeholder='Quantity'
+              />
+            </div>
+            <div className='col'>
+              <input className='btn btn-primary' type='submit' value='Add' />
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   );

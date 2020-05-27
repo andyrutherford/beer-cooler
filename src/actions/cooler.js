@@ -12,11 +12,11 @@ export const coolerGetQuantity = () => (dispatch) => {
   });
 };
 
-export const coolerAddProduct = (beer) => (dispatch) => {
-  dispatch(setAlert('Item added to cooler.'));
+export const coolerAddProduct = (beer, quantity) => (dispatch) => {
+  dispatch(setAlert(`${quantity}x ${beer.name} added to cooler.`));
 
   // Add a quantity field to item
-  const product = { ...beer, quantity: 1 };
+  const product = { ...beer, quantity };
 
   dispatch({
     type: 'COOLER_ADD_PRODUCT',

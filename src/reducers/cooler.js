@@ -27,7 +27,7 @@ export default function (state = initialState, action) {
       if (itemExists) {
         const updateQuantity = {
           ...itemExists,
-          quantity: itemExists.quantity++,
+          quantity: (itemExists.quantity += action.payload.quantity),
         };
         return {
           ...state,

@@ -21,11 +21,12 @@ export const ProductPage = ({
   return (
     <>
       {product && (
-        <section className='product-page'>
+        <section className=' card product-page'>
           <img src={product.image_url} alt={product.name} />
           <div>
             {' '}
             <h1>{product.name}</h1>
+            <p style={{ fontStyle: 'italic' }}>{product.tagline}</p>
             <p>ABV: {product.abv}</p>
             <p>{product.description}</p>
             <p>{product.brewers_tips}</p>
