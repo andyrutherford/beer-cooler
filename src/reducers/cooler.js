@@ -47,7 +47,14 @@ export default function (state = initialState, action) {
         cooler: state.cooler.filter((i) => i.id !== action.payload),
       };
     case 'COOLER_UPDATE_QUANTITY':
-      return state;
+      const update = state.cooler.find((i) => i.id === action.payload.id);
+      update.quantity = action.payload.quantity;
+      return {
+        ...state,
+        cooler: state.cooler.map((i) =>
+          i.id !== action.payload.id ? i : update
+        ),
+      };
     default:
       return state;
   }

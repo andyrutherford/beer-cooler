@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { coolerAddProduct, coolerUpdateQuantity } from '../actions/cooler';
+import { coolerAddProduct } from '../actions/cooler';
 
-const ProductItem = ({ beer, coolerAddProduct, coolerUpdateQuantity }) => {
+const ProductItem = ({ beer, coolerAddProduct }) => {
   const [quantity, setQuantity] = useState(1);
 
   const addToCoolerHandler = (e) => {
     e.preventDefault();
     coolerAddProduct(beer, parseInt(quantity));
     setQuantity(1);
-    coolerUpdateQuantity();
   };
 
   return (
@@ -26,6 +25,7 @@ const ProductItem = ({ beer, coolerAddProduct, coolerUpdateQuantity }) => {
             <div className='col'>
               <input
                 value={quantity}
+                min={1}
                 onChange={(e) => setQuantity(e.target.value)}
                 type='number'
                 className='form-control'
@@ -42,6 +42,4 @@ const ProductItem = ({ beer, coolerAddProduct, coolerUpdateQuantity }) => {
   );
 };
 
-export default connect(null, { coolerAddProduct, coolerUpdateQuantity })(
-  ProductItem
-);
+export default connect(null, { coolerAddProduct })(ProductItem);

@@ -15,7 +15,7 @@ const CoolerItem = ({ item, coolerUpdateQuantity, coolerRemoveProduct }) => {
   };
 
   const removeProductHandler = () => {
-    coolerRemoveProduct(item.id);
+    coolerRemoveProduct(item.id, item.name);
   };
 
   return (
@@ -38,6 +38,7 @@ const CoolerItem = ({ item, coolerUpdateQuantity, coolerRemoveProduct }) => {
                 type='number'
                 className='form-control'
                 value={quantity}
+                min={1}
                 onChange={(e) => setQuantity(e.target.value)}
               />
             </div>

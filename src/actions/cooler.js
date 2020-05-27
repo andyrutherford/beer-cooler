@@ -24,8 +24,8 @@ export const coolerAddProduct = (beer, quantity) => (dispatch) => {
   });
 };
 
-export const coolerRemoveProduct = (id) => (dispatch) => {
-  dispatch(setAlert('Item removed.'));
+export const coolerRemoveProduct = (id, name) => (dispatch) => {
+  dispatch(setAlert(`${name} has been removed.`));
   dispatch({
     type: 'COOLER_REMOVE_PRODUCT',
     payload: id,
@@ -38,4 +38,5 @@ export const coolerUpdateQuantity = (id, quantity) => (dispatch) => {
     type: 'COOLER_UPDATE_QUANTITY',
     payload: { id, quantity },
   });
+  dispatch(coolerGetQuantity());
 };
