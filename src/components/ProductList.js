@@ -20,9 +20,9 @@ const ProductList = ({
     <p>Loading...</p>
   ) : (
     <section>
-      <ul className='product-list'>
+      <ul className='product-list card-deck'>
         {products.map((p) => (
-          <ProductItem key={p.id} beer={p} />
+          <ProductItem key={p.id} item={p} />
         ))}
       </ul>
       <nav className='pagination-nav'>

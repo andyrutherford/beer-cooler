@@ -4,21 +4,23 @@ import { Link } from 'react-router-dom';
 
 import { coolerAddProduct } from '../actions/cooler';
 
-const ProductItem = ({ beer, coolerAddProduct }) => {
+const ProductItem = ({ item, coolerAddProduct }) => {
   const [quantity, setQuantity] = useState(1);
 
   const addToCoolerHandler = (e) => {
     e.preventDefault();
-    coolerAddProduct(beer, parseInt(quantity));
+    coolerAddProduct(item, parseInt(quantity));
     setQuantity(1);
   };
 
   return (
     <div className='card product-item'>
-      <img className='card-img-top' src={beer.image_url} alt={beer.name} />
+      <Link to={`/beers/${item.id}`}>
+        <img className='card-img-top' src={item.image_url} alt={item.name} />
+      </Link>
       <div className='card-body'>
-        <Link to={`/beers/${beer.id}`}>
-          <h5 className='card-title product-item'>{beer.name}</h5>
+        <Link to={`/beers/${item.id}`}>
+          <h5 className='card-title product-item'>{item.name}</h5>
         </Link>
         <form onSubmit={addToCoolerHandler}>
           <div className='form-row'>
