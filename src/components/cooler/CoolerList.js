@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import CoolerItem from './CoolerItem';
-import { coolerGetProducts, coolerGetQuantity } from '../../actions/cooler';
+import {
+  coolerGetProducts,
+  coolerGetQuantity,
+  coolerRemoveProduct,
+} from '../../actions/cooler';
 
 export const CoolerList = ({
   coolerGetProducts,
@@ -13,6 +17,10 @@ export const CoolerList = ({
     coolerGetProducts();
     coolerGetQuantity();
   }, [coolerGetProducts, coolerGetQuantity]);
+
+  if (cooler.length === 0) {
+    return <p>Your cooler is empty.</p>;
+  }
 
   return loading ? (
     <p>Loading...</p>

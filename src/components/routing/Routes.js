@@ -10,6 +10,7 @@ export const Routes = () => {
   return (
     <section className='container'>
       <Alert />
+
       <Switch>
         <Route exact path='/' component={ProductList} />
         <Route exact path='/beers/:id' component={ProductPage} />

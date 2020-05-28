@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { getProductById } from '../actions/products';
 import { coolerAddProduct } from '../actions/cooler';
+import Breadcrumb from '../components/layout/Breadcrumb';
 
 export const ProductPage = ({
   getProductById,
@@ -24,6 +25,7 @@ export const ProductPage = ({
 
   return (
     <>
+      <Breadcrumb />
       {item && (
         <section className=' card product-page'>
           <img src={item.image_url} alt={item.name} />
