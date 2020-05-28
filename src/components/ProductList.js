@@ -25,6 +25,7 @@ const ProductList = ({
           <ProductItem key={p.id} item={p} />
         ))}
       </ul>
+
       <nav className='pagination-nav'>
         <ul className='pagination'>
           <li onClick={() => getProducts(1)} className='page-item'>

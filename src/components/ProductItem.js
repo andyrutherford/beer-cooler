@@ -24,7 +24,7 @@ const ProductItem = ({ item, coolerAddProduct }) => {
         </Link>
         <form onSubmit={addToCoolerHandler}>
           <div className='form-row'>
-            <div className='col'>
+            <div className='col-md-5'>
               <input
                 value={quantity}
                 min={1}

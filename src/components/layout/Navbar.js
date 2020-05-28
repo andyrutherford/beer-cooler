@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = ({ cooler }) => {
   return (
@@ -11,6 +11,12 @@ const Navbar = ({ cooler }) => {
         </Link>
       </h1>
       <ul>
+        <li>
+          <NavLink to='#!'>Login</NavLink>
+        </li>
+        <li>
+          <NavLink to='/signup'>Signup</NavLink>
+        </li>
         <li>
           {cooler === 0 ? (
             <Link to='/cooler'>My Cooler</Link>

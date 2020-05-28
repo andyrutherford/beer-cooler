@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import {
@@ -24,7 +25,9 @@ const CoolerItem = ({ item, coolerUpdateQuantity, coolerRemoveProduct }) => {
         <img src={item.image_url} alt={item.name} />
       </div>
       <div className='card-body'>
-        <h5 className='card-title'>{item.name}</h5>
+        <h5 className='card-title'>
+          <Link to={`/beers/${item.id}`}>{item.name}</Link>
+        </h5>
         <h6 className='card-subtitle mb-2 text-muted font-weight-light font-italic'>
           {item.tagline}
         </h6>
@@ -32,8 +35,8 @@ const CoolerItem = ({ item, coolerUpdateQuantity, coolerRemoveProduct }) => {
         <p className='card-text'>{item.description}</p>
         <form onSubmit={updateQuantityHandler}>
           <div className='form-row'>
-            <label>Quantity: </label>
-            <div>
+            <label className='col'>Quantity: </label>
+            <div className='col'>
               <input
                 type='number'
                 className='form-control'
