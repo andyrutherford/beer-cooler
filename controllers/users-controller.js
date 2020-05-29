@@ -1,5 +1,14 @@
 const User = require('../models/User');
 
+// Get all users
+exports.getUsers = async (req, res, next) => {
+  try {
+    return res.status(200).json({
+      success: 'true',
+    });
+  } catch (error) {}
+};
+
 // @desc    Create a new user
 // @route   POST /api/v1/auth
 // @access  PUBLIC
