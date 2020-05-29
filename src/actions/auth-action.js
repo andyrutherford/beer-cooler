@@ -40,3 +40,10 @@ export const loginUser = (userData) => async (dispatch) => {
     dispatch(setAlert(error.response.data.error));
   }
 };
+
+export const logoutUser = () => (dispatch) => {
+  dispatch({
+    type: 'LOGOUT_USER',
+  });
+  dispatch(setAlert('You have successfully logged out.'));
+};

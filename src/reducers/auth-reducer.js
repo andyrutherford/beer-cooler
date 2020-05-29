@@ -17,6 +17,12 @@ export default function (state = initialState, action) {
         user: action.payload,
         isAuthenticated: true,
       };
+    case 'LOGOUT_USER':
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false,
+      };
     case 'LOGIN_USER_ERROR':
     case 'SIGNUP_USER_ERROR':
     default:
