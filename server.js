@@ -10,7 +10,7 @@ dotenv.config({ path: './config/config.env' });
 connectDB();
 
 // Routes
-const users = require('./routes/users-route');
+const users = require('./routes/auth-route');
 
 const app = express();
 
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-app.use('/api/v1/users', users);
+app.use('/api/v1/auth', users);
 app.get('/', (req, res) => res.send('Beer Cooler API v1'));
 
 const PORT = process.env.PORT || 5000;

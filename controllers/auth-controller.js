@@ -10,7 +10,7 @@ exports.getUsers = async (req, res, next) => {
 };
 
 // @desc    Create a new user
-// @route   POST /api/v1/auth
+// @route   POST /api/v1/auth/signup
 // @access  PUBLIC
 exports.createUser = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -44,5 +44,42 @@ exports.createUser = async (req, res, next) => {
         success: false,
         error: error,
       });
+  }
+};
+
+// @desc  Login user
+// @route POST /api/v1/auth/login
+// @access  PUBLIC
+exports.loginUser = async (req, res, next) => {
+  const { email, password } = req.body;
+  console.log(email, password);
+  try {
+    // See if user already exists
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        error: 'User not found',
+      });
+    }
+    return res.json({
+      success: true,
+      user: email,
+    });
+  } catch (error) {
+    if (err.name === 'ValidationError') {
+      const messages = Object.values(err.errors).map((val) => val.message);
+
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    } else {
+      return res.status(500).json({
+        sucess: false,
+        error: 'Server error',
+      });
+    }
   }
 };
