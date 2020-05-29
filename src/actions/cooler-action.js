@@ -1,4 +1,4 @@
-import { setAlert } from './alert';
+import { setAlert } from './alert-action';
 
 export const coolerGetProducts = () => (dispatch) => {
   dispatch({

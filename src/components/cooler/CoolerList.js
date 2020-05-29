@@ -6,7 +6,7 @@ import {
   coolerGetProducts,
   coolerGetQuantity,
   coolerRemoveProduct,
-} from '../../actions/cooler';
+} from '../../actions/cooler-action';
 
 export const CoolerList = ({
   coolerGetProducts,

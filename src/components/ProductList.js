@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import ProductItem from './ProductItem';
 
-import { getProducts, clearSelectedProduct } from '../actions/products';
+import { getProducts, clearSelectedProduct } from '../actions/products-action';
 
 const ProductList = ({
   getProducts,

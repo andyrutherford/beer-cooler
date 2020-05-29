@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {
   coolerUpdateQuantity,
   coolerRemoveProduct,
-} from '../../actions/cooler';
+} from '../../actions/cooler-action';
 
 const CoolerItem = ({ item, coolerUpdateQuantity, coolerRemoveProduct }) => {
   const [quantity, setQuantity] = useState(item.quantity);
@@ -25,9 +25,9 @@ const CoolerItem = ({ item, coolerUpdateQuantity, coolerRemoveProduct }) => {
         <img src={item.image_url} alt={item.name} />
       </div>
       <div className='card-body'>
-        <h5 className='card-title'>
+        <h2 className='card-title'>
           <Link to={`/beers/${item.id}`}>{item.name}</Link>
-        </h5>
+        </h2>
         <h6 className='card-subtitle mb-2 text-muted font-weight-light font-italic'>
           {item.tagline}
         </h6>
@@ -48,11 +48,13 @@ const CoolerItem = ({ item, coolerUpdateQuantity, coolerRemoveProduct }) => {
             <div className='col'>
               <input className='btn btn-primary' type='submit' value='Update' />
             </div>
+            <div className='col'>
+              <button className='btn btn-danger' onClick={removeProductHandler}>
+                Remove
+              </button>
+            </div>
           </div>
         </form>
-        <button className='btn btn-danger' onClick={removeProductHandler}>
-          Remove
-        </button>
       </div>
     </li>
   );

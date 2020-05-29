@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { getProductById } from '../actions/products';
-import { coolerAddProduct } from '../actions/cooler';
+import { getProductById } from '../actions/products-action';
+import { coolerAddProduct } from '../actions/cooler-action';
 import Breadcrumb from '../components/layout/Breadcrumb';
 
 export const ProductPage = ({

@@ -6,6 +6,7 @@ import ProductPage from '../ProductPage';
 import Cooler from '../cooler/Cooler';
 import Alert from '../layout/Alert';
 import Signup from '../Signup';
+import Login from '../Login';
 
 export const Routes = () => {
   return (
@@ -15,6 +16,7 @@ export const Routes = () => {
       <Switch>
         <Route exact path='/' component={ProductList} />
         <Route exact path='/signup' component={Signup} />
+        <Route exact path='/login' component={Login} />
         <Route exact path='/beers/:id' component={ProductPage} />
         <Route exact path='/cooler' component={Cooler} />
       </Switch>

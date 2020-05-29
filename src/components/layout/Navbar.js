@@ -12,7 +12,7 @@ const Navbar = ({ cooler }) => {
       </h1>
       <ul>
         <li>
-          <NavLink to='#!'>Login</NavLink>
+          <NavLink to='/login'>Login</NavLink>
         </li>
         <li>
           <NavLink to='/signup'>Signup</NavLink>

@@ -1,6 +1,6 @@
 const initialState = {
   user: null,
-  isAuthenticated: null,
+  isAuthenticated: false,
 };
 
 export default function (state = initialState, action) {
@@ -11,6 +11,14 @@ export default function (state = initialState, action) {
         user: action.payload,
         isAuthenticated: true,
       };
+    case 'LOGIN_USER':
+      return {
+        ...state,
+        user: action.payload,
+        isAuthenticated: true,
+      };
+    case 'LOGIN_USER_ERROR':
+    case 'SIGNUP_USER_ERROR':
     default:
       return state;
   }

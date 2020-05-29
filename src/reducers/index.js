@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import products from './products';
-import cooler from './cooler';
-import alert from './alert';
-import user from './user';
+import products from './products-reducer';
+import cooler from './cooler-reducer';
+import alert from './alert-reducer';
+import auth from './auth-reducer';
 export default combineReducers({
   products,
   cooler,
   alert,
-  user,
+  auth,
 });

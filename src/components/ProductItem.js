@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { coolerAddProduct } from '../actions/cooler';
+import { coolerAddProduct } from '../actions/cooler-action';
 
 const ProductItem = ({ item, coolerAddProduct }) => {
   const [quantity, setQuantity] = useState(1);
