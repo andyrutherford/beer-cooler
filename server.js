@@ -11,7 +11,8 @@ connectDB();
 
 // Routes
 const users = require('./routes/auth-route');
-const beers = require('./routes/beer-route');
+const profile = require('./routes/profile-route');
+// const beers = require('./routes/beer-route');
 
 const app = express();
 
@@ -23,7 +24,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use('/api/v1/auth', users);
-app.use('/api/v1/beers', beers);
+app.use('/api/v1/profile', profile);
+// app.use('/api/v1/beers', beers);
 app.get('/', (req, res) => res.send('Beer Cooler API v1'));
 
 const PORT = process.env.PORT || 5000;
