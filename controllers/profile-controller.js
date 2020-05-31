@@ -1,7 +1,7 @@
 const Profile = require('../models/Profile');
 const User = require('../models/User');
 
-// @desc    Get all user beers
+// @desc    Get current users profile
 // @route   GET api/v1/profile/me
 exports.getUserProfile = async (req, res, next) => {
   const userId = req.headers.user;
@@ -30,7 +30,7 @@ exports.getUserProfile = async (req, res, next) => {
 
 // @desc  Create and update user profile
 // @route POST api/v1/profile
-exports.createUserProfile = async (req, res, nex) => {
+exports.createUserProfile = async (req, res, next) => {
   const { location, cooler } = req.body;
   const userId = req.headers.user;
   let currentBeers;
@@ -58,6 +58,21 @@ exports.createUserProfile = async (req, res, nex) => {
     res.json({
       success: true,
       profile,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+};
+
+// @desc  Get all user profiles
+// @route GET api/v1/profile
+exports.getAllProfiles = async (req, res, next) => {
+  try {
+    const profiles = await Profile.find().populate('user', ['name', 'email']);
+    res.json({
+      success: true,
+      profiles,
     });
   } catch (error) {
     console.error(error.message);
