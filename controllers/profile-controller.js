@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const Profile = require('../models/Profile');
 const User = require('../models/User');
 
@@ -77,5 +79,33 @@ exports.getAllProfiles = async (req, res, next) => {
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server error');
+  }
+};
+
+// @desc  Get profile by userId
+// @route GET api/v1/profile/user/:user_id
+exports.getProfileById = async ({ params: { user_id } }, res, next) => {
+  // Make sure user_id is a valid mongoose ObjectId
+  if (!mongoose.Types.ObjectId.isValid(user_id))
+    return res.status(400).json({ success: false, error: 'Invalid user ID' });
+  try {
+    const profile = await Profile.findOne({
+      user: user_id,
+    }).populate('user', ['name', 'email']);
+    console.log(profile);
+
+    if (!profile) {
+      return res.status(400).json({
+        success: false,
+        error: 'Profile not found',
+      });
+    }
+    return res.json({
+      success: true,
+      profile,
+    });
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ msg: 'Server error ' });
   }
 };
