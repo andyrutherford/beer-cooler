@@ -92,13 +92,40 @@ exports.loginUser = async (req, res, next) => {
         error: 'User not found',
       });
     }
-    return res.json({
-      success: true,
-      user: email,
-    });
+
+    // Decrypt stored password and compare
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid credentials',
+      });
+    }
+
+    const payload = {
+      user: {
+        email: user.email,
+        id: user.id,
+      },
+    };
+
+    jwt.sign(
+      payload,
+      process.env.JWT_SECRET,
+      { expiresIn: 360000 },
+      (err, token) => {
+        if (err) throw err;
+        res.json({
+          success: true,
+          token,
+        });
+      }
+    );
   } catch (error) {
-    if (err.name === 'ValidationError') {
-      const messages = Object.values(err.errors).map((val) => val.message);
+    console.log(error);
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
 
       return res.status(400).json({
         success: false,
