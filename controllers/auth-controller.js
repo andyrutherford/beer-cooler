@@ -2,10 +2,10 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// Get users
+// Get user by token
 exports.getUser = async (req, res, next) => {
   try {
-    const user = await (await User.findById(req.user.id)).select('-password');
+    const user = await User.findById(req.user.id).select('-password');
     res.json(user);
   } catch (error) {
     console.error(error.message);
@@ -83,7 +83,6 @@ exports.createUser = async (req, res, next) => {
 // @access  PUBLIC
 exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
-  console.log(email, password);
   try {
     // See if user already exists
     let user = await User.findOne({ email });
@@ -119,7 +118,6 @@ exports.loginUser = async (req, res, next) => {
       (err, token) => {
         if (err) throw err;
         res.json({
-          success: true,
           token,
         });
       }

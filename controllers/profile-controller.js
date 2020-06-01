@@ -6,10 +6,11 @@ const User = require('../models/User');
 // @desc    Get current users profile
 // @route   GET api/v1/profile/me
 exports.getUserProfile = async (req, res, next) => {
-  const userId = req.headers.user;
+  const userId = req.user.id;
+  console.log(userId);
   try {
     const profile = await Profile.findOne({
-      _id: userId,
+      user: userId,
     });
 
     if (!profile) {
@@ -42,7 +43,7 @@ exports.getUserProfile = async (req, res, next) => {
 // @route POST api/v1/profile
 exports.createUserProfile = async (req, res, next) => {
   const { location, cooler } = req.body;
-  const userId = req.headers.user;
+  const user = req.user.id;
   let currentBeers;
 
   try {
@@ -54,7 +55,7 @@ exports.createUserProfile = async (req, res, next) => {
   } catch (error) {}
 
   const profileFields = {
-    user: userId,
+    user: req.user.id,
     location,
     coolwe: Array.isArray(cooler)
       ? cooler
@@ -63,7 +64,7 @@ exports.createUserProfile = async (req, res, next) => {
 
   try {
     let profile = await Profile.findOneAndUpdate(
-      { user: userId },
+      { user: req.user.id },
       { $set: profileFields },
       { new: true, upsert: true }
     );

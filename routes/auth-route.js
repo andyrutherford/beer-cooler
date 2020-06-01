@@ -5,8 +5,9 @@ const {
   createUser,
   loginUser,
 } = require('../controllers/auth-controller');
+const authMiddleware = require('../middleware/auth');
 
-router.route('/').get(getUser);
+router.route('/').get(authMiddleware, getUser);
 router.route('/signup').post(createUser);
 router.route('/login').post(loginUser);
 
