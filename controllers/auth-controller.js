@@ -2,13 +2,15 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// Get all users
-exports.getUsers = async (req, res, next) => {
+// Get users
+exports.getUser = async (req, res, next) => {
   try {
-    return res.status(200).json({
-      success: 'true',
-    });
-  } catch (error) {}
+    const user = await (await User.findById(req.user.id)).select('-password');
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
 };
 
 // @desc    Create a new user
@@ -99,7 +101,7 @@ exports.loginUser = async (req, res, next) => {
     if (!isMatch) {
       return res.status(400).json({
         success: false,
-        error: 'Invalid credentials',
+        error: 'Invalid credentials.  Please try again.',
       });
     }
 
