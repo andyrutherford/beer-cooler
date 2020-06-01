@@ -5,13 +5,15 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  switch (action.typ) {
-    case GET_PROFILE: {
+  switch (action.type) {
+    case 'GET_PROFILE': {
       return {
         ...state,
         profile: action.payload,
         loading: false,
       };
     }
+    default:
+      return state;
   }
 }

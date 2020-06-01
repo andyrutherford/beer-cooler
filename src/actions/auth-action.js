@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { setAlert } from './alert-action';
 import api from '../utils/api';
 
@@ -17,7 +15,7 @@ export const loadUser = () => async (dispatch) => {
 
 export const signupUser = (userData) => async (dispatch) => {
   try {
-    const res = await axios.post('/api/v1/auth/signup', userData, config);
+    const res = await api.post('/api/v1/auth/signup', userData, config);
     dispatch({
       type: 'SIGNUP_USER',
       payload: res.data,
@@ -35,7 +33,7 @@ export const signupUser = (userData) => async (dispatch) => {
 
 export const loginUser = (userData) => async (dispatch) => {
   try {
-    const res = await axios.post('/api/v1/auth/login', userData, config);
+    const res = await api.post('/auth/login', userData, config);
     dispatch({
       type: 'LOGIN_USER',
       payload: res.data,

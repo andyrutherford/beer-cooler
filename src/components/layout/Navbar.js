@@ -7,7 +7,7 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated }) => {
   const authLinks = (
     <ul>
       <li>
-        <Link to='/my-account'>My Account</Link>
+        <Link to='/my-profile'>My Profile</Link>
       </li>
 
       <li>

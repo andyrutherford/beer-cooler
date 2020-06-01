@@ -7,6 +7,7 @@ import Cooler from '../cooler/Cooler';
 import Alert from '../layout/Alert';
 import Signup from '../Signup';
 import Login from '../Login';
+import Profile from '../profile/Profile';
 
 export const Routes = () => {
   return (
@@ -17,6 +18,7 @@ export const Routes = () => {
         <Route exact path='/' component={ProductList} />
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/login' component={Login} />
+        <Route exact path='/my-profile' component={Profile} />
         <Route exact path='/beers/:id' component={ProductPage} />
         <Route exact path='/cooler' component={Cooler} />
       </Switch>
