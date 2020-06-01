@@ -7,7 +7,6 @@ const User = require('../models/User');
 // @route   GET api/v1/profile/me
 exports.getUserProfile = async (req, res, next) => {
   const userId = req.headers.user;
-  console.log(userId);
   try {
     const profile = await Profile.findOne({
       _id: userId,
@@ -25,8 +24,17 @@ exports.getUserProfile = async (req, res, next) => {
       profile: profile,
     });
   } catch (error) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    } else
+      return res.status(500).json({
+        success: false,
+        error: error,
+      });
   }
 };
 
@@ -48,7 +56,9 @@ exports.createUserProfile = async (req, res, next) => {
   const profileFields = {
     user: userId,
     location,
-    cooler: [cooler, ...currentBeers],
+    coolwe: Array.isArray(cooler)
+      ? cooler
+      : cooler.split(',').map((item) => ' ' + item.trim()),
   };
 
   try {
@@ -62,8 +72,26 @@ exports.createUserProfile = async (req, res, next) => {
       profile,
     });
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Server error');
+    // TODO: Validate cooler array data is a number
+
+    console.error(error);
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    }
+    if (error.name === 'CastError') {
+      return res.status(400).json({
+        success: false,
+        error: error.message,
+      });
+    } else
+      return res.status(500).json({
+        success: false,
+        error: error,
+      });
   }
 };
 
@@ -77,8 +105,17 @@ exports.getAllProfiles = async (req, res, next) => {
       profiles,
     });
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Server error');
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    } else
+      return res.status(500).json({
+        success: false,
+        error: error,
+      });
   }
 };
 
@@ -92,7 +129,6 @@ exports.getProfileById = async ({ params: { user_id } }, res, next) => {
     const profile = await Profile.findOne({
       user: user_id,
     }).populate('user', ['name', 'email']);
-    console.log(profile);
 
     if (!profile) {
       return res.status(400).json({
@@ -105,7 +141,16 @@ exports.getProfileById = async ({ params: { user_id } }, res, next) => {
       profile,
     });
   } catch (error) {
-    console.error(error.message);
-    return res.status(500).json({ msg: 'Server error ' });
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    } else
+      return res.status(500).json({
+        success: false,
+        error: error,
+      });
   }
 };
