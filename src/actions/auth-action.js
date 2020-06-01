@@ -1,11 +1,18 @@
 import axios from 'axios';
 
 import { setAlert } from './alert-action';
+import api from '../utils/api';
 
 const config = {
   headers: {
     'Content-Type': 'application/json',
   },
+};
+
+export const loadUser = () => async (dispatch) => {
+  try {
+    const res = await api.get('/auth');
+  } catch (error) {}
 };
 
 export const signupUser = (userData) => async (dispatch) => {
