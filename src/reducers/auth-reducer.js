@@ -1,12 +1,22 @@
 const initialState = {
   token: localStorage.getItem('token'),
+  user: {
+    name: null,
+    email: null,
+  },
   isAuthenticated: null,
   loading: true,
-  user: null,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case 'USER_LOADED':
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: action.payload,
+      };
     case 'SIGNUP_USER':
       return {
         ...state,

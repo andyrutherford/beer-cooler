@@ -10,7 +10,15 @@ const config = {
 export const loadUser = () => async (dispatch) => {
   try {
     const res = await api.get('/auth');
-  } catch (error) {}
+    dispatch({
+      type: 'USER_LOADED',
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: 'AUTH_ERROR',
+    });
+  }
 };
 
 export const signupUser = (userData) => async (dispatch) => {

@@ -3,12 +3,28 @@ import { connect } from 'react-redux';
 
 import { getCurrentProfile } from '../../actions/profile-action';
 
-export const Profile = ({ getCurrentProfile }) => {
+export const Profile = ({ getCurrentProfile, auth: { user }, profile }) => {
   useEffect(() => {
     getCurrentProfile();
   }, []);
 
-  return <div>profile</div>;
+  useEffect(() => {
+    console.log('profile has been loaded');
+  }, [profile]);
+
+  return (
+    <div>
+      <h1 className='large text-primary'>My Profile</h1>
+      <p className='lead'>
+        <i className='fas fa-user' /> Welcome {user.name}
+      </p>
+    </div>
+  );
 };
 
-export default connect(null, { getCurrentProfile })(Profile);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps, { getCurrentProfile })(Profile);

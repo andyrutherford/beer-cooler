@@ -9,8 +9,14 @@ export default function (state = initialState, action) {
     case 'GET_PROFILE': {
       return {
         ...state,
-        profile: action.payload,
+        ...action.payload,
         loading: false,
+      };
+    }
+    case 'PROFILE_ERROR': {
+      return {
+        ...state,
+        error: action.payload,
       };
     }
     default:

@@ -1,4 +1,5 @@
 import { setAlert } from './alert-action';
+import api from '../utils/api';
 
 export const coolerGetProducts = () => (dispatch) => {
   dispatch({
@@ -12,16 +13,20 @@ export const coolerGetQuantity = () => (dispatch) => {
   });
 };
 
-export const coolerAddProduct = (beer, quantity) => (dispatch) => {
-  dispatch(setAlert(`${quantity}x ${beer.name} added to cooler.`));
-
+export const coolerAddProduct = (beer, quantity) => async (dispatch) => {
   // Add a quantity field to item
   const product = { ...beer, quantity };
+  const productData = {
+    cooler: [{ id: product.id, quantity }],
+  };
+  const res = await api.post('/profile/cooler', productData);
 
   dispatch({
     type: 'COOLER_ADD_PRODUCT',
     payload: product,
   });
+
+  dispatch(setAlert(`${quantity}x ${beer.name} added to cooler.`));
 };
 
 export const coolerRemoveProduct = (id, name) => (dispatch) => {
