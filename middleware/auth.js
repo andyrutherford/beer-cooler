@@ -12,7 +12,6 @@ module.exports = function (req, res, next) {
   // Verify token
   try {
     jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
-      console.log(token, process.env.JWT_SECRET);
       if (error) {
         return res.status(401).json({ msg: 'Token is not valid' });
       } else {

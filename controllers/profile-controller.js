@@ -39,8 +39,9 @@ exports.getUserProfile = async (req, res, next) => {
   }
 };
 
-// @desc  Create and update user profile
-// @route POST api/v1/profile
+// @desc    Create and update user profile
+// @route   POST api/v1/profile
+// @access  Private
 exports.createUserProfile = async (req, res, next) => {
   const { location, cooler } = req.body;
   const user = req.user.id;
@@ -57,7 +58,7 @@ exports.createUserProfile = async (req, res, next) => {
   const profileFields = {
     user: req.user.id,
     location,
-    coolwe: Array.isArray(cooler)
+    cooler: Array.isArray(cooler)
       ? cooler
       : cooler.split(',').map((item) => ' ' + item.trim()),
   };
@@ -87,6 +88,40 @@ exports.createUserProfile = async (req, res, next) => {
       return res.status(400).json({
         success: false,
         error: error.message,
+      });
+    } else
+      return res.status(500).json({
+        success: false,
+        error: error,
+      });
+  }
+};
+
+// @desc    Add items to cooler
+// @route   POST api/v1/profile/cooler
+// @access  Private
+exports.addCoolerItem = async (req, res, next) => {
+  const userId = req.user.id;
+
+  const coolerItems = req.body;
+
+  try {
+    let profile = await Profile.findOneAndUpdate(
+      { user: userId },
+      { $set: coolerItems },
+      { new: true, upsert: true }
+    );
+    res.status(201).json({
+      success: true,
+      profile,
+    });
+  } catch (error) {
+    console.log(error);
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        error: messages,
       });
     } else
       return res.status(500).json({

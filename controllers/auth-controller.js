@@ -104,6 +104,7 @@ exports.loginUser = async (req, res, next) => {
       });
     }
 
+    const name = user.name;
     const payload = {
       user: {
         email: user.email,
@@ -119,6 +120,8 @@ exports.loginUser = async (req, res, next) => {
         if (err) throw err;
         res.json({
           token,
+          email,
+          name,
         });
       }
     );
