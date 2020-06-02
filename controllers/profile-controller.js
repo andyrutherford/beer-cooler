@@ -102,19 +102,32 @@ exports.createUserProfile = async (req, res, next) => {
 // @access  Private
 exports.addCoolerItem = async (req, res, next) => {
   const userId = req.user.id;
-
   const coolerItems = req.body;
 
   try {
+    let guy = await Profile.findOne({
+      user: userId,
+    });
+
+    const concatCoolers = guy.cooler.concat(coolerItems.cooler);
+
+    const newCooler = concatCoolers.reduce(function (accumulator, cur) {
+      let id = cur.id,
+        found = accumulator.find(function (elem) {
+          return elem.id == id;
+        });
+      if (found) found.quantity += cur.quantity;
+      else accumulator.push(cur);
+      return accumulator;
+    }, []);
+
     let profile = await Profile.findOneAndUpdate(
       { user: userId },
-      { $set: coolerItems },
+      { $set: { cooler: newCooler } },
       { new: true, upsert: true }
     );
-    res.status(201).json({
-      success: true,
-      profile,
-    });
+
+    res.json({ success: true, profile });
   } catch (error) {
     console.log(error);
     if (error.name === 'ValidationError') {
