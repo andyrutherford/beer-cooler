@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { getCurrentProfile } from '../../actions/profile-action';
 
-export const Profile = ({ getCurrentProfile, auth: { user }, profile }) => {
+export const Profile = ({ getCurrentProfile, auth, profile }) => {
   useEffect(() => {
     getCurrentProfile();
   }, []);
@@ -16,7 +16,7 @@ export const Profile = ({ getCurrentProfile, auth: { user }, profile }) => {
     <div>
       <h1 className='large text-primary'>My Profile</h1>
       <p className='lead'>
-        <i className='fas fa-user' /> Welcome {user.name}
+        <i className='fas fa-user' /> Welcome {auth.user.name}
       </p>
     </div>
   );

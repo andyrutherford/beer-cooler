@@ -26,13 +26,14 @@ export default function (state = initialState, action) {
     case 'LOGIN_USER':
       return {
         ...state,
-        ...action.payload,
+        user: action.payload,
         isAuthenticated: true,
         loading: false,
       };
     case 'LOGOUT_USER':
       return {
         ...state,
+        token: null,
         user: null,
         isAuthenticated: false,
       };
