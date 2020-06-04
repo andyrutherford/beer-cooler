@@ -26,7 +26,8 @@ export default function (state = initialState, action) {
     case 'LOGIN_USER':
       return {
         ...state,
-        user: action.payload,
+        token: action.payload.token,
+        user: { email: action.payload.email, name: action.payload.name },
         isAuthenticated: true,
         loading: false,
       };

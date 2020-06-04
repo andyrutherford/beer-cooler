@@ -6,11 +6,13 @@ import {
   coolerGetProducts,
   coolerGetQuantity,
   coolerRemoveProduct,
+  coolerRemoveAll,
 } from '../../actions/cooler-action';
 
 export const CoolerList = ({
   coolerGetProducts,
   coolerGetQuantity,
+  coolerRemoveAll,
   cooler: { cooler, quantity, loading },
 }) => {
   useEffect(() => {
@@ -27,6 +29,9 @@ export const CoolerList = ({
   ) : (
     <div>
       Quantity: {quantity}
+      <button className='btn btn-danger' onClick={() => coolerRemoveAll()}>
+        Remove All
+      </button>
       <ul className='cooler-items-list'>
         {cooler.map((item) => (
           <CoolerItem key={item.id} item={item} />
@@ -45,4 +50,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   coolerGetProducts,
   coolerGetQuantity,
+  coolerRemoveAll,
 })(CoolerList);

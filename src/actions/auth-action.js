@@ -1,4 +1,5 @@
 import { setAlert } from './alert-action';
+import { clearCoolerLogout } from './cooler-action';
 import api from '../utils/api';
 
 const config = {
@@ -23,7 +24,7 @@ export const loadUser = () => async (dispatch) => {
 
 export const signupUser = (userData) => async (dispatch) => {
   try {
-    const res = await api.post('/api/v1/auth/signup', userData, config);
+    const res = await api.post('/auth/signup', userData, config);
     dispatch({
       type: 'SIGNUP_USER',
       payload: res.data,
@@ -47,6 +48,7 @@ export const loginUser = (userData) => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: 'LOGIN_USER_ERROR',
     });
@@ -58,5 +60,6 @@ export const logoutUser = () => (dispatch) => {
   dispatch({
     type: 'LOGOUT_USER',
   });
+  dispatch(clearCoolerLogout());
   dispatch(setAlert('You have successfully logged out.'));
 };

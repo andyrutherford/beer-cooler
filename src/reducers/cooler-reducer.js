@@ -9,10 +9,10 @@ export default function (state = initialState, action) {
     case 'COOLER_GET_PRODUCTS':
       return {
         ...state,
+        cooler: action.payload,
         loading: false,
       };
     case 'COOLER_GET_QUANTITY':
-      console.log();
       return {
         ...state,
         quantity:
@@ -45,6 +45,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         cooler: state.cooler.filter((i) => i.id !== action.payload),
+      };
+    case 'COOLER_REMOVE_ALL':
+      return {
+        ...state,
+        cooler: [],
       };
     case 'COOLER_UPDATE_QUANTITY':
       const update = state.cooler.find((i) => i.id === action.payload.id);

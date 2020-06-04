@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { logoutUser } from '../../actions/auth-action';
 
-const Navbar = ({ cooler, logoutUser, isAuthenticated }) => {
+const Navbar = ({ cooler, logoutUser, isAuthenticated, history }) => {
+  const logoutHandler = () => {
+    logoutUser();
+  };
+
   const authLinks = (
     <ul>
       <li>
@@ -11,10 +15,10 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated }) => {
       </li>
 
       <li>
-        <a onClick={logoutUser} href='#!'>
+        <Link to='/' onClick={logoutHandler}>
           <i className='fas fa-sign-out-alt' />{' '}
           <span className='hide-sm'>Logout</span>
-        </a>
+        </Link>
       </li>
       <li>
         {cooler === 0 ? (
