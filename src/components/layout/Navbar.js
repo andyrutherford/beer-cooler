@@ -11,7 +11,7 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, history }) => {
   const authLinks = (
     <ul>
       <li>
-        <Link to='/my-profile'>My Profile</Link>
+        <NavLink to='/my-profile'>My Profile</NavLink>
       </li>
 
       <li>
@@ -22,9 +22,9 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, history }) => {
       </li>
       <li>
         {cooler === 0 ? (
-          <Link to='/cooler'>My Cooler</Link>
+          <NavLink to='/cooler'>My Cooler</NavLink>
         ) : (
-          <Link to='/cooler'>My Cooler ({cooler})</Link>
+          <NavLink to='/cooler'>My Cooler ({cooler})</NavLink>
         )}
       </li>
     </ul>

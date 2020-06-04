@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import ProductItem from './ProductItem';
 
@@ -29,29 +30,25 @@ const ProductList = ({
       <nav className='pagination-nav'>
         <ul className='pagination'>
           <li onClick={() => getProducts(1)} className='page-item'>
-            <a href='#!' className='page-link'>
-              {1}
-            </a>
+            <Link className='page-link'>{1}</Link>
           </li>
           <li onClick={() => getProducts(2)} className='page-item'>
-            <a href='#!' className='page-link'>
-              {2}
-            </a>
+            <Link className='page-link'>{2}</Link>
           </li>
           <li className='page-item'>
-            <a onClick={() => getProducts(3)} href='#!' className='page-link'>
+            <Link onClick={() => getProducts(3)} className='page-link'>
               {3}
-            </a>
+            </Link>
           </li>
           <li className='page-item'>
-            <a onClick={() => getProducts(4)} href='#!' className='page-link'>
+            <Link onClick={() => getProducts(4)} className='page-link'>
               {4}
-            </a>
+            </Link>
           </li>
           <li className='page-item'>
-            <a onClick={() => getProducts(5)} href='#!' className='page-link'>
+            <Link onClick={() => getProducts(5)} className='page-link'>
               {5}
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

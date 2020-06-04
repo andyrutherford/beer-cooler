@@ -6,13 +6,9 @@ export const coolerGetProducts = () => async (dispatch) => {
   try {
     const res = await api.get('/profile/cooler');
 
-    const ids = res.data.profileCooler.map((i) => i.id).join('|');
-
-    const res2 = await axios.get(`https://api.punkapi.com/v2/beers?ids=${ids}`);
-
     dispatch({
       type: 'COOLER_GET_PRODUCTS',
-      payload: res2.data,
+      payload: res.data.profileCooler,
     });
   } catch (error) {
     console.log(error);
@@ -32,17 +28,27 @@ export const coolerGetQuantity = () => (dispatch) => {
 export const coolerAddProduct = (beer, quantity) => async (dispatch) => {
   // Add a quantity field to item
   const product = { ...beer, quantity };
+  console.log(product);
   const productData = {
-    cooler: [{ id: product.id, quantity }],
+    cooler: [product],
   };
-  const res = await api.post('/profile/cooler', productData);
-
-  dispatch({
-    type: 'COOLER_ADD_PRODUCT',
-    payload: product,
-  });
-
-  dispatch(setAlert(`${quantity}x ${beer.name} added to cooler.`));
+  console.log(productData);
+  try {
+    const res = await api.post('/profile/cooler', productData);
+    console.log(product);
+    console.log(res.data);
+    dispatch({
+      type: 'COOLER_ADD_PRODUCT',
+      payload: product,
+    });
+    dispatch(setAlert(`${quantity}x ${beer.name} added to cooler.`));
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: 'COOLER_ERROR',
+    });
+    setAlert('A problem has occurred.');
+  }
 };
 
 export const coolerRemoveProduct = (id, name) => (dispatch) => {
