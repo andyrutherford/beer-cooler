@@ -7,7 +7,6 @@ const User = require('../models/User');
 // @route   GET api/v1/profile/me
 exports.getUserProfile = async (req, res, next) => {
   const userId = req.user.id;
-  console.log(userId);
   try {
     const profile = await Profile.findOne({
       user: userId,
@@ -44,7 +43,7 @@ exports.getUserProfile = async (req, res, next) => {
 // @access  Private
 exports.createUserProfile = async (req, res, next) => {
   const { location, cooler } = req.body;
-  const user = req.user.id;
+  const userId = req.user.id;
   let currentBeers;
 
   try {
@@ -103,14 +102,12 @@ exports.createUserProfile = async (req, res, next) => {
 exports.addCoolerItem = async (req, res, next) => {
   const userId = req.user.id;
   const coolerItems = req.body;
-
   try {
     let guy = await Profile.findOne({
       user: userId,
     });
 
     const concatCoolers = guy.cooler.concat(coolerItems.cooler);
-
     const newCooler = concatCoolers.reduce(function (accumulator, cur) {
       let id = cur.id,
         found = accumulator.find(function (elem) {
@@ -129,7 +126,61 @@ exports.addCoolerItem = async (req, res, next) => {
 
     res.json({ success: true, profile });
   } catch (error) {
-    console.log(error);
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    } else
+      return res.status(500).json({
+        success: false,
+        error: error,
+      });
+  }
+};
+
+// @desc    Remove all cooler items
+// @route   DELETE api/v1/profile/cooler
+// @access  PRIVATE
+exports.removeAllCoolerItems = async (req, res, next) => {
+  const userId = req.user.id;
+  try {
+    let profile = await Profile.findOneAndUpdate(
+      { user: userId },
+      { $set: { cooler: [] } },
+      { new: true, upsert: true }
+    );
+    res.json({
+      success: true,
+      profile,
+    });
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    } else
+      return res.status(500).json({
+        success: false,
+        error: error,
+      });
+  }
+};
+
+// @desc    Get cooler items
+// @route   GET api/v1/profile/cooler
+exports.getCoolerItems = async (req, res, next) => {
+  const userId = req.user.id;
+  try {
+    const profile = await Profile.findOne({
+      user: userId,
+    });
+    const profileCooler = profile.cooler;
+    res.json({ success: true, profileCooler });
+  } catch (error) {
     if (error.name === 'ValidationError') {
       const messages = Object.values(error.errors).map((val) => val.message);
       return res.status(400).json({
