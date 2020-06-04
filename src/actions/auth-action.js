@@ -1,5 +1,5 @@
 import { setAlert } from './alert-action';
-import { clearCoolerLogout } from './cooler-action';
+import { clearCoolerLogout, coolerGetProducts } from './cooler-action';
 import api from '../utils/api';
 
 const config = {
@@ -15,6 +15,7 @@ export const loadUser = () => async (dispatch) => {
       type: 'USER_LOADED',
       payload: res.data,
     });
+    dispatch(coolerGetProducts());
   } catch (error) {
     dispatch({
       type: 'AUTH_ERROR',
