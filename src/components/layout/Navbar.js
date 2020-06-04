@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { logoutUser } from '../../actions/auth-action';
 
-const Navbar = ({ cooler, logoutUser, isAuthenticated, history }) => {
+const Navbar = ({ cooler, logoutUser, isAuthenticated, user }) => {
   const logoutHandler = () => {
     logoutUser();
   };
@@ -11,7 +11,7 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, history }) => {
   const authLinks = (
     <ul>
       <li>
-        <NavLink to='/my-profile'>My Profile</NavLink>
+        <NavLink to='/my-profile'>{user && user.name}</NavLink>
       </li>
 
       <li>
@@ -63,6 +63,7 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, history }) => {
 const mapStateToProps = (state) => ({
   cooler: state.cooler.cooler.length,
   isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { logoutUser })(Navbar);
