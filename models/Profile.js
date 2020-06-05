@@ -8,12 +8,7 @@ const ProfileSchema = new mongoose.Schema({
   location: {
     type: String,
   },
-  cooler: [
-    {
-      id: Number,
-      quantity: Number,
-    },
-  ],
+  cooler: [Object],
   date: {
     type: Date,
     default: Date.now,

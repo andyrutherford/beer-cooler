@@ -113,8 +113,11 @@ exports.addCoolerItem = async (req, res, next) => {
         found = accumulator.find(function (elem) {
           return elem.id == id;
         });
-      if (found) found.quantity += cur.quantity;
-      else accumulator.push(cur);
+      if (found) {
+        found.quantity += cur.quantity;
+      } else {
+        accumulator.push(cur);
+      }
       return accumulator;
     }, []);
 
@@ -125,6 +128,47 @@ exports.addCoolerItem = async (req, res, next) => {
     );
 
     res.json({ success: true, profile });
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    } else
+      return res.status(500).json({
+        success: false,
+        error: error,
+      });
+  }
+};
+
+// @desc    Remove cooler item
+// @route   DELETE api/v1/profile/cooler/:id
+// @access  PRIVATE
+exports.removeCoolerItem = async (req, res, next) => {
+  const userId = req.user.id;
+  const itemToRemove = parseInt(req.params.id);
+  // console.log('id to remove: ', typeof req.params.id);
+  try {
+    const profile = await Profile.findOneAndUpdate({
+      user: userId,
+    });
+    const item = profile.cooler.find((i) => i.id === itemToRemove);
+
+    // Make sure item exists
+    if (!item) {
+      res.status(404).json({ success: false, msg: 'Item does not exist.' });
+    }
+
+    profile.cooler = profile.cooler.filter(({ id }) => id !== itemToRemove);
+
+    await profile.save();
+
+    return res.json({
+      success: true,
+      profile,
+    });
   } catch (error) {
     if (error.name === 'ValidationError') {
       const messages = Object.values(error.errors).map((val) => val.message);
