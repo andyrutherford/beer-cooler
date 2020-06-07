@@ -44,7 +44,6 @@ exports.getUserProfile = async (req, res, next) => {
 exports.createUserProfile = async (req, res, next) => {
   const { location, cooler } = req.body;
   const userId = req.user.id;
-  let currentBeers;
 
   try {
     // Check beers in profile
@@ -57,9 +56,6 @@ exports.createUserProfile = async (req, res, next) => {
   const profileFields = {
     user: req.user.id,
     location,
-    cooler: Array.isArray(cooler)
-      ? cooler
-      : cooler.split(',').map((item) => ' ' + item.trim()),
   };
 
   try {
@@ -73,8 +69,6 @@ exports.createUserProfile = async (req, res, next) => {
       profile,
     });
   } catch (error) {
-    // TODO: Validate cooler array data is a number
-
     console.error(error);
     if (error.name === 'ValidationError') {
       const messages = Object.values(error.errors).map((val) => val.message);
@@ -222,7 +216,13 @@ exports.getCoolerItems = async (req, res, next) => {
     const profile = await Profile.findOne({
       user: userId,
     });
+    if (!profile) {
+      console.log('no profile exists!!');
+      return res.json({ success: true, profileCooler: [] });
+    }
+    console.log('profile', profile);
     const profileCooler = profile.cooler;
+
     res.json({ success: true, profileCooler });
   } catch (error) {
     if (error.name === 'ValidationError') {
