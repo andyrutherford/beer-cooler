@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import PrivateRoute from './PrivateRoute';
 import ProductList from '../ProductList';
@@ -13,8 +15,7 @@ import Profile from '../profile/Profile';
 export const Routes = () => {
   return (
     <section className='container'>
-      <Alert />
-
+      <ToastContainer />
       <Switch>
         <Route exact path='/' component={ProductList} />
         <Route exact path='/signup' component={Signup} />

@@ -11,16 +11,19 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, user }) => {
   const authLinks = (
     <ul>
       <li>
+        <i className='fas fa-lg fa-user'></i>
         <NavLink to='/my-profile'>{user && user.name}</NavLink>
       </li>
 
       <li>
+        {' '}
+        <i className='fas fa-lg fa-sign-out-alt' />{' '}
         <Link to='/' onClick={logoutHandler}>
-          <i className='fas fa-sign-out-alt' />{' '}
-          <span className='hide-sm'>Logout</span>
+          Logout
         </Link>
       </li>
       <li>
+        <i class='fas fa-lg fa-shopping-basket'></i>
         {cooler === 0 ? (
           <NavLink to='/cooler'>My Cooler</NavLink>
         ) : (

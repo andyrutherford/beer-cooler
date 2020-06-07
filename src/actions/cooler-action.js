@@ -84,13 +84,13 @@ export const coolerRemoveAll = () => (dispatch) => {
     dispatch({
       type: 'COOLER_REMOVE_ALL',
     });
-    setAlert('Your cart has been emptied.');
+    dispatch(setAlert('Your cart has been emptied.'));
   } catch (error) {
     console.log(error);
     dispatch({
       type: 'COOLER_ERROR',
     });
-    setAlert('A problem has occurred.');
+    dispatch(setAlert('A problem has occurred.'));
   }
 };
 
