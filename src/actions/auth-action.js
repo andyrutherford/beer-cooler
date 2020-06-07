@@ -26,6 +26,8 @@ export const loadUser = () => async (dispatch) => {
 export const signupUser = (userData) => async (dispatch) => {
   try {
     const res = await api.post('/auth/signup', userData, config);
+    // const createProfile = await api.post('/profile');
+    // console.log(createProfile.data);
     dispatch({
       type: 'SIGNUP_USER',
       payload: res.data,

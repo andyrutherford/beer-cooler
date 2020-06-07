@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 import { coolerAddProduct } from '../actions/cooler-action';
 
-const ProductItem = ({ item, coolerAddProduct }) => {
+const ProductItem = ({ item, coolerAddProduct, isAuthenticated }) => {
   const [quantity, setQuantity] = useState(1);
 
   const addToCoolerHandler = (e) => {
     e.preventDefault();
-    coolerAddProduct(item, parseInt(quantity));
+    coolerAddProduct(item, parseInt(quantity), isAuthenticated);
     setQuantity(1);
   };
 
@@ -44,4 +44,8 @@ const ProductItem = ({ item, coolerAddProduct }) => {
   );
 };
 
-export default connect(null, { coolerAddProduct })(ProductItem);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { coolerAddProduct })(ProductItem);

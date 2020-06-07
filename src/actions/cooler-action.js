@@ -1,11 +1,9 @@
 import { setAlert } from './alert-action';
 import api from '../utils/api';
-import axios from 'axios';
 
 export const coolerGetProducts = () => async (dispatch) => {
   try {
     const res = await api.get('/profile/cooler');
-
     dispatch({
       type: 'COOLER_GET_PRODUCTS',
       payload: res.data.profileCooler,
@@ -25,17 +23,28 @@ export const coolerGetQuantity = () => (dispatch) => {
   });
 };
 
-export const coolerAddProduct = (beer, quantity) => async (dispatch) => {
+export const coolerAddProduct = (beer, quantity, isAuthenticated) => async (
+  dispatch
+) => {
   // Add a quantity field to item
   const product = { ...beer, quantity };
-  console.log(product);
   const productData = {
     cooler: [product],
   };
-  console.log(productData);
+
+  // If user is not logged in, add item to frontend cooler only
+  if (!isAuthenticated) {
+    dispatch({
+      type: 'COOLER_ADD_PRODUCT',
+      payload: product,
+    });
+    dispatch(setAlert(`${quantity}x ${beer.name} added to cooler.`));
+    return;
+  }
+
+  // If user is logged in, save item in db
   try {
     const res = await api.post('/profile/cooler', productData);
-    console.log(product);
     console.log(res.data);
     dispatch({
       type: 'COOLER_ADD_PRODUCT',
@@ -52,6 +61,15 @@ export const coolerAddProduct = (beer, quantity) => async (dispatch) => {
 };
 
 export const coolerRemoveProduct = (id, name) => (dispatch) => {
+  try {
+    api.delete(`/profile/cooler/${id}`);
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: 'COOLER_ERROR',
+    });
+    setAlert('A problem has occurred.');
+  }
   dispatch(setAlert(`${name} has been removed.`));
   dispatch({
     type: 'COOLER_REMOVE_PRODUCT',

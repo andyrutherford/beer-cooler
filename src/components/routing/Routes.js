@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import PrivateRoute from './PrivateRoute';
 import ProductList from '../ProductList';
 import ProductPage from '../ProductPage';
 import Cooler from '../cooler/Cooler';
@@ -18,7 +19,7 @@ export const Routes = () => {
         <Route exact path='/' component={ProductList} />
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/login' component={Login} />
-        <Route exact path='/my-profile' component={Profile} />
+        <PrivateRoute exact path='/my-profile' component={Profile} />
         <Route exact path='/beers/:id' component={ProductPage} />
         <Route exact path='/cooler' component={Cooler} />
       </Switch>

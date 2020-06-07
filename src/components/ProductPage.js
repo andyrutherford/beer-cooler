@@ -6,6 +6,7 @@ import { coolerAddProduct } from '../actions/cooler-action';
 import Breadcrumb from '../components/layout/Breadcrumb';
 
 export const ProductPage = ({
+  isAuthenticated,
   getProductById,
   coolerAddProduct,
   match,
@@ -19,7 +20,7 @@ export const ProductPage = ({
 
   const addToCoolerHandler = (e) => {
     e.preventDefault();
-    coolerAddProduct(item, parseInt(quantity));
+    coolerAddProduct(item, parseInt(quantity), isAuthenticated);
     setQuantity(1);
   };
 
@@ -87,6 +88,7 @@ export const ProductPage = ({
 
 const mapStateToProps = (state) => ({
   item: state.products.selectedProduct,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { getProductById, coolerAddProduct })(

@@ -10,23 +10,24 @@ import {
 } from '../../actions/cooler-action';
 
 export const CoolerList = ({
+  isAuthenticated,
   coolerGetProducts,
   coolerGetQuantity,
   coolerRemoveAll,
   cooler: { cooler, quantity, loading },
 }) => {
   useEffect(() => {
-    coolerGetProducts();
-    coolerGetQuantity();
-  }, [coolerGetProducts, coolerGetQuantity]);
+    if (isAuthenticated) {
+      console.log(isAuthenticated);
+      coolerGetProducts(isAuthenticated);
+    }
+  }, []);
 
   if (cooler.length === 0) {
     return <p>Your cooler is empty.</p>;
   }
 
-  return loading ? (
-    <p>Loading...</p>
-  ) : (
+  return (
     <div>
       Quantity: {quantity}
       <button className='btn btn-danger' onClick={() => coolerRemoveAll()}>
@@ -45,6 +46,7 @@ const mapStateToProps = (state) => ({
   cooler: state.cooler,
   quantity: state.quantity,
   loading: state.loading,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, {

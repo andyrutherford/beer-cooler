@@ -30,25 +30,29 @@ const ProductList = ({
       <nav className='pagination-nav'>
         <ul className='pagination'>
           <li onClick={() => getProducts(1)} className='page-item'>
-            <Link className='page-link'>{1}</Link>
+            <a href='#!' className='page-link'>
+              {1}
+            </a>
           </li>
           <li onClick={() => getProducts(2)} className='page-item'>
-            <Link className='page-link'>{2}</Link>
+            <a href='#!' className='page-link'>
+              {2}
+            </a>
           </li>
           <li className='page-item'>
-            <Link onClick={() => getProducts(3)} className='page-link'>
+            <a href='#!' onClick={() => getProducts(3)} className='page-link'>
               {3}
-            </Link>
+            </a>
           </li>
           <li className='page-item'>
-            <Link onClick={() => getProducts(4)} className='page-link'>
+            <a href='#!' onClick={() => getProducts(4)} className='page-link'>
               {4}
-            </Link>
+            </a>
           </li>
           <li className='page-item'>
-            <Link onClick={() => getProducts(5)} className='page-link'>
+            <a href='#!' onClick={() => getProducts(5)} className='page-link'>
               {5}
-            </Link>
+            </a>
           </li>
         </ul>
       </nav>
