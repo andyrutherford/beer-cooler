@@ -90,6 +90,35 @@ exports.createUserProfile = async (req, res, next) => {
   }
 };
 
+// @desc    Add/update profile address
+// @route   POST api/v1/profile/address
+// @access  Private
+exports.updateAddress = async (req, res, next) => {
+  const userId = req.user.id;
+  const address = req.body;
+  try {
+    const profile = await Profile.findOneAndUpdate(
+      { user: userId },
+      { $set: { address } },
+      { new: true, upsert: true }
+    );
+
+    res.json({ success: true, profile });
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    } else
+      return res.status(500).json({
+        success: false,
+        error: error,
+      });
+  }
+};
+
 // @desc    Add items to cooler
 // @route   POST api/v1/profile/cooler
 // @access  Private

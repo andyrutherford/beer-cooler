@@ -9,10 +9,12 @@ const { addCoolerItem } = require('../controllers/profile-controller');
 const { getCoolerItems } = require('../controllers/profile-controller');
 const { removeAllCoolerItems } = require('../controllers/profile-controller');
 const { removeCoolerItem } = require('../controllers/profile-controller');
+const { updateAddress } = require('../controllers/profile-controller');
 
 const authMiddleware = require('../middleware/auth');
 
 router.route('/me').get(authMiddleware, getUserProfile);
+router.route('/address').post(authMiddleware, updateAddress);
 router.route('/').post(authMiddleware, createUserProfile);
 router.route('/').get(getAllProfiles);
 router.route('/user/:user_id').get(getProfileById);
