@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import ProfileAddress from './ProfileAddress';
 import { getCurrentProfile } from '../../actions/profile-action';
 
 export const Profile = ({ getCurrentProfile, auth }) => {
@@ -41,6 +42,9 @@ export const Profile = ({ getCurrentProfile, auth }) => {
         </div>
         {auth && <p>Account created on {createdDate()}</p>}
       </form>
+
+      <ProfileAddress />
+
       <h3 className='mt-4 mb-3'>
         <span>
           <i className='fas fa-unlock-alt'></i> Change Your Password

@@ -50,6 +50,7 @@ export const loginUser = (userData) => async (dispatch) => {
       type: 'LOGIN_USER',
       payload: res.data,
     });
+    dispatch(loadUser());
     dispatch(coolerGetProducts());
   } catch (error) {
     console.log(error);
