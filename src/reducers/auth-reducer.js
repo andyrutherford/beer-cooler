@@ -31,7 +31,13 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
         loading: false,
       };
+    case 'CHANGE_PASSWORD_SUCCESS':
+      localStorage.setItem('token', action.payload.token);
+      return {
+        ...state,
+      };
     case 'LOGOUT_USER':
+      localStorage.removeItem('token');
       return {
         ...state,
         token: null,

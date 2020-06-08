@@ -34,11 +34,12 @@ export const ProfileAddress = ({ updateAddress, setAlert, address }) => {
     ) {
       for (let element in addressData) {
         if (addressData[element] === '' && element !== 'address2') {
-          setAlert(`${element} is a required field.`);
+          return setAlert(`${element} is a required field.`);
         }
       }
     }
     updateAddress(addressData);
+    setAlert('Your address has been successfully updated.');
   };
 
   return (

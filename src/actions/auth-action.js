@@ -71,3 +71,16 @@ export const logoutUser = () => (dispatch) => {
 
   dispatch(setAlert('You have successfully logged out.'));
 };
+
+export const changePassword = (userData) => async (dispatch) => {
+  try {
+    const res = await api.put('/auth', userData);
+    dispatch({
+      type: 'PASSWORD_CHANGE_SUCCESS',
+      payload: res.data,
+    });
+    dispatch(setAlert(res.data.msg));
+  } catch (error) {
+    dispatch(setAlert(error.response.data.error));
+  }
+};
