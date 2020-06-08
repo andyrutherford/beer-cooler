@@ -4,10 +4,12 @@ const {
   getUser,
   createUser,
   loginUser,
+  changePassword,
 } = require('../controllers/auth-controller');
 const authMiddleware = require('../middleware/auth');
 
 router.route('/').get(authMiddleware, getUser);
+router.route('/').put(authMiddleware, changePassword);
 router.route('/signup').post(createUser);
 router.route('/login').post(loginUser);
 

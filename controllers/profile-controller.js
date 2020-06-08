@@ -172,7 +172,6 @@ exports.addCoolerItem = async (req, res, next) => {
 exports.removeCoolerItem = async (req, res, next) => {
   const userId = req.user.id;
   const itemToRemove = parseInt(req.params.id);
-  // console.log('id to remove: ', typeof req.params.id);
   try {
     const profile = await Profile.findOneAndUpdate({
       user: userId,
@@ -246,10 +245,8 @@ exports.getCoolerItems = async (req, res, next) => {
       user: userId,
     });
     if (!profile) {
-      console.log('no profile exists!!');
       return res.json({ success: true, profileCooler: [] });
     }
-    console.log('profile', profile);
     const profileCooler = profile.cooler;
 
     res.json({ success: true, profileCooler });
