@@ -1,5 +1,6 @@
 import { setAlert } from './alert-action';
 import { clearCoolerLogout, coolerGetProducts } from './cooler-action';
+import { getCurrentProfile } from './profile-action';
 import api from '../utils/api';
 
 const config = {
@@ -15,6 +16,7 @@ export const loadUser = () => async (dispatch) => {
       type: 'USER_LOADED',
       payload: res.data,
     });
+    dispatch(getCurrentProfile());
     dispatch(coolerGetProducts());
   } catch (error) {
     dispatch({
@@ -63,6 +65,9 @@ export const logoutUser = () => (dispatch) => {
   dispatch({
     type: 'LOGOUT_USER',
   });
+  dispatch({ type: 'CLEAR_PROFILE' });
+  dispatch({ type: 'COOLER_REMOVE_ALL' });
   dispatch(clearCoolerLogout());
+
   dispatch(setAlert('You have successfully logged out.'));
 };

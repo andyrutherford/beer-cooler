@@ -10,6 +10,7 @@ const initialState = {
   },
   loading: true,
   error: {},
+  cooler: [],
 };
 
 export default function (state = initialState, action) {
@@ -17,7 +18,8 @@ export default function (state = initialState, action) {
     case 'GET_PROFILE': {
       return {
         ...state,
-        ...action.payload,
+        address: action.payload.address,
+        cooler: action.payload.cooler,
         loading: false,
       };
     }
@@ -31,6 +33,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         error: action.payload,
+      };
+    }
+    case 'CLEAR_PROFILE': {
+      return {
+        ...state,
+        address: null,
+        loading: false,
+        cooler: [],
       };
     }
     default:
