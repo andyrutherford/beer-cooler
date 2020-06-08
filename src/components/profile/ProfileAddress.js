@@ -1,100 +1,149 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-export const ProfileAddress = () => {
-  return (
-    <div class='container'>
-      <div class='row'>
-        <form class='form-horizontal'>
-          <fieldset>
-            <h2>
-              {' '}
-              <i className='fas fa-address-card'></i> My Address
-            </h2>
+import { updateAddress } from '../../actions/profile-action';
+import { setAlert } from '../../actions/alert-action';
 
-            <div class='control-group'>
-              <label class='control-label'>Full Name</label>
-              <div class='controls'>
-                <input
-                  id='full-name'
-                  name='full-name'
-                  type='text'
-                  className='form-control'
-                />
-                <p class='help-block'></p>
-              </div>
+export const ProfileAddress = ({ updateAddress, setAlert, address }) => {
+  const [addressData, setAddressData] = useState({
+    fullName: address.fullName || '',
+    address1: address.address1 || '',
+    address2: address.address2 || '',
+    city: address.city || '',
+    state: address.state || '',
+    postCode: address.postCode || '',
+    country: address.country || '',
+  });
+
+  const onChange = (e) => {
+    setAddressData({
+      ...addressData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (
+      addressData.fullName === '' ||
+      addressData.address1 === '' ||
+      addressData.city === '' ||
+      addressData.postCode === '' ||
+      addressData.country === ''
+    ) {
+      for (let element in addressData) {
+        if (addressData[element] === '' && element !== 'address2') {
+          setAlert(`${element} is a required field.`);
+        }
+      }
+    }
+    updateAddress(addressData);
+  };
+
+  return (
+    <div>
+      <form className='form-horizontal' onSubmit={onSubmit}>
+        <fieldset>
+          <h2>
+            {' '}
+            <i className='fas fa-address-card'></i> My Address
+          </h2>
+          <div className='form-group'>
+            <label className='control-label'>Full Name</label>
+            <div className='controls'>
+              <input
+                name='fullName'
+                type='text'
+                className='form-control'
+                onChange={onChange}
+                value={addressData.fullName}
+              />
             </div>
-            <div class='control-group'>
-              <label class='control-label'>Address Line 1</label>
-              <div class='controls'>
+          </div>{' '}
+          <div className='d-flex justify-content-between'>
+            <div className='form-group w-50 pr-2'>
+              <label className='control-label'>Address Line 1</label>
+              <div className='controls'>
                 <input
-                  id='address-line1'
-                  name='address-line1'
+                  name='address1'
                   type='text'
                   className='form-control'
+                  onChange={onChange}
+                  value={addressData.address1}
                 />
-                <p class='help-block'>
+                <small className='form-text text-muted mb-2'>
                   Street address, P.O. box, company name, c/o
-                </p>
+                </small>
               </div>
             </div>
-            <div class='control-group'>
-              <label class='control-label'>Address Line 2</label>
-              <div class='controls'>
+
+            <div className='form-group w-50 pl-2'>
+              <label className='control-label'>Address Line 2</label>
+              <div className='controls'>
                 <input
-                  id='address-line2'
-                  name='address-line2'
+                  name='address2'
                   type='text'
                   className='form-control'
+                  onChange={onChange}
+                  value={addressData.address2}
                 />
-                <p class='help-block'>
+                <small className='form-text text-muted mb-2'>
                   Apartment, suite , unit, building, floor, etc.
-                </p>
+                </small>
               </div>
             </div>
-            <div class='control-group'>
-              <label class='control-label'>City / Town</label>
-              <div class='controls'>
+          </div>
+          <div className='d-flex justify-content-between'>
+            <div className='form-group w-50 pr-2'>
+              <label className='control-label'>City / Town</label>
+              <div className='controls'>
                 <input
-                  id='city'
                   name='city'
                   type='text'
                   className='form-control'
+                  onChange={onChange}
+                  value={addressData.city}
                 />
-                <p class='help-block'></p>
               </div>
             </div>
-            <div class='control-group'>
-              <label class='control-label'>State / Province / Region</label>
-              <div class='controls'>
+            <div className='form-group w-50 pl-2'>
+              <label className='control-label'>State / Province / Region</label>
+              <div className='controls'>
                 <input
-                  id='region'
-                  name='region'
+                  name='state'
                   type='text'
                   className='form-control'
+                  onChange={onChange}
+                  value={addressData.state}
                 />
-                <p class='help-block'></p>
               </div>
             </div>
-            <div class='control-group'>
-              <label class='control-label'>Zip / Postal Code</label>
-              <div class='controls'>
+          </div>
+          <div className='d-flex justify-content-between'>
+            <div className='form-group w-50 pr-2'>
+              <label className='control-label'>Zip / Postal Code</label>
+              <div className='controls'>
                 <input
-                  id='postal-code'
-                  name='postal-code'
+                  name='postCode'
                   type='text'
                   className='form-control'
+                  onChange={onChange}
+                  value={addressData.postCode}
                 />
-                <p class='help-block'></p>
               </div>
             </div>
-            <div class='control-group'>
-              <label class='control-label'>Country</label>
-              <div class='controls'>
-                <select id='country' name='country' className='form-control'>
-                  <option value='' selected='selected'>
-                    (please select a country)
-                  </option>
+            <div className='form-group w-50 pl-2'>
+              <label className='control-label'>Country</label>
+              <div className='controls'>
+                <select
+                  id='country'
+                  name='country'
+                  className='form-control'
+                  onChange={onChange}
+                  value={addressData.country}
+                >
+                  <option value=''>(please select a country)</option>
                   <option value='AF'>Afghanistan</option>
                   <option value='AL'>Albania</option>
                   <option value='DZ'>Algeria</option>
@@ -347,14 +396,20 @@ export const ProfileAddress = () => {
                 </select>
               </div>
             </div>
-          </fieldset>
-          <button className='btn'>
-            <i className='fas fa-save'></i> Save Address
-          </button>
-        </form>
-      </div>
+          </div>
+        </fieldset>
+        <button className='btn mt-4'>
+          <i className='fas fa-save'></i> Save Address
+        </button>
+      </form>
     </div>
   );
 };
 
-export default connect()(ProfileAddress);
+const mapStateToProps = (state) => ({
+  address: state.profile.address,
+});
+
+export default connect(mapStateToProps, { updateAddress, setAlert })(
+  ProfileAddress
+);

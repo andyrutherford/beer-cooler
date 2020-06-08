@@ -17,7 +17,7 @@ const Login = ({ loginUser, setAlert, isAuthenticated }) => {
       history.push('/');
       setAlert('You have successfully logged in.');
     }
-  }, [isAuthenticated, history]);
+  }, [isAuthenticated, history, setAlert]);
 
   const fill = () => {
     setUserData({

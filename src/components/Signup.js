@@ -19,7 +19,7 @@ const Signup = ({ signupUser, setAlert, isAuthenticated }) => {
       history.push('/');
       setAlert('Your account has been created successfully.');
     }
-  }, [isAuthenticated, history]);
+  }, [isAuthenticated, history, setAlert]);
 
   const fill = () => {
     setUserData({

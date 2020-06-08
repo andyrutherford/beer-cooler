@@ -1,13 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import PrivateRoute from './PrivateRoute';
 import ProductList from '../ProductList';
 import ProductPage from '../ProductPage';
 import Cooler from '../cooler/Cooler';
-import Alert from '../layout/Alert';
 import Signup from '../Signup';
 import Login from '../Login';
 import Profile from '../profile/Profile';

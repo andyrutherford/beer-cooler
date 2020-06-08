@@ -32,8 +32,6 @@ export const signupUser = (userData) => async (dispatch) => {
       type: 'SIGNUP_USER',
       payload: res.data,
     });
-
-    dispatch(setAlert('user registration successful'));
   } catch (error) {
     dispatch({
       type: 'SIGNUP_USER_ERROR',

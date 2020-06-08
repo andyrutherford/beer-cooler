@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import ProfileAddress from './ProfileAddress';
 import { getCurrentProfile } from '../../actions/profile-action';
 
-export const Profile = ({ getCurrentProfile, auth }) => {
+export const Profile = ({ getCurrentProfile, auth, profile }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile]);
 
   const createdDate = () => {
     const date = auth.user.date.split('-');

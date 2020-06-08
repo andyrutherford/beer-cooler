@@ -23,7 +23,7 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, user }) => {
         </Link>
       </li>
       <li>
-        <i class='fas fa-lg fa-shopping-basket'></i>
+        <i className='fas fa-lg fa-shopping-basket'></i>
         {cooler === 0 ? (
           <NavLink to='/cooler'>My Cooler</NavLink>
         ) : (

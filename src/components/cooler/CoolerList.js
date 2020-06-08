@@ -18,7 +18,6 @@ export const CoolerList = ({
 }) => {
   useEffect(() => {
     if (isAuthenticated) {
-      console.log(isAuthenticated);
       coolerGetProducts(isAuthenticated);
     }
   }, []);

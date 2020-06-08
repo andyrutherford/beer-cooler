@@ -1,5 +1,13 @@
 const initialState = {
-  profile: null,
+  address: {
+    fullName: '',
+    address1: '',
+    address2: '',
+    city: '',
+    state: '',
+    postCode: '',
+    country: '',
+  },
   loading: true,
   error: {},
 };
@@ -11,6 +19,12 @@ export default function (state = initialState, action) {
         ...state,
         ...action.payload,
         loading: false,
+      };
+    }
+    case 'UPDATE_ADDRESS': {
+      return {
+        ...state,
+        address: action.payload,
       };
     }
     case 'PROFILE_ERROR': {
