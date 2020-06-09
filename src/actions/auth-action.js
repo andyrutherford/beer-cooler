@@ -34,6 +34,7 @@ export const signupUser = (userData) => async (dispatch) => {
       type: 'SIGNUP_USER',
       payload: res.data,
     });
+    dispatch(loadUser());
   } catch (error) {
     dispatch({
       type: 'SIGNUP_USER_ERROR',
@@ -82,5 +83,19 @@ export const changePassword = (userData) => async (dispatch) => {
     dispatch(setAlert(res.data.msg));
   } catch (error) {
     dispatch(setAlert(error.response.data.error));
+  }
+};
+
+export const deleteUser = () => async (dispatch) => {
+  if (window.confirm('Are you sure?  This cannot be undone.')) {
+    try {
+      await api.delete('/auth');
+      dispatch({
+        type: 'DELETE_USER',
+      });
+      dispatch(setAlert('Your account has been successfully deleted.'));
+    } catch (error) {
+      dispatch(setAlert(error.response.data.error));
+    }
   }
 };

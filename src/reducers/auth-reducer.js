@@ -18,11 +18,6 @@ export default function (state = initialState, action) {
         user: action.payload,
       };
     case 'SIGNUP_USER':
-      return {
-        ...state,
-        user: action.payload,
-        isAuthenticated: true,
-      };
     case 'LOGIN_USER':
       return {
         ...state,
@@ -36,6 +31,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
       };
+    case 'DELETE_USER':
     case 'LOGOUT_USER':
       localStorage.removeItem('token');
       return {

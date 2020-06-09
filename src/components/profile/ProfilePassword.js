@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { changePassword } from '../../actions/auth-action';
+import { changePassword, deleteUser } from '../../actions/auth-action';
 import { setAlert } from '../../actions/alert-action';
 
-export const ProfilePassword = ({ changePassword, setAlert }) => {
+export const ProfilePassword = ({ changePassword, deleteUser, setAlert }) => {
   const [userData, setUserData] = useState({
     oldPassword: '',
     password1: '',
@@ -20,7 +20,6 @@ export const ProfilePassword = ({ changePassword, setAlert }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     // All fields are required
     if (
       userData.oldPassword === '' ||
@@ -88,13 +87,19 @@ export const ProfilePassword = ({ changePassword, setAlert }) => {
           <button className='btn'>
             <i className='fas fa-save'></i> Save
           </button>
-          <button className='btn btn-danger mr-0'>
-            <i className='fas fa-user-times'></i> Delete Account
-          </button>
         </div>
-      </form>
+      </form>{' '}
+      <button
+        className='btn btn-danger mr-0'
+        name='delete-account'
+        onClick={() => deleteUser()}
+      >
+        <i className='fas fa-user-times'></i> Delete Account
+      </button>
     </div>
   );
 };
 
-export default connect(null, { changePassword, setAlert })(ProfilePassword);
+export default connect(null, { changePassword, setAlert, deleteUser })(
+  ProfilePassword
+);

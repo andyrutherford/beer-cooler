@@ -6,13 +6,13 @@ import { setAlert } from '../../actions/alert-action';
 
 export const ProfileAddress = ({ updateAddress, setAlert, address }) => {
   const [addressData, setAddressData] = useState({
-    fullName: address.fullName || '',
-    address1: address.address1 || '',
-    address2: address.address2 || '',
-    city: address.city || '',
-    state: address.state || '',
-    postCode: address.postCode || '',
-    country: address.country || '',
+    fullName: address ? address.fullName : '',
+    address1: address ? address.address1 : '',
+    address2: address ? address.address2 : '',
+    city: address ? address.city : '',
+    state: address ? address.state : '',
+    postCode: address ? address.postCode : '',
+    country: address ? address.country : '',
   });
 
   const onChange = (e) => {
