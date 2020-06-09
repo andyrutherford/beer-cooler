@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Profile = require('../models/Profile');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -32,6 +33,13 @@ exports.createUser = async (req, res, next) => {
       email,
       password,
     });
+
+    // Initialize empty profile for new user
+    let profile = new Profile({
+      user: user.id,
+      location: 'Canada',
+    });
+    await profile.save();
 
     // Encrypt password
     const salt = await bcrypt.genSalt(10);
@@ -90,7 +98,7 @@ exports.loginUser = async (req, res, next) => {
     if (!user) {
       return res.status(400).json({
         success: false,
-        error: 'User not found',
+        error: 'User not found.  Please create an account.',
       });
     }
 
@@ -213,5 +221,32 @@ exports.changePassword = async (req, res, next) => {
       success: false,
       error: error.message,
     });
+  }
+};
+
+// @desc    Delete user account and profile
+// @route   DELETE /api/v1/auth/
+// @access  PRIVATE
+exports.deleteUser = async (req, res, next) => {
+  const userId = req.user.id;
+  try {
+    await Profile.findOneAndRemove({ user: userId });
+    await User.findOneAndRemove({ _id: userId });
+    res.json({ success: true, message: 'User deleted.' });
+  } catch (error) {
+    console.log(error);
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
+
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    } else {
+      return res.status(500).json({
+        sucess: false,
+        error: 'Server error',
+      });
+    }
   }
 };
