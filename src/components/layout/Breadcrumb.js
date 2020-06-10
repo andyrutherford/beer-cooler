@@ -11,7 +11,7 @@ const Breadcrumb = ({ product }) => {
             <Link to='/'>Home</Link>
           </li>
           <li className='breadcrumb-item'>
-            <Link to='/'>Beers</Link>
+            <Link to='/beers'>Beers</Link>
           </li>
           <li className='breadcrumb-item active' aria-current='page'>
             {product && product.name}

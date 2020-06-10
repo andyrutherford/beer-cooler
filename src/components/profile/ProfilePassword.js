@@ -90,7 +90,7 @@ export const ProfilePassword = ({ changePassword, deleteUser, setAlert }) => {
         </div>
       </form>{' '}
       <button
-        className='btn btn-danger mr-0'
+        className='btn btn-danger mr-0 mt-4'
         name='delete-account'
         onClick={() => deleteUser()}
       >

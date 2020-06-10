@@ -11,10 +11,10 @@ const Login = ({ loginUser, setAlert, isAuthenticated }) => {
     password: '',
   });
 
-  // If isAuthenticated, redirect to '/'
+  // If isAuthenticated, redirect to '/beers'
   useEffect(() => {
     if (isAuthenticated) {
-      history.push('/');
+      history.push('/beers');
       setAlert('You have successfully logged in.');
     }
   }, [isAuthenticated, history, setAlert]);

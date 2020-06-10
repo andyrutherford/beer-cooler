@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import Navbar from './components/layout/Navbar';
-import Landing2 from './components/layout/Landing2';
+import Landing from './components/layout/Landing';
 import { Routes } from './components/routing/Routes';
 import { loadUser } from '../src/actions/auth-action';
 import setAuthToken from './utils/setAuthToken';
@@ -20,9 +20,8 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Navbar />
-
         <Switch>
-          <Route exact path='/' component={Landing2} />
+          <Route exact path='/' component={Landing} />
           <Route component={Routes} />
         </Switch>
       </Router>

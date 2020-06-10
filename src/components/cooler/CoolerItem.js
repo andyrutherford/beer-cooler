@@ -15,8 +15,8 @@ const CoolerItem = ({ item, coolerUpdateQuantity, coolerRemoveProduct }) => {
     coolerUpdateQuantity(item.id, parseInt(quantity));
   };
 
-  const removeProductHandler = () => {
-    console.log('frm');
+  const removeProductHandler = (e) => {
+    e.preventDefault();
     coolerRemoveProduct(item.id, item.name);
   };
 

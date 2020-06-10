@@ -5,7 +5,6 @@ import CoolerItem from './CoolerItem';
 import {
   coolerGetProducts,
   coolerGetQuantity,
-  coolerRemoveProduct,
   coolerRemoveAll,
 } from '../../actions/cooler-action';
 

@@ -11,24 +11,27 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, user }) => {
   const authLinks = (
     <ul>
       <li>
-        <i className='fas fa-lg fa-user'></i>
-        <NavLink to='/my-profile'>{user && user.name}</NavLink>
-      </li>
-
-      <li>
-        {' '}
-        <i className='fas fa-lg fa-sign-out-alt' />{' '}
-        <Link to='/' onClick={logoutHandler}>
-          Logout
-        </Link>
+        <NavLink to='/my-profile'>
+          <i className='fas fa-lg fa-user' /> {user && user.name}
+        </NavLink>
       </li>
       <li>
-        <i className='fas fa-lg fa-shopping-basket'></i>
         {cooler === 0 ? (
-          <NavLink to='/cooler'>My Cooler</NavLink>
+          <NavLink to='/cooler'>
+            <i className='fas fa-lg fa-shopping-basket'></i> My Cooler
+          </NavLink>
         ) : (
-          <NavLink to='/cooler'>My Cooler ({cooler})</NavLink>
+          <NavLink to='/cooler'>
+            <i className='fas fa-lg fa-shopping-basket'></i> My Cooler ({cooler}
+            )
+          </NavLink>
         )}
+      </li>
+      <li>
+        <Link to='/' onClick={logoutHandler}>
+          <i className='fas fa-lg fa-sign-out-alt' />{' '}
+          <span className='hide-sm'>Logout</span>
+        </Link>
       </li>
     </ul>
   );
@@ -53,11 +56,11 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, user }) => {
 
   return (
     <nav className='navbar bg-dark'>
-      <h1>
-        <Link to='/'>
+      <h2>
+        <Link to='/beers'>
           <i className='fas fa-beer'></i> BeerCooler{' '}
         </Link>
-      </h1>
+      </h2>
       {isAuthenticated ? authLinks : guestLinks}
     </nav>
   );

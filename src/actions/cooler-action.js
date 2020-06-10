@@ -44,7 +44,7 @@ export const coolerAddProduct = (beer, quantity, isAuthenticated) => async (
 
   // If user is logged in, save item in db
   try {
-    const res = await api.post('/profile/cooler', productData);
+    await api.post('/profile/cooler', productData);
     dispatch({
       type: 'COOLER_ADD_PRODUCT',
       payload: product,
