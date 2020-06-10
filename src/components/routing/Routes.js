@@ -16,7 +16,7 @@ export const Routes = () => {
     <section className='container'>
       <ToastContainer />
       <Switch>
-        <Route exact path='/' component={ProductList} />
+        <Route exact path='/beers' component={ProductList} />
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/login' component={Login} />
         <PrivateRoute exact path='/my-profile' component={Profile} />
