@@ -39,16 +39,25 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, user }) => {
   const guestLinks = (
     <ul>
       <li>
-        <NavLink to='/login'>Login</NavLink>
+        <NavLink to='/login'>
+          <i className='fas fa-sign-in-alt'></i> Login
+        </NavLink>
       </li>
       <li>
-        <NavLink to='/signup'>Signup</NavLink>
+        <NavLink to='/signup'>
+          <i className='fas fa-user-plus'></i> Signup
+        </NavLink>
       </li>
       <li>
         {cooler === 0 ? (
-          <Link to='/cooler'>My Cooler</Link>
+          <Link to='/cooler'>
+            <i className='fas fa-lg fa-shopping-basket'></i> My Cooler
+          </Link>
         ) : (
-          <Link to='/cooler'>My Cooler ({cooler})</Link>
+          <Link to='/cooler'>
+            <i className='fas fa-lg fa-shopping-basket'></i> My Cooler ({cooler}
+            )
+          </Link>
         )}
       </li>
     </ul>

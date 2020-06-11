@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signupUser } from '../actions/auth-action';
 import { setAlert } from '../actions/alert-action';
@@ -64,17 +64,17 @@ const Signup = ({ signupUser, setAlert, isAuthenticated }) => {
   };
 
   return (
-    <div>
+    <div className='signup-form'>
       <h1>
-        Create an account <button onClick={fill}>Fill</button>
+        <i className='fas fa-user-plus'></i> Create an account{' '}
+        <button onClick={fill}>Fill</button>
       </h1>
-      <form onSubmit={onSubmitHandler}>
+      <form onSubmit={onSubmitHandler} className='mb-2'>
         <div className='form-group'>
           <label htmlFor='name'>Name</label>
           <input
             type='string'
             className='form-control'
-            placeholder='James'
             name='name'
             onChange={onChangeHandler}
             value={userData.name}
@@ -85,7 +85,6 @@ const Signup = ({ signupUser, setAlert, isAuthenticated }) => {
           <input
             type='email'
             className='form-control'
-            placeholder='james@beercooler.com'
             name='email'
             onChange={onChangeHandler}
             value={userData.email}
@@ -118,6 +117,9 @@ const Signup = ({ signupUser, setAlert, isAuthenticated }) => {
           Submit
         </button>
       </form>
+      <p>
+        Already have an account? <Link to='/login'>Login</Link>
+      </p>
     </div>
   );
 };

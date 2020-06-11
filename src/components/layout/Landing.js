@@ -20,12 +20,12 @@ const Landing2 = ({ isAuthenticated }) => {
               Browse our extensive selection of beers from all around the world
             </p>
             <div className='buttons'>
-              <Link to='/beers' className='btn btn-primary'>
-                Browse
+              <Link to='/beers' className='btn btn-primary mr-3'>
+                Browse <i className='fas fa-chevron-right'></i>
               </Link>
               {!isAuthenticated && (
                 <Link to='/login' className='btn btn-light'>
-                  Login
+                  <i className='fas fa-sign-in-alt'></i> Login
                 </Link>
               )}
             </div>

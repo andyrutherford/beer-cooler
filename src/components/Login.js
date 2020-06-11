@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/auth-action';
 import { setAlert } from '../actions/alert-action';
@@ -50,17 +50,17 @@ const Login = ({ loginUser, setAlert, isAuthenticated }) => {
   };
 
   return (
-    <div>
+    <div className='login-form'>
       <h1>
-        Login <button onClick={fill}>Fill</button>
+        <i className='fas fa-sign-in-alt'></i> Login{' '}
+        <button onClick={fill}>Fill</button>
       </h1>
-      <form onSubmit={onSubmitHandler}>
+      <form onSubmit={onSubmitHandler} className='mb-2'>
         <div className='form-group'>
           <label htmlFor='email'>Email address</label>
           <input
             type='email'
             className='form-control'
-            placeholder='james@beercooler.com'
             name='email'
             onChange={onChangeHandler}
             value={userData.email}
@@ -83,6 +83,9 @@ const Login = ({ loginUser, setAlert, isAuthenticated }) => {
           Submit
         </button>
       </form>
+      <p>
+        Don't have an account? <Link to='/signup'>Create one</Link>
+      </p>
     </div>
   );
 };
