@@ -86,6 +86,9 @@ const Login = ({ loginUser, setAlert, isAuthenticated }) => {
       <p>
         Don't have an account? <Link to='/signup'>Create one</Link>
       </p>
+      <p>
+        Forgot your password? Reset it <Link to='/forgot_password'>here</Link>
+      </p>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export const ResetPassword = ({ match }) => {
@@ -8,7 +9,8 @@ export const ResetPassword = ({ match }) => {
     confirmPassword: '',
     updated: false,
     isLoading: true,
-    error: false,
+    tokenError: false,
+    error: '',
   });
 
   useEffect(() => {
@@ -20,20 +22,18 @@ export const ResetPassword = ({ match }) => {
           },
         });
 
-        console.log(res.data);
-
         if (res.data.message === 'password reset successful') {
           setFormData({
             ...formData,
             email: res.data.email,
-            update: false,
+            updated: false,
             isLoading: false,
             error: false,
           });
         } else {
           setFormData({
             ...formData,
-            update: false,
+            updated: false,
             isLoading: false,
             error: true,
           });
@@ -54,13 +54,29 @@ export const ResetPassword = ({ match }) => {
 
   const updatePassword = async (e) => {
     e.preventDefault();
+    setFormData({
+      ...formData,
+      error: '',
+    });
+    if (formData.password === '' || formData.confirmPassword === '') {
+      return setFormData({
+        ...formData,
+        error: 'Both password fields are required.',
+      });
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      return setFormData({
+        ...formData,
+        error: 'The passwords do not match.',
+      });
+    }
+
     try {
       const res = await axios.put('http://localhost:3000/password/update', {
         email: formData.email,
         password: formData.password,
       });
-
-      console.log(res.data);
 
       if (res.data.message === 'password updated') {
         setFormData({
@@ -79,6 +95,56 @@ export const ResetPassword = ({ match }) => {
       console.log(error.data);
     }
   };
+
+  return (
+    <div className='login-form'>
+      <h1>
+        <i className='fas fa-unlock'></i> Reset your password{' '}
+      </h1>
+      <hr />
+      {formData.tokenError || formData.error ? (
+        <p>
+          A problem occurred. Please request a new password{' '}
+          <Link to='/forgot_password'>here</Link>.
+        </p>
+      ) : formData.updated ? (
+        <p>Your password has been reset.</p>
+      ) : (
+        <form onSubmit={updatePassword} className='mb-2'>
+          <div className='form-group'>
+            <label>Please create a new password:</label>
+
+            <input
+              type='password'
+              className='form-control mb-2'
+              name='password'
+              onChange={onChange}
+              value={formData.password}
+            />
+            <label>Confirm password:</label>
+            <input
+              type='password'
+              className='form-control mb-2'
+              name='confirmPassword'
+              onChange={onChange}
+              value={formData.confirmPassword}
+            />
+          </div>
+          {formData.error && <p className='text-danger'>{formData.error}</p>}
+          <button type='submit' className='btn btn-primary mb-1'>
+            Submit
+          </button>
+          <button
+            type='reset'
+            className='btn btn-default mb-1 ml-3'
+            onClick={() => setFormData({ ...formData, error: '' })}
+          >
+            Reset
+          </button>
+        </form>
+      )}
+    </div>
+  );
 
   if (formData.error) {
     return (
