@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use('/api/v1/auth', users);
 app.use('/api/v1/profile', profile);
-app.use('/send', email);
+app.use('/password', email);
 // app.use('/api/v1/beers', beers);
 app.get('/', (req, res) => res.send('Beer Cooler API v1'));
 

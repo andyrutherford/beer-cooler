@@ -3,7 +3,11 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 
 const { forgotPassword } = require('../controllers/email-controller');
-router.route('/forgot_password').post(forgotPassword);
+router.route('/forgot').post(forgotPassword);
+const { resetPassword } = require('../controllers/email-controller');
+router.route('/reset').get(resetPassword);
+const { updatePassword } = require('../controllers/email-controller');
+router.route('/update').put(updatePassword);
 
 // var transport = {
 //   host: 'smtp.gmail.com',
