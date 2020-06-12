@@ -121,7 +121,10 @@ export const ResetPassword = ({ match }) => {
               onChange={onChange}
               value={formData.password}
             />
-            <label>Confirm password:</label>
+            <small className='form-text text-muted'>
+              Your password must contain a minimum of 6 characters.
+            </small>
+            <label className='mt-2'>Confirm password:</label>
             <input
               type='password'
               className='form-control mb-2'

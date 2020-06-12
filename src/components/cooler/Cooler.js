@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CoolerList from './CoolerList';
 
@@ -19,9 +20,9 @@ const Cooler = ({ coolerRemoveAll, cooler }) => {
             >
               <i className='fas fa-times'></i> Remove All
             </button>
-            <button className='btn btn-primary'>
+            <Link to="/cooler/review"><button className='btn btn-primary'>
               Review your order <i className='fas fa-chevron-right'></i>
-            </button>
+            </button></Link>
           </div>
         )}
       </div>

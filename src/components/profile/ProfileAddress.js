@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 import { updateAddress } from '../../actions/profile-action';
 import { setAlert } from '../../actions/alert-action';
 
-export const ProfileAddress = ({ updateAddress, setAlert, address }) => {
+export const ProfileAddress = ({
+  updateAddress,
+  setAlert,
+  address,
+  reviewOrder,
+}) => {
   const [addressData, setAddressData] = useState({
     fullName: address ? address.fullName : '',
     address1: address ? address.address1 : '',
@@ -399,9 +404,11 @@ export const ProfileAddress = ({ updateAddress, setAlert, address }) => {
             </div>
           </div>
         </fieldset>
-        <button className='btn mt-4'>
-          <i className='fas fa-save'></i> Save Address
-        </button>
+        {!reviewOrder && (
+          <button className='btn mt-4'>
+            <i className='fas fa-save'></i> Save Address
+          </button>
+        )}
       </form>
     </div>
   );

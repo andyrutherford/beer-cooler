@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 
 const ForgotPassword = () => {
