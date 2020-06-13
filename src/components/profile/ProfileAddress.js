@@ -405,7 +405,7 @@ export const ProfileAddress = ({
           </div>
         </fieldset>
         {!reviewOrder && (
-          <button className='btn mt-4'>
+          <button className='btn btn-primary mt-4'>
             <i className='fas fa-save'></i> Save Address
           </button>
         )}

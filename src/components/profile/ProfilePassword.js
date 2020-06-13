@@ -84,7 +84,7 @@ export const ProfilePassword = ({ changePassword, deleteUser, setAlert }) => {
           />
         </div>
         <div className='d-flex justify-content-between'>
-          <button className='btn'>
+          <button className='btn btn-primary'>
             <i className='fas fa-save'></i> Save
           </button>
         </div>

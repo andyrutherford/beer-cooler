@@ -7,7 +7,7 @@ import PrivateRoute from './PrivateRoute';
 import ProductList from '../ProductList';
 import ProductPage from '../ProductPage';
 import Cooler from '../cooler/Cooler';
-import ReviewOrder from '../cooler/ReviewOrder';
+import Checkout from '../cooler/Checkout';
 import Signup from '../Signup';
 import Login from '../Login';
 import ForgotPassword from '../profile/forgotPassword/ForgotPassword';
@@ -27,7 +27,7 @@ export const Routes = () => {
         <PrivateRoute exact path='/my-profile' component={Profile} />
         <Route exact path='/beers/:id' component={ProductPage} />
         <Route exact path='/cooler' component={Cooler} />
-        <Route exact path='/cooler/review' component={ReviewOrder} />
+        <Route exact path='/checkout' component={Checkout} />
       </Switch>
     </section>
   );

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { connection } from 'mongoose';
 
-export const ReviewOrderPayment = () => {
+export const CheckoutPayment = () => {
   const [formData, setFormData] = useState({
     cardName: '',
     cardNumber: '',
@@ -42,8 +41,6 @@ export const ReviewOrderPayment = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  const onChangeExp = (e) => {};
 
   return (
     <div>
@@ -96,6 +93,7 @@ export const ReviewOrderPayment = () => {
                   <input
                     name='expMonth'
                     type='number'
+                    max={12}
                     className='form-control'
                     onChange={onChange}
                     value={expMonth}
@@ -125,20 +123,18 @@ export const ReviewOrderPayment = () => {
             <br />
             <div className='btn-group-vertical btn-block'>
               <a
-                className='btn btn-default'
-                style={{ textAlign: 'left' }}
+                className='btn btn-default text-left'
                 data-toggle='tab'
                 href='#stripe'
               >
                 Stripe/Credit Card
               </a>
               <a
-                className='btn btn-default'
-                style={{ textAlign: 'left' }}
+                className='btn btn-default text-left'
                 data-toggle='tab'
                 href='#paypal'
               >
-                PayPal
+                Cash on Delivery (COD)
               </a>
             </div>
           </div>
@@ -148,4 +144,4 @@ export const ReviewOrderPayment = () => {
   );
 };
 
-export default connect()(ReviewOrderPayment);
+export default connect()(CheckoutPayment);

@@ -31,3 +31,10 @@ export const updateAddress = (addressData) => async (dispatch) => {
     });
   }
 };
+
+export const savePayment = (paymentData) => async (dispatch) => {
+  dispatch({
+    type: 'SAVE_PAYMENT',
+    payload: paymentData,
+  });
+};

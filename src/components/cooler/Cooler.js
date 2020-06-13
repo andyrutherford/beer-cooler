@@ -20,9 +20,11 @@ const Cooler = ({ coolerRemoveAll, cooler }) => {
             >
               <i className='fas fa-times'></i> Remove All
             </button>
-            <Link to="/cooler/review"><button className='btn btn-primary'>
-              Review your order <i className='fas fa-chevron-right'></i>
-            </button></Link>
+            <Link to='/checkout'>
+              <button className='btn btn-primary'>
+                Checkout <i className='fas fa-chevron-right'></i>
+              </button>
+            </Link>
           </div>
         )}
       </div>

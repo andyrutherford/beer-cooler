@@ -8,6 +8,12 @@ const initialState = {
     postCode: '',
     country: '',
   },
+  payment: {
+    cardName: '',
+    cardNumber: '',
+    expMonth: '',
+    expYear: '',
+  },
   loading: true,
   error: {},
   cooler: [],
@@ -41,6 +47,12 @@ export default function (state = initialState, action) {
         address: null,
         loading: false,
         cooler: [],
+      };
+    }
+    case 'SAVE_PAYMENT': {
+      return {
+        ...state,
+        payment: action.payload,
       };
     }
     default:
