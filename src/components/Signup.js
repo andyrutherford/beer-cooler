@@ -69,57 +69,67 @@ const Signup = ({ signupUser, setAlert, isAuthenticated }) => {
         <i className='fas fa-user-plus'></i> Create an account{' '}
         <button onClick={fill}>Fill</button>
       </h1>
-      <form onSubmit={onSubmitHandler} className='mb-2'>
+      <form onSubmit={onSubmitHandler} className='mt-4 mb-2'>
         <div className='form-group'>
-          <label htmlFor='name'>Name</label>
           <input
             type='string'
-            className='form-control'
+            className='form-control mb-4'
             name='name'
             onChange={onChangeHandler}
             value={userData.name}
+            placeholder='Name'
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='email'>Email address</label>
           <input
             type='email'
-            className='form-control'
+            className='form-control mb-4'
             name='email'
             onChange={onChangeHandler}
             value={userData.email}
+            placeholder='Email'
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='password1'>Password</label>
           <input
             type='password'
             className='form-control'
             name='password'
             onChange={onChangeHandler}
             value={userData.password}
+            placeholder='Password'
           />
           <small className='form-text text-muted'>
             Your password must contain a minimum of 6 characters.
           </small>
         </div>
         <div className='form-group'>
-          <label htmlFor='password2'>Confirm Password</label>
           <input
             type='password'
-            className='form-control'
+            className='form-control mt-3 mb-4'
             name='password2'
             onChange={onChangeHandler}
             value={userData.password2}
+            placeholder='Confirm Password'
           />
         </div>
-        <button type='submit' className='btn btn-primary mb-1'>
-          Submit
-        </button>
+        <div className='form-actions d-flex justify-content-between'>
+          <Link
+            to='/forgot_password'
+            className='btn pull-left btn-link text-muted pl-0'
+          >
+            Forgot password?
+          </Link>
+          <div>
+            <Link to='/login' className='btn btn-link text-muted mr-4'>
+              Log in
+            </Link>
+            <button type='submit' className='btn btn-primary mb-1'>
+              Submit
+            </button>
+          </div>
+        </div>
       </form>
-      <p>
-        Already have an account? <Link to='/login'>Login</Link>
-      </p>
     </div>
   );
 };

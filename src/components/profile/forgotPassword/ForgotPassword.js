@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import axios from 'axios';
@@ -76,9 +77,15 @@ const ForgotPassword = () => {
             {error && <p className='text-danger'>{error}</p>}
             {loading && <p>Please wait...</p>}
           </div>
-          <button type='submit' className='btn btn-primary mb-1'>
-            Submit
-          </button>
+
+          <div className='form-actions float-right'>
+            <Link to='/login' className='btn btn-link text-muted mr-4'>
+              Back
+            </Link>
+            <button type='submit' className='btn btn-primary mb-1'>
+              Submit
+            </button>
+          </div>
         </form>
       )}
     </div>

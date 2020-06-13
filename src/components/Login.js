@@ -55,23 +55,23 @@ const Login = ({ loginUser, setAlert, isAuthenticated }) => {
         <i className='fas fa-sign-in-alt'></i> Login{' '}
         <button onClick={fill}>Fill</button>
       </h1>
-      <form onSubmit={onSubmitHandler} className='mb-2'>
+      <form onSubmit={onSubmitHandler} className='mt-4 mb-2'>
         <div className='form-group'>
-          <label htmlFor='email'>Email address</label>
           <input
             type='email'
-            className='form-control'
+            className='form-control mb-4'
             name='email'
+            placeholder='Email'
             onChange={onChangeHandler}
             value={userData.email}
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='password1'>Password</label>
           <input
             type='password'
             className='form-control'
             name='password'
+            placeholder='Password'
             onChange={onChangeHandler}
             value={userData.password}
           />
@@ -79,16 +79,23 @@ const Login = ({ loginUser, setAlert, isAuthenticated }) => {
             Your password must contain a minimum of 6 characters.
           </small>
         </div>
-        <button type='submit' className='btn btn-primary mb-1'>
-          Submit
-        </button>
+        <div className='form-actions d-flex justify-content-between'>
+          <Link
+            to='/forgot_password'
+            className='btn pull-left btn-link text-muted pl-0'
+          >
+            Forgot password?
+          </Link>
+          <div>
+            <Link to='/signup' className='btn btn-link text-muted'>
+              Sign Up
+            </Link>
+            <button type='submit' className='btn btn-primary mb-1'>
+              Submit
+            </button>
+          </div>
+        </div>
       </form>
-      <p>
-        Don't have an account? <Link to='/signup'>Create one</Link>
-      </p>
-      <p>
-        Forgot your password? Reset it <Link to='/forgot_password'>here</Link>
-      </p>
     </div>
   );
 };
