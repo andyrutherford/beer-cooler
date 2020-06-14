@@ -102,7 +102,53 @@ exports.updateAddress = async (req, res, next) => {
       { $set: { address } },
       { new: true, upsert: true }
     );
+    if (!profile) {
+      return res.status(500).json({
+        success: false,
+        msg: 'A problem occurred.  Please try again.',
+      });
+    }
+    res.json({ success: true, profile });
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    } else
+      return res.status(500).json({
+        success: false,
+        error: error,
+      });
+  }
+};
 
+// @desc    Save profile payment information
+// @route   POST api/v1/profile/payment
+// @access  Private
+exports.savePayment = async (req, res, next) => {
+  console.log(req.body);
+  const userId = req.user.id;
+  const { cardName, cardNumber, expMonth, expYear } = req.body;
+
+  const paymentInfo = { cardName, cardNumber, expMonth, expYear };
+  console.log(paymentInfo);
+  try {
+    const profile = await Profile.findOneAndUpdate(
+      {
+        user: userId,
+      },
+      { $set: { payment: paymentInfo } },
+      { new: true, upsert: true }
+    );
+
+    if (!profile) {
+      return res.status(500).json({
+        success: false,
+        msg: 'A problem occurred.  Please try again.',
+      });
+    }
     res.json({ success: true, profile });
   } catch (error) {
     if (error.name === 'ValidationError') {

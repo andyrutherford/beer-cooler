@@ -1,20 +1,24 @@
 const express = require('express');
 const router = express.Router();
 
-const { getUserProfile } = require('../controllers/profile-controller');
-const { createUserProfile } = require('../controllers/profile-controller');
-const { getAllProfiles } = require('../controllers/profile-controller');
-const { getProfileById } = require('../controllers/profile-controller');
-const { addCoolerItem } = require('../controllers/profile-controller');
-const { getCoolerItems } = require('../controllers/profile-controller');
-const { removeAllCoolerItems } = require('../controllers/profile-controller');
-const { removeCoolerItem } = require('../controllers/profile-controller');
-const { updateAddress } = require('../controllers/profile-controller');
+const {
+  getUserProfile,
+  createUserProfile,
+  getAllProfiles,
+  getProfileById,
+  addCoolerItem,
+  getCoolerItems,
+  removeAllCoolerItems,
+  removeCoolerItem,
+  updateAddress,
+  savePayment,
+} = require('../controllers/profile-controller');
 
 const authMiddleware = require('../middleware/auth');
 
 router.route('/me').get(authMiddleware, getUserProfile);
 router.route('/address').post(authMiddleware, updateAddress);
+router.route('/payment').post(authMiddleware, savePayment);
 router.route('/').post(authMiddleware, createUserProfile);
 router.route('/').get(getAllProfiles);
 router.route('/user/:user_id').get(getProfileById);
