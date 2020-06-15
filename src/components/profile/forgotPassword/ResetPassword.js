@@ -43,7 +43,7 @@ export const ResetPassword = ({ match }) => {
       }
     };
     requestReset();
-  }, []);
+  }, [match.params.token, formData]);
 
   const onChange = (e) => {
     setFormData({
@@ -148,31 +148,6 @@ export const ResetPassword = ({ match }) => {
       )}
     </div>
   );
-
-  if (formData.error) {
-    return (
-      <div>
-        <h4>Problem. Please try again.</h4>
-      </div>
-    );
-  } else if (formData.isLoading) {
-    return <div>Loading user data...</div>;
-  } else {
-    return (
-      <div>
-        <form onSubmit={updatePassword}>
-          <input
-            label='password'
-            onChange={onChange}
-            name='password'
-            value={formData.password}
-            type='password'
-          />
-          <input type='submit' label='Submit' />
-        </form>
-      </div>
-    );
-  }
 };
 
 export default ResetPassword;

@@ -8,7 +8,6 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
-  const [showError, setShowError] = useState();
   const [success, setSuccess] = useState(false);
 
   const onChange = (e) => {
@@ -32,11 +31,9 @@ const ForgotPassword = () => {
         console.log(res.data);
 
         if (res.data === 'no user found') {
-          setShowError(true);
           setLoading(false);
           setError('An account was not found with the provided email.');
         } else if (res.data === 'recovery email sent') {
-          setShowError(false);
           setLoading(false);
           setSuccess(true);
         }

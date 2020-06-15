@@ -18,7 +18,7 @@ export const Profile = ({ getCurrentProfile, auth, profile }) => {
   return (
     <div>
       <h1 className='large '>
-        <i class='fas fa-user-circle'></i> My Profile
+        <i className='fas fa-user-circle'></i> My Profile
       </h1>
 
       <form>

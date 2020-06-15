@@ -2,10 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import CoolerItem from './CoolerItem';
-import {
-  coolerGetProducts,
-  coolerGetQuantity,
-} from '../../actions/cooler-action';
+import { coolerGetProducts } from '../../actions/cooler-action';
 
 export const CoolerList = ({
   isAuthenticated,
@@ -17,7 +14,7 @@ export const CoolerList = ({
     if (isAuthenticated) {
       coolerGetProducts(isAuthenticated);
     }
-  }, []);
+  }, [coolerGetProducts, isAuthenticated]);
 
   if (cooler.length === 0) {
     return <p>Your cooler is empty.</p>;

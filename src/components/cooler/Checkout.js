@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import CheckoutPayment from './CheckoutPayment';
 
 import { coolerCheckout } from '../../actions/cooler-action';
 
-export const Checkout = ({ checkout, coolerCheckout }) => {
+export const Checkout = ({ coolerCheckout }) => {
   const onSubmit = (e) => {
     coolerCheckout();
   };
@@ -43,8 +43,4 @@ export const Checkout = ({ checkout, coolerCheckout }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  checkout: state.cooler.checkout,
-});
-
-export default connect(mapStateToProps, { coolerCheckout })(Checkout);
+export default connect(null, { coolerCheckout })(Checkout);

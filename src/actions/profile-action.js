@@ -1,4 +1,3 @@
-import { setAlert } from './alert-action';
 import api from '../utils/api';
 export const getCurrentProfile = () => async (dispatch) => {
   try {

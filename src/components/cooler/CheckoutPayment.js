@@ -12,7 +12,7 @@ export const CheckoutPayment = ({ savePayment, payment }) => {
     expYear: payment.expYear ? payment.expYear : '',
     message: '',
   });
-  const { cardName, cardNumber, cardCvc, expMonth, expYear, valid } = formData;
+  const { cardName, cardNumber, cardCvc, expMonth, expYear } = formData;
 
   const onChange = (e) => {
     if (e.target.name === 'cardNumber') {
