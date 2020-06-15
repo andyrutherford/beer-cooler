@@ -4,9 +4,14 @@ import { Link } from 'react-router-dom';
 
 import ProfileAddress from '../profile/ProfileAddress';
 import CheckoutPayment from './CheckoutPayment';
-import './ReviewOrder.css';
 
-export const Checkout = () => {
+import { coolerCheckout } from '../../actions/cooler-action';
+
+export const Checkout = ({ checkout, coolerCheckout }) => {
+  const onSubmit = (e) => {
+    coolerCheckout();
+  };
+
   return (
     <div>
       <h1 className='large '>
@@ -22,13 +27,24 @@ export const Checkout = () => {
           <Link to='/' className='btn btn-link text-muted mr-3'>
             Reset
           </Link>
-          <button type='submit' className='btn btn-primary mb-1'>
-            Review Your Order <i className='fas fa-chevron-right'></i>
-          </button>
+
+          <Link to='/review_order'>
+            <button
+              type='submit'
+              className='btn btn-primary mb-1'
+              onClick={onSubmit}
+            >
+              Review Your Order <i className='fas fa-chevron-right'></i>
+            </button>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default connect()(Checkout);
+const mapStateToProps = (state) => ({
+  checkout: state.cooler.checkout,
+});
+
+export default connect(mapStateToProps, { coolerCheckout })(Checkout);

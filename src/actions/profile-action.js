@@ -7,7 +7,6 @@ export const getCurrentProfile = () => async (dispatch) => {
       type: 'GET_PROFILE',
       payload: res.data.profile,
     });
-    setAlert('Your address has been updated.');
   } catch (error) {
     dispatch({
       type: 'PROFILE_ERROR',
@@ -33,8 +32,16 @@ export const updateAddress = (addressData) => async (dispatch) => {
 };
 
 export const savePayment = (paymentData) => async (dispatch) => {
-  dispatch({
-    type: 'SAVE_PAYMENT',
-    payload: paymentData,
-  });
+  paymentData.cardNumber =
+    'XXXXXXXXXXXX' + paymentData.cardNumber.slice(12, 16);
+  try {
+    const res = await api.post('/profile/payment', paymentData);
+    console.log(res.data);
+    dispatch({
+      type: 'SAVE_PAYMENT',
+      payload: res.data.profile.payment,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
 };

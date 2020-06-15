@@ -26,6 +26,7 @@ export default function (state = initialState, action) {
         ...state,
         address: action.payload.address,
         cooler: action.payload.cooler,
+        payment: action.payload.payment,
         loading: false,
       };
     }

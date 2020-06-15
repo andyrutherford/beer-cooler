@@ -2,6 +2,7 @@ const initialState = {
   cooler: [],
   quantity: 0,
   loading: true,
+  checkout: false,
 };
 
 export default function (state = initialState, action) {
@@ -45,6 +46,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         cooler: state.cooler.filter((i) => i.id !== action.payload),
+      };
+    case 'COOLER_CHECKOUT':
+      return {
+        ...state,
+        checkout: true,
       };
     case 'COOLER_REMOVE_ALL':
       return {

@@ -93,6 +93,12 @@ export const coolerRemoveAll = () => (dispatch) => {
   }
 };
 
+export const coolerCheckout = () => (dispatch) => {
+  dispatch({
+    type: 'COOLER_CHECKOUT',
+  });
+};
+
 export const clearCoolerLogout = () => (dispatch) => {
   dispatch({
     type: 'COOLER_REMOVE_ALL',

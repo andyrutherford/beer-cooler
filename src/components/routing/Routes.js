@@ -8,6 +8,7 @@ import ProductList from '../ProductList';
 import ProductPage from '../ProductPage';
 import Cooler from '../cooler/Cooler';
 import Checkout from '../cooler/Checkout';
+import ReviewOrder from '../cooler/ReviewOrder';
 import Signup from '../Signup';
 import Login from '../Login';
 import ForgotPassword from '../profile/forgotPassword/ForgotPassword';
@@ -28,6 +29,7 @@ export const Routes = () => {
         <Route exact path='/beers/:id' component={ProductPage} />
         <Route exact path='/cooler' component={Cooler} />
         <Route exact path='/checkout' component={Checkout} />
+        <Route exact path='/review_order' component={ReviewOrder} />
       </Switch>
     </section>
   );
