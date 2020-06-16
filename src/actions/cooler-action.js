@@ -99,6 +99,17 @@ export const coolerCheckout = () => (dispatch) => {
   });
 };
 
+export const coolerPlaceOrder = (order) => async (dispatch) => {
+  console.log(order);
+  try {
+    const res = await api.post('/orders/new', order);
+    console.log(res.data);
+    dispatch({
+      type: 'COOLER_PLACE_ORDER',
+    });
+  } catch (error) {}
+};
+
 export const clearCoolerLogout = () => (dispatch) => {
   dispatch({
     type: 'COOLER_REMOVE_ALL',

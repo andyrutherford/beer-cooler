@@ -2,7 +2,8 @@ const initialState = {
   cooler: [],
   quantity: 0,
   loading: true,
-  checkout: true,
+  checkout: false,
+  review: false,
 };
 
 export default function (state = initialState, action) {
@@ -51,6 +52,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         checkout: true,
+      };
+    case 'COOLER_PLACE_RDER':
+      return {
+        ...state,
+        review: true,
       };
     case 'COOLER_REMOVE_ALL':
       return {
