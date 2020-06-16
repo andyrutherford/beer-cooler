@@ -128,12 +128,11 @@ exports.updateAddress = async (req, res, next) => {
 // @route   POST api/v1/profile/payment
 // @access  Private
 exports.savePayment = async (req, res, next) => {
-  console.log(req.body);
   const userId = req.user.id;
   const { cardName, cardNumber, expMonth, expYear } = req.body;
 
   const paymentInfo = { cardName, cardNumber, expMonth, expYear };
-  console.log(paymentInfo);
+
   try {
     const profile = await Profile.findOneAndUpdate(
       {

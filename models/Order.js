@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ProfileSchema = new mongoose.Schema({
+const OrderSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
@@ -35,12 +35,6 @@ const ProfileSchema = new mongoose.Schema({
     cardNumber: {
       type: String,
     },
-    expMonth: {
-      type: Number,
-    },
-    expYear: {
-      type: Number,
-    },
   },
   cooler: [Object],
   date: {
@@ -49,4 +43,4 @@ const ProfileSchema = new mongoose.Schema({
   },
 });
 
-module.exports = Profile = mongoose.model('profile', ProfileSchema);
+module.exports = Order = mongoose.model('order', OrderSchema);
