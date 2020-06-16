@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
-export const ReviewOrder = ({ checkout, address, payment }) => {
+export const ReviewOrder = ({ checkout, address, payment, cooler }) => {
   const history = useHistory();
 
   useEffect(() => {
@@ -18,31 +18,66 @@ export const ReviewOrder = ({ checkout, address, payment }) => {
       </h1>
       <div className='d-flex justify-content-between'>
         <div>
-          <h2>
-            <i className='fas fa-shipping-fast'></i> Shipping Address
-          </h2>
-          <div className='card'>
-            <p>Your order will be delivered to: </p>
-            <p>{address.fullName}</p>
-            <p>{address.address1}</p>
-            <p>{address.address2}</p>
-            <p>{address.city}</p>
-            <p>{address.state}</p>
-            <p>{address.postcode}</p>
-            <p>{address.country}</p>
+          <div class='card'>
+            <div class='card-body'>
+              <h2 className='mb-2'>
+                <i className='fas fa-shipping-fast'></i> Shipping Address
+              </h2>
+              <h6 className='card-subtitle mb-3 text-muted'>
+                Your order will be delivered to:
+              </h6>
+              <ul>
+                <li>{address.fullName}</li>
+                <li>
+                  {address.address1} {address.address2}
+                </li>
+                <li>
+                  {address.city}, {address.state}
+                </li>
+                <li>{address.postCode}</li>
+                <li>{address.country}</li>
+                <Link to='/checkout' class='card-link float-right'>
+                  Edit
+                </Link>
+              </ul>
+            </div>
           </div>
-          <h2>
-            <i className='fas fa-wallet'></i> Payment
-          </h2>
-          <div className='card'>
-            <p>{payment.cardName}</p>
-            <p>{payment.cardNumber}</p>
-            <p>
-              Exp. {payment.expMonth}/{payment.expYear}
-            </p>
+          <div class='card'>
+            <div class='card-body'>
+              <h2 className='mb-2'>
+                <i className='fas fa-wallet'></i> Payment
+              </h2>
+              <h6 class='card-subtitle mb-3 text-muted'>
+                Your payment method:
+              </h6>
+              <ul>
+                <li>{payment.cardName}</li>
+                <li>{payment.cardNumber}</li>
+                <li>
+                  Exp. {payment.expMonth}/{payment.expYear}
+                </li>
+                <Link to='/checkout' class='card-link float-right'>
+                  Edit
+                </Link>
+              </ul>
+            </div>
           </div>
         </div>
-        <div>My Order</div>
+        <div className='card'>
+          <h2 className='mb-2'>
+            <i className='fas fa-beer'></i> My Order
+          </h2>
+          <h6 class='card-subtitle mb-3 text-muted'>
+            The following items will be delivered to you:
+          </h6>
+          <ul>
+            {cooler.map((i, index) => (
+              <li key={index}>
+                {i.quantity}x {i.name}{' '}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div className='form-actions d-flex justify-content-between'>
@@ -64,6 +99,7 @@ const mapStateToProps = (state) => ({
   checkout: state.cooler.checkout,
   address: state.profile.address,
   payment: state.profile.payment,
+  cooler: state.cooler.cooler,
 });
 
 export default connect(mapStateToProps)(ReviewOrder);

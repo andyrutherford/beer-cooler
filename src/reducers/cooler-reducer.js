@@ -2,7 +2,7 @@ const initialState = {
   cooler: [],
   quantity: 0,
   loading: true,
-  checkout: false,
+  checkout: true,
 };
 
 export default function (state = initialState, action) {

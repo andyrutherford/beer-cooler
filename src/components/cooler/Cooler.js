@@ -8,7 +8,9 @@ import { coolerRemoveAll } from '../../actions/cooler-action';
 const Cooler = ({ coolerRemoveAll, cooler }) => {
   return (
     <section>
-      <h1>My Cooler</h1>
+      <h1 className='large '>
+        <i className='fas fa-shopping-cart'></i> My Cooler
+      </h1>
 
       <div>
         <CoolerList />
