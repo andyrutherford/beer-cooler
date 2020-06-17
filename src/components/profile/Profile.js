@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import ProfileAddress from './ProfileAddress';
 import ProfilePassword from './ProfilePassword';
@@ -17,9 +18,12 @@ export const Profile = ({ getCurrentProfile, auth, profile }) => {
 
   return (
     <div>
-      <h1 className='large '>
-        <i className='fas fa-user-circle'></i> My Profile
-      </h1>
+      <div className='d-flex justify-content-between align-items-center'>
+        <h1 className='large'>
+          <i className='fas fa-user-circle'></i> My Profile
+        </h1>
+        <Link to='/my-orders'>My Order History</Link>
+      </div>
 
       <form>
         <div className='form-group'>

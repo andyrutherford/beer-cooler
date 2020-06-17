@@ -15,6 +15,7 @@ import Login from '../Login';
 import ForgotPassword from '../profile/forgotPassword/ForgotPassword';
 import ResetPassword from '../profile/forgotPassword/ResetPassword';
 import Profile from '../profile/Profile';
+import OrderHistory from '../order/OrderHistory';
 
 export const Routes = () => {
   return (
@@ -27,11 +28,12 @@ export const Routes = () => {
         <Route exact path='/forgot_password' component={ForgotPassword} />
         <Route exact path='/reset_password/:token' component={ResetPassword} />
         <PrivateRoute exact path='/my-profile' component={Profile} />
+        <PrivateRoute exact path='/my-orders' component={OrderHistory} />
         <Route exact path='/beers/:id' component={ProductPage} />
         <Route exact path='/cooler' component={Cooler} />
         <Route exact path='/checkout' component={Checkout} />
-        <Route exact path='/review_order' component={ReviewOrder} />
-        <Route exact path='/orders/:id' component={OrderComplete} />
+        <Route exact path='/review-order' component={ReviewOrder} />
+        <Route exact path='/my-orders/:id' component={OrderComplete} />
       </Switch>
     </section>
   );

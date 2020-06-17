@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import { getOrderById } from '../../actions/order-action';
 
@@ -12,7 +13,9 @@ export const OrderComplete = ({
   getOrderById,
   order,
   isAuthenticated,
+  newOrder,
 }) => {
+  const location = useLocation();
   const orderId = match.params.id;
 
   // Make sure isAuth is true from userLoaded before getting order
@@ -29,10 +32,14 @@ export const OrderComplete = ({
     <>
       {order && (
         <div>
-          <h1 className='display-4'>
-            <i class='fas fa-check'></i> Success!
-          </h1>
-          <p>Your order has been processed, and will be shipped soon.</p>
+          {location.state && (
+            <div>
+              <h1 className='display-4'>
+                <i className='fas fa-check'></i> Success!
+              </h1>
+              <p>Your order has been processed, and will be shipped soon.</p>
+            </div>
+          )}
           <div className='card card-body'>
             <h2>Order {order._id}</h2>
             <p className='text-muted'>Order submitted on {createdDate()}</p>

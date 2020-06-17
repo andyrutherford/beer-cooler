@@ -28,7 +28,7 @@ export const Checkout = ({ coolerCheckout }) => {
             Reset
           </Link>
 
-          <Link to='/review_order'>
+          <Link to='/review-order'>
             <button
               type='submit'
               className='btn btn-primary mb-1'

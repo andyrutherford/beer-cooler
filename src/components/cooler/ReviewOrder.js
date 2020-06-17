@@ -47,7 +47,7 @@ export const ReviewOrder = ({
 
       setTimeout(() => {
         setMessage('');
-        history.push(`/orders/${res.order._id}`);
+        history.push(`/my-orders/${res.order._id}`, { newOrder: true });
       }, 3000);
     } catch (error) {
       console.log(error);
