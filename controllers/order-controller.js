@@ -18,7 +18,6 @@ exports.placeOrder = async (req, res, next) => {
       cooler: [...cooler],
     });
     await order.save();
-    console.log(order);
     res.json({
       success: true,
       order,
@@ -36,7 +35,6 @@ exports.placeOrder = async (req, res, next) => {
 // @route   GET /api/v1/orders/:id
 // @access  PRIVATE
 exports.getOrderById = async (req, res, next) => {
-  //   res.json({ orderID: req.params.order_id, user: req.user });
   const orderId = req.params.order_id;
   const userId = req.user.id;
 
