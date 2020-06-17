@@ -73,12 +73,6 @@ exports.getAllUserOrders = async (req, res, next) => {
       user: userId,
     });
 
-    if (orders == 0) {
-      return res.status(404).json({
-        success: true,
-        message: 'No orders found.',
-      });
-    }
     res.json({ success: true, orders });
   } catch (error) {
     console.log(error.message);
