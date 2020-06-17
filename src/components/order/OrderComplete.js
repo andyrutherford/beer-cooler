@@ -41,7 +41,7 @@ export const OrderComplete = ({
             </div>
           )}
           <div className='card card-body'>
-            <h2>Order {order._id}</h2>
+            <h2>Order {order.orderId}</h2>
             <p className='text-muted'>Order submitted on {createdDate()}</p>
           </div>
           <div className='d-flex justify-content-between'>

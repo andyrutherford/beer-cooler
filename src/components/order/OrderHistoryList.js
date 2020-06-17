@@ -11,8 +11,7 @@ export const OrderHistoryList = ({ history }) => {
           className='list-group-item d-flex justify-content-between'
           key={i._id}
         >
-          {i._id}
-          {i.date}
+          {i.orderId} - {i.date}
         </Link>
       ))}
     </ul>

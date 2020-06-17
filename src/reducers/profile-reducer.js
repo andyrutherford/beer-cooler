@@ -46,6 +46,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         address: null,
+        payment: null,
+        error: {},
         loading: false,
         cooler: [],
       };

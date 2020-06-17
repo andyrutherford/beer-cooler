@@ -67,7 +67,7 @@ export const logoutUser = () => (dispatch) => {
     type: 'LOGOUT_USER',
   });
   dispatch({ type: 'CLEAR_PROFILE' });
-  dispatch({ type: 'COOLER_REMOVE_ALL' });
+  dispatch({ type: 'CLEAR_ORDERS' });
   dispatch(clearCoolerLogout());
 
   dispatch(setAlert('You have successfully logged out.'));

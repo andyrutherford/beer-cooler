@@ -15,7 +15,12 @@ export default function (state = initialState, action) {
         ...state,
         history: action.payload,
       };
-
+    case 'CLEAR_ORDERS':
+      return {
+        ...state,
+        current: null,
+        history: [],
+      };
     default:
       return state;
   }
