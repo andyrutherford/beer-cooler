@@ -62,6 +62,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         cooler: [],
+        review: false,
+        checkout: false,
       };
     case 'COOLER_UPDATE_QUANTITY':
       const update = state.cooler.find((i) => i.id === action.payload.id);

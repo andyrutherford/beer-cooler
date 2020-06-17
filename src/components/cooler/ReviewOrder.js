@@ -17,11 +17,8 @@ export const ReviewOrder = ({
   const history = useHistory();
   const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    if (!checkout) {
-      history.push('/cooler');
-    }
-  }, [checkout, history]);
+  // TODO
+  // Redirect user from this page if checkout is false
 
   const onSubmit = async (e) => {
     e.preventDefault();

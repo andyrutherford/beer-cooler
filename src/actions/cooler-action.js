@@ -59,9 +59,15 @@ export const coolerAddProduct = (beer, quantity, isAuthenticated) => async (
   }
 };
 
-export const coolerRemoveProduct = (id, name) => (dispatch) => {
+export const coolerRemoveProduct = (id, name) => async (dispatch) => {
   try {
-    api.delete(`/profile/cooler/${id}`);
+    await api.delete(`/profile/cooler/${id}`);
+    dispatch(setAlert(`${name} has been removed.`));
+    dispatch({
+      type: 'COOLER_REMOVE_PRODUCT',
+      payload: id,
+    });
+    dispatch(coolerGetQuantity());
   } catch (error) {
     console.log(error);
     dispatch({
@@ -69,21 +75,14 @@ export const coolerRemoveProduct = (id, name) => (dispatch) => {
     });
     setAlert('A problem has occurred.');
   }
-  dispatch(setAlert(`${name} has been removed.`));
-  dispatch({
-    type: 'COOLER_REMOVE_PRODUCT',
-    payload: id,
-  });
-  dispatch(coolerGetQuantity());
 };
 
-export const coolerRemoveAll = () => (dispatch) => {
+export const coolerRemoveAll = () => async (dispatch) => {
   try {
-    api.delete('/profile/cooler');
+    await api.delete('/profile/cooler');
     dispatch({
       type: 'COOLER_REMOVE_ALL',
     });
-    dispatch(setAlert('Your cart has been emptied.'));
   } catch (error) {
     console.log(error);
     dispatch({
@@ -107,8 +106,11 @@ export const coolerPlaceOrder = (order) => async (dispatch) => {
     dispatch({
       type: 'COOLER_PLACE_ORDER',
     });
+    dispatch(coolerRemoveAll());
     return res.data;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 export const clearCoolerLogout = () => (dispatch) => {
