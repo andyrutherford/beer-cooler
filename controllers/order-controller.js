@@ -1,5 +1,4 @@
 const Order = require('../models/Order');
-const User = require('../models/User');
 
 const mongoose = require('mongoose');
 
@@ -58,6 +57,29 @@ exports.getOrderById = async (req, res, next) => {
       success: true,
       order,
     });
+  } catch (error) {
+    console.log(error.message);
+    res.send(error.message);
+  }
+};
+
+// @desc    Get all users orders
+// @route   GET /api/v1/orders/
+// @access  PRIVATE
+exports.getAllUserOrders = async (req, res, next) => {
+  const userId = req.user.id;
+  try {
+    const orders = await Order.find({
+      user: userId,
+    });
+
+    if (orders == 0) {
+      return res.status(404).json({
+        success: true,
+        message: 'No orders found.',
+      });
+    }
+    res.json({ success: true, orders });
   } catch (error) {
     console.log(error.message);
     res.send(error.message);
