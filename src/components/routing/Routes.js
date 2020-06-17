@@ -9,6 +9,7 @@ import ProductPage from '../ProductPage';
 import Cooler from '../cooler/Cooler';
 import Checkout from '../cooler/Checkout';
 import ReviewOrder from '../cooler/ReviewOrder';
+import OrderComplete from '../order/OrderComplete';
 import Signup from '../Signup';
 import Login from '../Login';
 import ForgotPassword from '../profile/forgotPassword/ForgotPassword';
@@ -30,6 +31,7 @@ export const Routes = () => {
         <Route exact path='/cooler' component={Cooler} />
         <Route exact path='/checkout' component={Checkout} />
         <Route exact path='/review_order' component={ReviewOrder} />
+        <Route exact path='/orders/:id' component={OrderComplete} />
       </Switch>
     </section>
   );

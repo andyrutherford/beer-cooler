@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
 import { coolerPlaceOrder } from '../../actions/cooler-action';
+import { OrderAddress } from '../order/OrderAddress';
+import { OrderPayment } from '../order/OrderPayment';
+import { OrderItems } from '../order/OrderItems';
 
 export const ReviewOrder = ({
   checkout,
@@ -20,7 +23,7 @@ export const ReviewOrder = ({
     }
   }, [checkout, history]);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setMessage('Processing your order...');
 
@@ -38,12 +41,17 @@ export const ReviewOrder = ({
       cooler: coolerItems,
     };
 
-    coolerPlaceOrder(newOrder);
+    try {
+      const res = await coolerPlaceOrder(newOrder);
+      console.log(res.order._id);
 
-    setTimeout(() => {
-      setMessage('');
-      history.push('/cooler');
-    }, 3000);
+      setTimeout(() => {
+        setMessage('');
+        history.push(`/orders/${res.order._id}`);
+      }, 3000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -54,66 +62,14 @@ export const ReviewOrder = ({
       <div className='d-flex justify-content-between'>
         <div>
           <div className='card'>
-            <div className='card-body'>
-              <h2 className='mb-2'>
-                <i className='fas fa-shipping-fast'></i> Shipping Address
-              </h2>
-              <h6 className='card-subtitle mb-3 text-muted'>
-                Your order will be delivered to:
-              </h6>
-              <ul>
-                <li>{address.fullName}</li>
-                <li>
-                  {address.address1} {address.address2}
-                </li>
-                <li>
-                  {address.city}, {address.state}
-                </li>
-                <li>{address.postCode}</li>
-                <li>{address.country}</li>
-                <Link to='/checkout' className='card-link float-right'>
-                  Edit
-                </Link>
-              </ul>
-            </div>
+            <OrderAddress address={address} review={true} />
           </div>
           <div className='card'>
-            <div className='card-body'>
-              <h2 className='mb-2'>
-                <i className='fas fa-wallet'></i> Payment
-              </h2>
-              <h6 className='card-subtitle mb-3 text-muted'>
-                Your payment method:
-              </h6>
-              <ul>
-                <li>{payment.cardName}</li>
-                <li>{payment.cardNumber}</li>
-                <li>
-                  Exp. {payment.expMonth}/{payment.expYear}
-                </li>
-                <Link to='/checkout' className='card-link float-right'>
-                  Edit
-                </Link>
-              </ul>
-            </div>
+            <OrderPayment payment={payment} review={true} />
           </div>
         </div>
         <div className='card'>
-          <div className='card-body'>
-            <h2 className='mb-2'>
-              <i className='fas fa-beer'></i> My Order
-            </h2>
-            <h6 className='card-subtitle mb-3 text-muted'>
-              The following items will be delivered to you:
-            </h6>
-            <ul>
-              {cooler.map((i, index) => (
-                <li key={index}>
-                  {i.quantity}x {i.name}{' '}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <OrderItems cooler={cooler} />
         </div>
       </div>
 
@@ -131,8 +87,8 @@ export const ReviewOrder = ({
             Place Your Order <i className='fas fa-chevron-right'></i>
           </button>
         </Link>
+        {message && <p>{message}</p>}
       </div>
-      {message && <p>{message}</p>}
     </div>
   );
 };

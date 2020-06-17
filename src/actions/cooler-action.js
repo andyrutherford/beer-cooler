@@ -107,6 +107,7 @@ export const coolerPlaceOrder = (order) => async (dispatch) => {
     dispatch({
       type: 'COOLER_PLACE_ORDER',
     });
+    return res.data;
   } catch (error) {}
 };
 

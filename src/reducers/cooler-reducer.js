@@ -53,7 +53,7 @@ export default function (state = initialState, action) {
         ...state,
         checkout: true,
       };
-    case 'COOLER_PLACE_RDER':
+    case 'COOLER_PLACE_ORDER':
       return {
         ...state,
         review: true,
