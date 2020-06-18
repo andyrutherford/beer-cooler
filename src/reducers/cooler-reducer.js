@@ -8,7 +8,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case 'COOLER_GET_PRODUCTS':
+    case 'GET_COOLER':
       return {
         ...state,
         cooler: action.payload,

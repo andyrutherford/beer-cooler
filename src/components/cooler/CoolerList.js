@@ -2,19 +2,19 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import CoolerItem from './CoolerItem';
-import { coolerGetProducts } from '../../actions/cooler-action';
+import { getCooler } from '../../actions/cooler-action';
 
 export const CoolerList = ({
   isAuthenticated,
-  coolerGetProducts,
+  getCooler,
   coolerRemoveAll,
   cooler: { cooler },
 }) => {
   useEffect(() => {
     if (isAuthenticated) {
-      coolerGetProducts(isAuthenticated);
+      getCooler(isAuthenticated);
     }
-  }, [coolerGetProducts, isAuthenticated]);
+  }, [getCooler, isAuthenticated]);
 
   if (cooler.length === 0) {
     return <p>Your cooler is empty.</p>;
@@ -37,5 +37,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  coolerGetProducts,
+  getCooler,
 })(CoolerList);

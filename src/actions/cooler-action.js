@@ -1,11 +1,11 @@
 import { setAlert } from './alert-action';
 import api from '../utils/api';
 
-export const coolerGetProducts = () => async (dispatch) => {
+export const getCooler = () => async (dispatch) => {
   try {
     const res = await api.get('/profile/cooler');
     dispatch({
-      type: 'COOLER_GET_PRODUCTS',
+      type: 'GET_COOLER',
       payload: res.data.profileCooler,
     });
   } catch (error) {

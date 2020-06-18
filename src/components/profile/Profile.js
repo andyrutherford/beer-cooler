@@ -6,15 +6,12 @@ import ProfileAddress from './ProfileAddress';
 import ProfilePassword from './ProfilePassword';
 import { getCurrentProfile } from '../../actions/profile-action';
 
-export const Profile = ({ getCurrentProfile, auth, profile }) => {
+import { formatDate } from '../../utils/formatDate';
+
+export const Profile = ({ getCurrentProfile, auth, address }) => {
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
-
-  const createdDate = () => {
-    const date = auth.user.date.split('-');
-    return `${date[2].slice(0, 2)}-${date[1]}-${date[0]}`;
-  };
 
   return (
     <div>
@@ -45,10 +42,10 @@ export const Profile = ({ getCurrentProfile, auth, profile }) => {
             disabled
           />
         </div>
-        {auth && <p>Account created on {createdDate()}</p>}
+        {auth && <p>Account created on {formatDate(auth.user.date)}</p>}
       </form>
 
-      <ProfileAddress />
+      {address && <ProfileAddress />}
       <ProfilePassword />
     </div>
   );
@@ -56,7 +53,7 @@ export const Profile = ({ getCurrentProfile, auth, profile }) => {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  profile: state.profile,
+  address: state.profile.address,
 });
 
 export default connect(mapStateToProps, { getCurrentProfile })(Profile);

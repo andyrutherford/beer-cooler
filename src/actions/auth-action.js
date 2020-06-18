@@ -1,5 +1,5 @@
 import { setAlert } from './alert-action';
-import { clearCoolerLogout, coolerGetProducts } from './cooler-action';
+import { clearCoolerLogout, getCooler } from './cooler-action';
 import { getCurrentProfile } from './profile-action';
 import api from '../utils/api';
 
@@ -16,8 +16,7 @@ export const loadUser = () => async (dispatch) => {
       type: 'USER_LOADED',
       payload: res.data,
     });
-    dispatch(getCurrentProfile());
-    dispatch(coolerGetProducts());
+    dispatch(getCooler());
   } catch (error) {
     dispatch({
       type: 'AUTH_ERROR',
@@ -52,7 +51,6 @@ export const loginUser = (userData) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(loadUser());
-    dispatch(coolerGetProducts());
   } catch (error) {
     console.log(error);
     dispatch({

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 import { getOrderById } from '../../actions/order-action';
+import { formatAddress, formatDate } from '../../utils/formatDate';
 
 import { OrderAddress } from './OrderAddress';
 import { OrderPayment } from './OrderPayment';
@@ -23,11 +24,6 @@ export const OrderComplete = ({
     getOrderById(match.params.id);
   }, [isAuthenticated]);
 
-  const createdDate = () => {
-    const date = order.date.split('-');
-    return `${date[2].slice(0, 2)}-${date[1]}-${date[0]}`;
-  };
-
   return (
     <>
       {order && (
@@ -35,14 +31,16 @@ export const OrderComplete = ({
           {location.state && (
             <div>
               <h1 className='display-4'>
-                <i className='fas fa-check'></i> Success!
+                <i className='fas fa-check'></i> Your order has been placed
               </h1>
-              <p>Your order has been processed, and will be shipped soon.</p>
+              <p>Your order is still processing, and will be shipped soon.</p>
             </div>
           )}
           <div className='card card-body'>
             <h2>Order {order.orderId}</h2>
-            <p className='text-muted'>Order submitted on {createdDate()}</p>
+            <p className='text-muted'>
+              Order submitted on {formatDate(order.date)}
+            </p>
           </div>
           <div className='d-flex justify-content-between'>
             <div>
