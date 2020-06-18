@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { updateAddress } from '../../actions/profile-action';
 import { setAlert } from '../../actions/alert-action';
 
-export const ProfileAddress = ({ updateAddress, setAlert, address }) => {
+export const ProfileAddress = ({ updateAddress, setAlert, address, guest }) => {
   const [addressData, setAddressData] = useState({
     fullName: address ? address.fullName : '',
     address1: address ? address.address1 : '',
@@ -38,7 +38,7 @@ export const ProfileAddress = ({ updateAddress, setAlert, address }) => {
         }
       }
     }
-    updateAddress(addressData);
+    updateAddress(addressData, guest);
     setAlert('Your address has been successfully updated.');
   };
 

@@ -14,7 +14,14 @@ export const getCurrentProfile = () => async (dispatch) => {
   }
 };
 
-export const updateAddress = (addressData) => async (dispatch) => {
+export const updateAddress = (addressData, guest) => async (dispatch) => {
+  console.log(addressData, guest);
+  if (guest) {
+    return dispatch({
+      type: 'UPDATE_ADDRESS',
+      payload: addressData,
+    });
+  }
   try {
     const res = await api.post('/profile/address', addressData);
     console.log(res.data);
