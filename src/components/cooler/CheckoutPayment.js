@@ -67,7 +67,7 @@ export const CheckoutPayment = ({ savePayment, payment }) => {
   };
 
   return (
-    <div>
+    <div className='mt-4'>
       <h2>
         <i className='fas fa-wallet'></i> Payment
       </h2>

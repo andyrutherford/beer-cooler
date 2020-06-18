@@ -45,7 +45,7 @@ export const Profile = ({ getCurrentProfile, auth, address }) => {
         {auth && <p>Account created on {formatDate(auth.user.date)}</p>}
       </form>
 
-      {address && <ProfileAddress />}
+      {address.fullName && <ProfileAddress />}
       <ProfilePassword />
     </div>
   );

@@ -47,11 +47,9 @@ export const ProfilePassword = ({ changePassword, deleteUser, setAlert }) => {
 
   return (
     <div>
-      <h3 className='mt-4 mb-3'>
-        <span>
-          <i className='fas fa-key'></i> Change Your Password
-        </span>
-      </h3>
+      <h2 className='mt-4'>
+        <i className='fas fa-key'></i> Change Your Password
+      </h2>
       <form onSubmit={onSubmit}>
         <div className='form-group'>
           <label htmlFor='text'>Old Password</label>

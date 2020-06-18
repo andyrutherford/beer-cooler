@@ -17,7 +17,11 @@ export const CoolerList = ({
   }, [getCooler, isAuthenticated]);
 
   if (cooler.length === 0) {
-    return <p>Your cooler is empty.</p>;
+    return (
+      <h3>
+        <i className='fas fa-exclamation-circle'></i> Your cooler is empty.
+      </h3>
+    );
   }
 
   return (
