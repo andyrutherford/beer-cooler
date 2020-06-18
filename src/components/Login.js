@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import { loginUser } from '../actions/auth-action';
 import { setAlert } from '../actions/alert-action';
 
-const Login = ({ loginUser, setAlert, isAuthenticated }) => {
+const Login = ({ loginUser, setAlert, isAuthenticated, location }) => {
   let history = useHistory();
+  const { checkout } = location;
+
   const [userData, setUserData] = useState({
     email: '',
     password: '',
@@ -95,6 +97,11 @@ const Login = ({ loginUser, setAlert, isAuthenticated }) => {
             </button>
           </div>
         </div>
+        {checkout && (
+          <Link to={{ pathname: '/checkout', checkoutAsGuest: true }}>
+            Continue as a Guest
+          </Link>
+        )}
       </form>
     </div>
   );

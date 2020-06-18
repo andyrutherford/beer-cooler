@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 import { getOrderById } from '../../actions/order-action';
-import { formatAddress, formatDate } from '../../utils/formatDate';
+import { formatDate } from '../../utils/formatDate';
 
 import { OrderAddress } from './OrderAddress';
 import { OrderPayment } from './OrderPayment';
@@ -37,9 +37,10 @@ export const OrderComplete = ({
             </div>
           )}
           <div className='card card-body'>
-            <h2>Order {order.orderId}</h2>
+            <h1>Order #{order.orderId}</h1>
             <p className='text-muted'>
-              Order submitted on {formatDate(order.date)}
+              <i className='far fa-calendar-alt'></i> Submitted on{' '}
+              {formatDate(order.date)}
             </p>
           </div>
           <div className='d-flex justify-content-between'>
@@ -55,7 +56,6 @@ export const OrderComplete = ({
               <OrderItems cooler={order.cooler} />
             </div>
           </div>
-          <button onClick={() => getOrderById(match.params.id)}>Click</button>
         </div>
       )}
     </>

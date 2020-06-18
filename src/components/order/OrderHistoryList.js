@@ -10,10 +10,14 @@ export const OrderHistoryList = ({ history }) => {
       {history.map((i) => (
         <li className='list-group-item d-flex justify-content-between align-items-center'>
           {' '}
-          <Link to={`/my-orders/${i._id}`} key={i._id}>
-            {i.orderId}
-          </Link>
-          <span>{formatDate(i.date)}</span>
+          <span>
+            <Link to={`/my-orders/${i._id}`} key={i._id}>
+              Order #{i.orderId}
+            </Link>
+          </span>
+          <span className='text-muted'>
+            <i className='far fa-calendar-alt'></i> {formatDate(i.date)}
+          </span>
         </li>
       ))}
     </ul>

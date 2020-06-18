@@ -9,12 +9,15 @@ import { getCurrentProfile } from '../../actions/profile-action';
 import { coolerCheckout } from '../../actions/cooler-action';
 
 export const Checkout = ({
+  location,
   coolerCheckout,
   getCurrentProfile,
   isAuthenticated,
   address,
   payment,
 }) => {
+  const { checkoutAsGuest } = location;
+
   useEffect(() => {
     console.log('abc');
     getCurrentProfile();
@@ -31,6 +34,8 @@ export const Checkout = ({
       </h1>
       {address.fullName && <ProfileAddress className='mb-5' />}
       {payment.cardName && <CheckoutPayment />}
+      {checkoutAsGuest && <ProfileAddress className='mb-5' guest={true} />}
+      {checkoutAsGuest && <CheckoutPayment guest={true} />}
       <div className='form-actions d-flex justify-content-between'>
         <Link to='/cooler' className='btn pull-left btn-link text-muted pl-0'>
           Back

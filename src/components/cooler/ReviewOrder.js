@@ -19,6 +19,11 @@ export const ReviewOrder = ({
 
   // TODO
   // Redirect user from this page if checkout is false
+  useEffect(() => {
+    if (checkout === false) {
+      history.push('/checkout');
+    }
+  }, [checkout]);
 
   const onSubmit = async (e) => {
     e.preventDefault();

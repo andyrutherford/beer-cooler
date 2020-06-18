@@ -5,7 +5,7 @@ import CoolerList from './CoolerList';
 
 import { coolerRemoveAll } from '../../actions/cooler-action';
 
-const Cooler = ({ coolerRemoveAll, cooler }) => {
+const Cooler = ({ coolerRemoveAll, cooler, isAuthenticated }) => {
   return (
     <section>
       <h1 className='large '>
@@ -22,11 +22,19 @@ const Cooler = ({ coolerRemoveAll, cooler }) => {
             >
               <i className='fas fa-times'></i> Remove All
             </button>
-            <Link to='/checkout'>
-              <button className='btn btn-primary'>
-                Checkout <i className='fas fa-chevron-right'></i>
-              </button>
-            </Link>
+            {isAuthenticated ? (
+              <Link to='/checkout'>
+                <button className='btn btn-primary'>
+                  Checkout <i className='fas fa-chevron-right'></i>
+                </button>
+              </Link>
+            ) : (
+              <Link to={{ pathname: '/login', checkout: true }}>
+                <button className='btn btn-primary'>
+                  Checkout <i className='fas fa-chevron-right'></i>
+                </button>
+              </Link>
+            )}
           </div>
         )}
       </div>
@@ -36,6 +44,7 @@ const Cooler = ({ coolerRemoveAll, cooler }) => {
 
 const mapStateToProps = (state) => ({
   cooler: state.cooler.cooler,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { coolerRemoveAll })(Cooler);
