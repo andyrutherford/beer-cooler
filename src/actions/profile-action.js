@@ -15,7 +15,6 @@ export const getCurrentProfile = () => async (dispatch) => {
 };
 
 export const updateAddress = (addressData, guest) => async (dispatch) => {
-  console.log(addressData, guest);
   if (guest) {
     return dispatch({
       type: 'UPDATE_ADDRESS',
@@ -37,9 +36,17 @@ export const updateAddress = (addressData, guest) => async (dispatch) => {
   }
 };
 
-export const savePayment = (paymentData) => async (dispatch) => {
+export const savePayment = (paymentData, guest) => async (dispatch) => {
   paymentData.cardNumber =
     'XXXXXXXXXXXX' + paymentData.cardNumber.slice(12, 16);
+
+  if (guest) {
+    return dispatch({
+      type: 'SAVE_PAYMENT',
+      payload: paymentData,
+    });
+  }
+
   try {
     const res = await api.post('/profile/payment', paymentData);
     console.log(res.data);

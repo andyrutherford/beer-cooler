@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { savePayment } from '../../actions/profile-action';
 
-export const CheckoutPayment = ({ savePayment, payment }) => {
+export const CheckoutPayment = ({ savePayment, payment, guest }) => {
   const [formData, setFormData] = useState({
     cardName: payment.cardName ? payment.cardName : '',
     cardNumber: payment.cardNumber ? payment.cardNumber : '',
@@ -56,8 +56,7 @@ export const CheckoutPayment = ({ savePayment, payment }) => {
         ...formData,
         message: 'Payment information saved.',
       });
-      console.log(formData);
-      savePayment(formData);
+      savePayment(formData, guest);
     } else {
       setFormData({
         ...formData,
