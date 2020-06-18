@@ -6,7 +6,10 @@ const jwt = require('jsonwebtoken');
 // Get user by token
 exports.getUser = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await User.findById(req.user.id)
+      .select('-password')
+      .select('-resetPasswordToken')
+      .select('-resetPasswordExpires');
     res.json(user);
   } catch (error) {
     console.error(error.message);
