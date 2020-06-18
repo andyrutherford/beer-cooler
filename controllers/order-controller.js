@@ -16,6 +16,9 @@ exports.placeOrder = async (req, res, next) => {
       payment: { ...payment },
       cooler: [...cooler],
     });
+    const orderId = order._id.toString().slice(18, 24);
+
+    order.orderId = orderId;
     await order.save();
     res.json({
       success: true,
@@ -71,7 +74,7 @@ exports.getAllUserOrders = async (req, res, next) => {
   try {
     const orders = await Order.find({
       user: userId,
-    });
+    }).sort({ date: -1 });
 
     res.json({ success: true, orders });
   } catch (error) {

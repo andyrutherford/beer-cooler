@@ -93,7 +93,7 @@ exports.updatePassword = async (req, res, next) => {
       res.status(200).send({ message: 'password updated' });
     } else {
       console.log('user does not exist');
-      res.status(404).json('no user existsi in db to update');
+      res.status(404).json('no user exists in db to update');
     }
   } catch (error) {
     console.log(error.message);
