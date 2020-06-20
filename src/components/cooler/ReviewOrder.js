@@ -13,12 +13,11 @@ export const ReviewOrder = ({
   payment,
   cooler,
   coolerPlaceOrder,
+  checkoutAsGuest,
 }) => {
   const history = useHistory();
   const [message, setMessage] = useState('');
 
-  // TODO
-  // Redirect user from this page if checkout is false
   useEffect(() => {
     if (checkout === false) {
       history.push('/checkout');
@@ -26,6 +25,8 @@ export const ReviewOrder = ({
   }, [checkout]);
 
   const onSubmit = async (e) => {
+    // TODO
+    // fix redirect - does not wait 3 seconds
     e.preventDefault();
     setMessage('Processing your order...');
 
@@ -44,8 +45,9 @@ export const ReviewOrder = ({
     };
 
     try {
-      const res = await coolerPlaceOrder(newOrder);
-      console.log(res.order._id);
+      // TODO
+      // If placing order as guest, do not ping backend
+      const res = await coolerPlaceOrder(newOrder, checkoutAsGuest);
 
       setTimeout(() => {
         setMessage('');
@@ -100,6 +102,7 @@ const mapStateToProps = (state) => ({
   address: state.profile.address,
   payment: state.profile.payment,
   cooler: state.cooler.cooler,
+  checkoutAsGuest: state.cooler.checkoutAsGuest,
 });
 
 export default connect(mapStateToProps, { coolerPlaceOrder })(ReviewOrder);

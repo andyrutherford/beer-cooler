@@ -16,6 +16,7 @@ export const getCurrentProfile = () => async (dispatch) => {
 
 export const updateAddress = (addressData, guest) => async (dispatch) => {
   if (guest) {
+    dispatch({ type: 'COOLER_ADDRESS_VALID' });
     return dispatch({
       type: 'UPDATE_ADDRESS',
       payload: addressData,
@@ -41,6 +42,7 @@ export const savePayment = (paymentData, guest) => async (dispatch) => {
     'XXXXXXXXXXXX' + paymentData.cardNumber.slice(12, 16);
 
   if (guest) {
+    dispatch({ type: 'COOLER_PAYMENT_VALID' });
     return dispatch({
       type: 'SAVE_PAYMENT',
       payload: paymentData,

@@ -3,6 +3,9 @@ const initialState = {
   quantity: 0,
   loading: true,
   checkout: false,
+  checkoutAsGuest: false,
+  addressValid: false,
+  paymentValid: false,
   review: false,
 };
 
@@ -52,6 +55,26 @@ export default function (state = initialState, action) {
       return {
         ...state,
         checkout: true,
+      };
+    case 'COOLER_CHECKOUT_AS_GUEST':
+      return {
+        ...state,
+        checkoutAsGuest: true,
+      };
+    case 'COOLER_ADDRESS_VALID':
+      return {
+        ...state,
+        addressValid: true,
+      };
+    case 'COOLER_ADDRESS_INVALID':
+      return {
+        ...state,
+        addressValid: false,
+      };
+    case 'COOLER_PAYMENT_VALID':
+      return {
+        ...state,
+        paymentValid: true,
       };
     case 'COOLER_PLACE_ORDER':
       return {

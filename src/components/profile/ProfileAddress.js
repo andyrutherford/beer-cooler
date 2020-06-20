@@ -39,6 +39,7 @@ export const ProfileAddress = ({ updateAddress, setAlert, address, guest }) => {
       }
     }
     updateAddress(addressData, guest);
+
     setAlert('Your address has been successfully updated.');
   };
 
@@ -412,6 +413,8 @@ const mapStateToProps = (state) => ({
   address: state.profile.address,
 });
 
-export default connect(mapStateToProps, { updateAddress, setAlert })(
-  ProfileAddress
-);
+export default connect(mapStateToProps, {
+  updateAddress,
+
+  setAlert,
+})(ProfileAddress);

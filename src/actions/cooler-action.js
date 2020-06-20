@@ -98,15 +98,37 @@ export const coolerCheckout = () => (dispatch) => {
   });
 };
 
-export const coolerPlaceOrder = (order) => async (dispatch) => {
+export const coolerCheckoutAsGuest = () => (dispatch) => {
+  dispatch({
+    type: 'COOLER_CHECKOUT_AS_GUEST',
+  });
+};
+
+export const coolerPlaceOrder = (order, checkoutAsGuest) => async (
+  dispatch
+) => {
   console.log(order);
   try {
-    const res = await api.post('/orders/new', order);
+    const res = await api.post(
+      checkoutAsGuest ? '/orders/guest-new' : '/orders/new',
+      order
+    );
     console.log(res.data);
     dispatch({
       type: 'COOLER_PLACE_ORDER',
     });
-    dispatch(coolerRemoveAll());
+    dispatch({
+      type: 'LOAD_CURRENT_ORDER',
+      payload: res.data.order,
+    });
+
+    // If checkout as user, remove all cooler items from db
+    if (checkoutAsGuest) {
+      dispatch({ type: 'COOLER_REMOVE_ALL' });
+    } else {
+      dispatch(coolerRemoveAll());
+    }
+
     return res.data;
   } catch (error) {
     console.log(error.message);

@@ -5,6 +5,12 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case 'LOAD_CURRENT_ORDER': {
+      return {
+        ...state,
+        current: action.payload,
+      };
+    }
     case 'GET_ORDER_BY_ID':
       return {
         ...state,

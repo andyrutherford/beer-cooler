@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import ProfileAddress from '../profile/ProfileAddress';
 import CheckoutPayment from './CheckoutPayment';
@@ -9,17 +9,27 @@ import { getCurrentProfile } from '../../actions/profile-action';
 import { coolerCheckout } from '../../actions/cooler-action';
 
 export const Checkout = ({
-  location,
   coolerCheckout,
   getCurrentProfile,
   isAuthenticated,
   address,
   payment,
+  checkoutAsGuest,
+  addressValid,
+  paymentValid,
 }) => {
-  const { checkoutAsGuest } = location;
+  const history = useHistory();
+
+  // TODO
+  // Standardize error handling for address and payment components
 
   useEffect(() => {
-    console.log('abc');
+    if (!isAuthenticated && checkoutAsGuest !== true) {
+      history.push('/cooler');
+    }
+  }, []);
+
+  useEffect(() => {
     getCurrentProfile();
   }, [isAuthenticated]);
 
@@ -32,10 +42,21 @@ export const Checkout = ({
       <h1 className='large '>
         <i className='fas fa-shopping-cart'></i> Checkout
       </h1>
-      {address.fullName && <ProfileAddress className='mb-5' />}
-      {payment.cardName && <CheckoutPayment />}
-      {checkoutAsGuest && <ProfileAddress className='mb-5' guest={true} />}
-      {checkoutAsGuest && <CheckoutPayment guest={true} />}
+
+      {/* TODO
+      // Sometimes get error address is not defined on render
+      */}
+
+      {checkoutAsGuest ? (
+        <ProfileAddress className='mb-5' guest={true} />
+      ) : (
+        <ProfileAddress className='mb-5' guest={false} />
+      )}
+      {checkoutAsGuest ? (
+        <CheckoutPayment guest={true} />
+      ) : (
+        <CheckoutPayment guest={false} />
+      )}
       <div className='form-actions d-flex justify-content-between'>
         <Link to='/cooler' className='btn pull-left btn-link text-muted pl-0'>
           Back
@@ -45,11 +66,14 @@ export const Checkout = ({
             Reset
           </Link>
 
+          {/* TODO: Fix disabled state on Review Order button */}
+
           <Link to='/review-order'>
             <button
               type='submit'
               className='btn btn-primary mb-1'
               onClick={onSubmit}
+              // disabled={!(addressValid && paymentValid)}
             >
               Review Your Order <i className='fas fa-chevron-right'></i>
             </button>
@@ -64,6 +88,9 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   address: state.profile.address,
   payment: state.profile.payment,
+  checkoutAsGuest: state.cooler.checkoutAsGuest,
+  addressValid: state.cooler.addressValid,
+  paymentValid: state.cooler.paymentValid,
 });
 
 export default connect(mapStateToProps, { coolerCheckout, getCurrentProfile })(

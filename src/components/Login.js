@@ -3,8 +3,15 @@ import { useHistory, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/auth-action';
 import { setAlert } from '../actions/alert-action';
+import { coolerCheckoutAsGuest } from '../actions/cooler-action';
 
-const Login = ({ loginUser, setAlert, isAuthenticated, location }) => {
+const Login = ({
+  loginUser,
+  setAlert,
+  isAuthenticated,
+  location,
+  coolerCheckoutAsGuest,
+}) => {
   let history = useHistory();
   const { checkout } = location;
 
@@ -98,8 +105,11 @@ const Login = ({ loginUser, setAlert, isAuthenticated, location }) => {
           </div>
         </div>
         {checkout && (
-          <Link to={{ pathname: '/checkout', checkoutAsGuest: true }}>
-            Continue as a Guest
+          // <Link to={{ pathname: '/checkout', checkoutAsGuest: true }}>
+          //   Continue as a Guest
+          // </Link>
+          <Link to='/checkout' onClick={() => coolerCheckoutAsGuest()}>
+            Checkout as a Guest
           </Link>
         )}
       </form>
@@ -111,4 +121,8 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { loginUser, setAlert })(Login);
+export default connect(mapStateToProps, {
+  loginUser,
+  setAlert,
+  coolerCheckoutAsGuest,
+})(Login);
