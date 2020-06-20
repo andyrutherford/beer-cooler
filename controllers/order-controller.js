@@ -2,10 +2,39 @@ const Order = require('../models/Order');
 
 const mongoose = require('mongoose');
 
+// @desc    Place new order as a guest
+// @route   POST /api/v1/orders/guest-new
+// @access  PUBLIC
+exports.placeGuestOrder = async (req, res, next) => {
+  console.log('* place guest order controller *');
+  const { address, payment, cooler } = req.body;
+  try {
+    let order = new Order({
+      address: { ...address },
+      payment: { ...payment },
+      cooler: [...cooler],
+    });
+    const orderId = order._id.toString().slice(18, 24);
+    order.orderId = orderId;
+    await order.save();
+    res.json({
+      success: true,
+      order,
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({
+      success: false,
+      error: 'A problem occurred.  Please try again',
+    });
+  }
+};
+
 // @desc    Place new order
 // @route   POST /api/v1/orders/new
 // @access  PRIVATE
 exports.placeOrder = async (req, res, next) => {
+  console.log('* place order controller *');
   const userId = req.user.id;
   const { address, payment, cooler } = req.body;
   try {
