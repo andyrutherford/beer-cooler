@@ -137,11 +137,9 @@ export const CheckoutPayment = ({ savePayment, payment, guest }) => {
               </div>
             </div>
             <div className='form-group d-flex justify-content-between'>
-              <input
-                type='submit'
-                value='Save'
-                className='btn btn-primary float-left'
-              />
+              <button className='btn btn-primary'>
+                <i className='fas fa-save'></i> Save Payment
+              </button>
               {formData.message &&
                 formData.message === 'Payment information saved.' && (
                   <p className='text-success'>{formData.message}</p>

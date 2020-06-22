@@ -56,6 +56,11 @@ export default function (state = initialState, action) {
         ...state,
         checkout: true,
       };
+    case 'COOLER_REVIEW':
+      return {
+        ...state,
+        review: true,
+      };
     case 'COOLER_CHECKOUT_AS_GUEST':
       return {
         ...state,

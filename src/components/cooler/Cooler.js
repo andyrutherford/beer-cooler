@@ -14,7 +14,7 @@ const Cooler = ({
 }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile, isAuthenticated]);
 
   return (
     <section>

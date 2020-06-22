@@ -96,7 +96,7 @@ const Login = ({
             Forgot password?
           </Link>
           <div>
-            <Link to='/signup' className='btn btn-link text-muted'>
+            <Link to='/signup' className='btn btn-link text-muted mr-4'>
               Sign Up
             </Link>
             <button type='submit' className='btn btn-primary mb-1'>

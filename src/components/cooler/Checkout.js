@@ -27,11 +27,11 @@ export const Checkout = ({
     if (!isAuthenticated && checkoutAsGuest !== true) {
       history.push('/cooler');
     }
-  }, []);
+  }, [checkoutAsGuest, history, isAuthenticated]);
 
   useEffect(() => {
     getCurrentProfile();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, getCurrentProfile]);
 
   const onSubmit = (e) => {
     coolerCheckout();

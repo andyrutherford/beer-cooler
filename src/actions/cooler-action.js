@@ -101,6 +101,12 @@ export const coolerCheckout = () => (dispatch) => {
   });
 };
 
+export const coolerReview = () => (dispatch) => {
+  dispatch({
+    type: 'COOLER_REVIEW',
+  });
+};
+
 export const coolerCheckoutAsGuest = () => (dispatch) => {
   dispatch({
     type: 'COOLER_CHECKOUT_AS_GUEST',

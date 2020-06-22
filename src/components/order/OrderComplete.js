@@ -8,28 +8,35 @@ import { formatDate } from '../../utils/formatDate';
 import { OrderAddress } from './OrderAddress';
 import { OrderPayment } from './OrderPayment';
 import { OrderItems } from './OrderItems';
+import { coolerRemoveAll } from '../../actions/cooler-action';
 
 export const OrderComplete = ({
   match,
   getOrderById,
   order,
   isAuthenticated,
-  newOrder,
+  coolerRemoveAll,
 }) => {
   const location = useLocation();
 
   // Make sure isAuth is true from userLoaded before getting order
   useEffect(() => {
-    if (!order) {
+    if (!order && isAuthenticated) {
       getOrderById(match.params.id);
     }
   }, [isAuthenticated, order, getOrderById, match]);
+
+  useEffect(() => {
+    if (location.state.newOrder && isAuthenticated) {
+      coolerRemoveAll();
+    }
+  }, [location, isAuthenticated, coolerRemoveAll]);
 
   return (
     <>
       {order && (
         <div>
-          {location.state && (
+          {location.state.newOrder && (
             <div>
               <h1 className='display-4'>
                 <i className='fas fa-check'></i> Your order has been placed
@@ -68,4 +75,6 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { getOrderById })(OrderComplete);
+export default connect(mapStateToProps, { getOrderById, coolerRemoveAll })(
+  OrderComplete
+);

@@ -2,19 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
-import { coolerPlaceOrder, coolerRemoveAll } from '../../actions/cooler-action';
+import { coolerPlaceOrder, coolerReview } from '../../actions/cooler-action';
 import { OrderAddress } from '../order/OrderAddress';
 import { OrderPayment } from '../order/OrderPayment';
 import { OrderItems } from '../order/OrderItems';
 
 export const ReviewOrder = ({
   checkout,
+  review,
   address,
   payment,
   cooler,
   coolerPlaceOrder,
-  coolerRemoveAll,
   checkoutAsGuest,
+  coolerReview,
 }) => {
   const history = useHistory();
   const [message, setMessage] = useState('');
@@ -25,16 +26,7 @@ export const ReviewOrder = ({
     }
   }, [checkout, history]);
 
-  // Cleanup
-  useEffect(() => {
-    return () => {
-      coolerRemoveAll(checkoutAsGuest);
-    };
-  }, [coolerRemoveAll]);
-
   const onSubmit = async (e) => {
-    // TODO
-    // fix redirect - does not wait 3 seconds
     e.preventDefault();
     setMessage('Processing your order...');
 
@@ -54,7 +46,7 @@ export const ReviewOrder = ({
 
     try {
       const res = await coolerPlaceOrder(newOrder, checkoutAsGuest);
-
+      coolerReview();
       setTimeout(() => {
         setMessage('');
         history.push(`/my-orders/${res.order._id}`, { newOrder: true });
@@ -105,12 +97,14 @@ export const ReviewOrder = ({
 
 const mapStateToProps = (state) => ({
   checkout: state.cooler.checkout,
+  review: state.cooler.review,
   address: state.profile.address,
   payment: state.profile.payment,
   cooler: state.cooler.cooler,
   checkoutAsGuest: state.cooler.checkoutAsGuest,
 });
 
-export default connect(mapStateToProps, { coolerPlaceOrder, coolerRemoveAll })(
-  ReviewOrder
-);
+export default connect(mapStateToProps, {
+  coolerPlaceOrder,
+  coolerReview,
+})(ReviewOrder);
