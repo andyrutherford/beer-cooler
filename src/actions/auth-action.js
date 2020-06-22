@@ -51,6 +51,7 @@ export const loginUser = (userData) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(loadUser());
+    dispatch(getCurrentProfile());
   } catch (error) {
     console.log(error);
     dispatch({

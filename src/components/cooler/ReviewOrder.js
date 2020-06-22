@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
-import { coolerPlaceOrder } from '../../actions/cooler-action';
+import { coolerPlaceOrder, coolerRemoveAll } from '../../actions/cooler-action';
 import { OrderAddress } from '../order/OrderAddress';
 import { OrderPayment } from '../order/OrderPayment';
 import { OrderItems } from '../order/OrderItems';
@@ -13,6 +13,7 @@ export const ReviewOrder = ({
   payment,
   cooler,
   coolerPlaceOrder,
+  coolerRemoveAll,
   checkoutAsGuest,
 }) => {
   const history = useHistory();
@@ -22,7 +23,14 @@ export const ReviewOrder = ({
     if (checkout === false) {
       history.push('/checkout');
     }
-  }, [checkout]);
+  }, [checkout, history]);
+
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      coolerRemoveAll(checkoutAsGuest);
+    };
+  }, [coolerRemoveAll]);
 
   const onSubmit = async (e) => {
     // TODO
@@ -45,8 +53,6 @@ export const ReviewOrder = ({
     };
 
     try {
-      // TODO
-      // If placing order as guest, do not ping backend
       const res = await coolerPlaceOrder(newOrder, checkoutAsGuest);
 
       setTimeout(() => {
@@ -105,4 +111,6 @@ const mapStateToProps = (state) => ({
   checkoutAsGuest: state.cooler.checkoutAsGuest,
 });
 
-export default connect(mapStateToProps, { coolerPlaceOrder })(ReviewOrder);
+export default connect(mapStateToProps, { coolerPlaceOrder, coolerRemoveAll })(
+  ReviewOrder
+);

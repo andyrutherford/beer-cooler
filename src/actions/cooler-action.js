@@ -77,7 +77,10 @@ export const coolerRemoveProduct = (id, name) => async (dispatch) => {
   }
 };
 
-export const coolerRemoveAll = () => async (dispatch) => {
+export const coolerRemoveAll = (guest) => async (dispatch) => {
+  if (guest) {
+    return dispatch({ type: 'COOLER_REMOVE_ALL' });
+  }
   try {
     await api.delete('/profile/cooler');
     dispatch({
@@ -107,13 +110,11 @@ export const coolerCheckoutAsGuest = () => (dispatch) => {
 export const coolerPlaceOrder = (order, checkoutAsGuest) => async (
   dispatch
 ) => {
-  console.log(order);
   try {
     const res = await api.post(
       checkoutAsGuest ? '/orders/guest-new' : '/orders/new',
       order
     );
-    console.log(res.data);
     dispatch({
       type: 'COOLER_PLACE_ORDER',
     });
@@ -123,11 +124,11 @@ export const coolerPlaceOrder = (order, checkoutAsGuest) => async (
     });
 
     // If checkout as user, remove all cooler items from db
-    if (checkoutAsGuest) {
-      dispatch({ type: 'COOLER_REMOVE_ALL' });
-    } else {
-      dispatch(coolerRemoveAll());
-    }
+    // if (checkoutAsGuest) {
+    //   dispatch({ type: 'COOLER_REMOVE_ALL' });
+    // } else {
+    //   dispatch(coolerRemoveAll());
+    // }
 
     return res.data;
   } catch (error) {

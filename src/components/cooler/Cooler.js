@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CoolerList from './CoolerList';
 
 import { coolerRemoveAll } from '../../actions/cooler-action';
+import { getCurrentProfile } from '../../actions/profile-action';
 
-const Cooler = ({ coolerRemoveAll, cooler, isAuthenticated }) => {
+const Cooler = ({
+  coolerRemoveAll,
+  getCurrentProfile,
+  cooler,
+  isAuthenticated,
+}) => {
+  useEffect(() => {
+    getCurrentProfile();
+  }, []);
+
   return (
     <section>
       <h1 className='large '>
@@ -47,4 +57,6 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { coolerRemoveAll })(Cooler);
+export default connect(mapStateToProps, { coolerRemoveAll, getCurrentProfile })(
+  Cooler
+);

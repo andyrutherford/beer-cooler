@@ -17,14 +17,13 @@ export const OrderComplete = ({
   newOrder,
 }) => {
   const location = useLocation();
-  const orderId = match.params.id;
 
   // Make sure isAuth is true from userLoaded before getting order
   useEffect(() => {
     if (!order) {
       getOrderById(match.params.id);
     }
-  }, [isAuthenticated, order]);
+  }, [isAuthenticated, order, getOrderById, match]);
 
   return (
     <>

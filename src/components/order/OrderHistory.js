@@ -8,7 +8,7 @@ import OrderHistoryList from './OrderHistoryList';
 const OrderHistory = ({ getAllUserOrders, history }) => {
   useEffect(() => {
     getAllUserOrders();
-  }, []);
+  }, [getAllUserOrders]);
 
   return (
     <div>
