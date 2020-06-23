@@ -28,7 +28,7 @@ const Login = ({
     }
   }, [isAuthenticated, history, setAlert]);
 
-  const fill = () => {
+  const testAccount = () => {
     setUserData({
       email: 'john@gmail.com',
       password: '123456',
@@ -62,8 +62,11 @@ const Login = ({
     <div className='login-form'>
       <h1>
         <i className='fas fa-sign-in-alt'></i> Login{' '}
-        <button onClick={fill}>Fill</button>
       </h1>
+      Just testing?{' '}
+      <button className='btn btn-link p-0' onClick={testAccount}>
+        Login to a test account
+      </button>
       <form onSubmit={onSubmitHandler} className='mt-4 mb-2'>
         <div className='form-group'>
           <input

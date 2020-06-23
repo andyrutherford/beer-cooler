@@ -66,6 +66,11 @@ export default function (state = initialState, action) {
         ...state,
         checkoutAsGuest: true,
       };
+    case 'COOLER_CHECKOUT_AS_MEMBER':
+      return {
+        ...state,
+        checkoutAsGuest: false,
+      };
     case 'COOLER_ADDRESS_VALID':
       return {
         ...state,

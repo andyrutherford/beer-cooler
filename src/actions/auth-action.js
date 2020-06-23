@@ -50,6 +50,9 @@ export const loginUser = (userData) => async (dispatch) => {
       type: 'LOGIN_USER',
       payload: res.data,
     });
+    dispatch({
+      type: 'COOLER_CHECKOUT_AS_MEMBER',
+    });
     dispatch(loadUser());
     dispatch(getCurrentProfile());
   } catch (error) {

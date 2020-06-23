@@ -216,6 +216,10 @@ ul {
   opacity: 0.8;
 }
 
+.btn-link {
+  color: var(--primary-color);
+}
+
 button[disabled] {
   cursor: not-allowed;
 }

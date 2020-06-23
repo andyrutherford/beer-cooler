@@ -45,8 +45,6 @@ export const ProfileAddress = ({
       }
     }
     updateAddress(addressData, guest);
-
-    setAlert('Your address has been successfully updated.', 'success');
   };
 
   return (

@@ -12,8 +12,6 @@ export const Checkout = ({
   coolerCheckout,
   getCurrentProfile,
   isAuthenticated,
-  address,
-  payment,
   checkoutAsGuest,
   addressValid,
   paymentValid,
@@ -39,8 +37,9 @@ export const Checkout = ({
 
   return (
     <div>
-      <h1 className='large '>
-        <i className='fas fa-shopping-cart'></i> Checkout
+      <h1 className='large'>
+        <i className='fas fa-shopping-cart'></i>
+        {checkoutAsGuest && ' Guest '} Checkout
       </h1>
 
       {checkoutAsGuest ? (

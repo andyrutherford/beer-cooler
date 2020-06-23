@@ -1,4 +1,5 @@
 import api from '../utils/api';
+import { setAlert } from './alert-action';
 export const getCurrentProfile = () => async (dispatch) => {
   try {
     const res = await api.get('/profile/me');
@@ -17,6 +18,7 @@ export const getCurrentProfile = () => async (dispatch) => {
 export const updateAddress = (addressData, guest) => async (dispatch) => {
   if (guest) {
     dispatch({ type: 'COOLER_ADDRESS_VALID' });
+    dispatch(setAlert('Your address has been confirmed.'));
     return dispatch({
       type: 'UPDATE_ADDRESS',
       payload: addressData,
@@ -29,6 +31,7 @@ export const updateAddress = (addressData, guest) => async (dispatch) => {
       payload: res.data.profile.address,
     });
     dispatch({ type: 'COOLER_ADDRESS_VALID' });
+    dispatch(setAlert('Your address has been confirmed.'));
   } catch (error) {
     dispatch({
       type: 'PROFILE_ERROR',
@@ -43,6 +46,7 @@ export const savePayment = (paymentData, guest) => async (dispatch) => {
 
   if (guest) {
     dispatch({ type: 'COOLER_PAYMENT_VALID' });
+    dispatch(setAlert('Your payment method has been confirmed.'));
     return dispatch({
       type: 'SAVE_PAYMENT',
       payload: paymentData,
@@ -56,6 +60,7 @@ export const savePayment = (paymentData, guest) => async (dispatch) => {
       payload: res.data.profile.payment,
     });
     dispatch({ type: 'COOLER_PAYMENT_VALID' });
+    dispatch(setAlert('Your payment method has been confirmed.'));
   } catch (error) {
     console.log(error.message);
   }

@@ -113,6 +113,12 @@ export const coolerCheckoutAsGuest = () => (dispatch) => {
   });
 };
 
+export const coolerCheckoutAsMember = () => (dispatch) => {
+  dispatch({
+    type: 'COOLER_CHECKOUT_AS_MEMBER',
+  });
+};
+
 export const coolerPlaceOrder = (order, checkoutAsGuest) => async (
   dispatch
 ) => {
