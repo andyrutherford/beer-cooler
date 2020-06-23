@@ -138,7 +138,7 @@ export const CheckoutPayment = ({ savePayment, payment, guest }) => {
             </div>
             <div className='form-group d-flex justify-content-between'>
               <button className='btn btn-primary'>
-                <i className='fas fa-save'></i> Save Payment
+                <i className='fas fa-save'></i> Confirm Payment
               </button>
               {formData.message &&
                 formData.message === 'Payment information saved.' && (

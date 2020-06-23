@@ -24,11 +24,11 @@ export const updateAddress = (addressData, guest) => async (dispatch) => {
   }
   try {
     const res = await api.post('/profile/address', addressData);
-    console.log(res.data);
     dispatch({
       type: 'UPDATE_ADDRESS',
       payload: res.data.profile.address,
     });
+    dispatch({ type: 'COOLER_ADDRESS_VALID' });
   } catch (error) {
     dispatch({
       type: 'PROFILE_ERROR',
@@ -51,11 +51,11 @@ export const savePayment = (paymentData, guest) => async (dispatch) => {
 
   try {
     const res = await api.post('/profile/payment', paymentData);
-    console.log(res.data);
     dispatch({
       type: 'SAVE_PAYMENT',
       payload: res.data.profile.payment,
     });
+    dispatch({ type: 'COOLER_PAYMENT_VALID' });
   } catch (error) {
     console.log(error.message);
   }

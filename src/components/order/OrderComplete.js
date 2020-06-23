@@ -18,7 +18,7 @@ export const OrderComplete = ({
   coolerRemoveAll,
 }) => {
   const location = useLocation();
-
+  console.log(location.state);
   // Make sure isAuth is true from userLoaded before getting order
   useEffect(() => {
     if (!order && isAuthenticated) {
@@ -27,8 +27,9 @@ export const OrderComplete = ({
   }, [isAuthenticated, order, getOrderById, match]);
 
   useEffect(() => {
-    if (location.state.newOrder && isAuthenticated) {
-      coolerRemoveAll();
+    if (location.state.newOrder) {
+      const guest = !isAuthenticated;
+      coolerRemoveAll(guest);
     }
   }, [location, isAuthenticated, coolerRemoveAll]);
 
@@ -36,7 +37,7 @@ export const OrderComplete = ({
     <>
       {order && (
         <div>
-          {location.state.newOrder && (
+          {location.state && (
             <div>
               <h1 className='display-4'>
                 <i className='fas fa-check'></i> Your order has been placed

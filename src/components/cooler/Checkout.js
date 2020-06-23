@@ -43,14 +43,10 @@ export const Checkout = ({
         <i className='fas fa-shopping-cart'></i> Checkout
       </h1>
 
-      {/* TODO
-      // Sometimes get error address is not defined on render
-      */}
-
       {checkoutAsGuest ? (
-        <ProfileAddress className='mb-5' guest={true} />
+        <ProfileAddress className='mb-5' guest />
       ) : (
-        <ProfileAddress className='mb-5' guest={false} />
+        <ProfileAddress className='mb-5' order />
       )}
       {checkoutAsGuest ? (
         <CheckoutPayment guest={true} />
@@ -66,14 +62,12 @@ export const Checkout = ({
             Reset
           </Link>
 
-          {/* TODO: Fix disabled state on Review Order button */}
-
           <Link to='/review-order'>
             <button
               type='submit'
               className='btn btn-primary mb-1'
               onClick={onSubmit}
-              // disabled={!(addressValid && paymentValid)}
+              disabled={!(addressValid && paymentValid)}
             >
               Review Your Order <i className='fas fa-chevron-right'></i>
             </button>

@@ -129,13 +129,6 @@ export const coolerPlaceOrder = (order, checkoutAsGuest) => async (
       payload: res.data.order,
     });
 
-    // If checkout as user, remove all cooler items from db
-    // if (checkoutAsGuest) {
-    //   dispatch({ type: 'COOLER_REMOVE_ALL' });
-    // } else {
-    //   dispatch(coolerRemoveAll());
-    // }
-
     return res.data;
   } catch (error) {
     console.log(error.message);

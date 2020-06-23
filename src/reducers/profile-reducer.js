@@ -24,9 +24,9 @@ export default function (state = initialState, action) {
     case 'GET_PROFILE': {
       return {
         ...state,
-        address: action.payload.address,
-        cooler: action.payload.cooler,
-        payment: action.payload.payment,
+        address: action.payload.address ? action.payload.address : {},
+        cooler: action.payload.cooler ? action.payload.cooler : [],
+        payment: action.payload.payment ? action.payload.payment : {},
         loading: false,
       };
     }
@@ -45,8 +45,21 @@ export default function (state = initialState, action) {
     case 'CLEAR_PROFILE': {
       return {
         ...state,
-        address: null,
-        payment: null,
+        address: {
+          fullName: '',
+          address1: '',
+          address2: '',
+          city: '',
+          state: '',
+          postCode: '',
+          country: '',
+        },
+        payment: {
+          cardName: '',
+          cardNumber: '',
+          expMonth: '',
+          expYear: '',
+        },
         error: {},
         loading: false,
         cooler: [],

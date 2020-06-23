@@ -105,12 +105,12 @@ const Login = ({
           </div>
         </div>
         {checkout && (
-          // <Link to={{ pathname: '/checkout', checkoutAsGuest: true }}>
-          //   Continue as a Guest
-          // </Link>
-          <Link to='/checkout' onClick={() => coolerCheckoutAsGuest()}>
-            Checkout as a Guest
-          </Link>
+          <div>
+            <hr />
+            <Link to='/checkout' onClick={() => coolerCheckoutAsGuest()}>
+              Checkout as a Guest
+            </Link>
+          </div>
         )}
       </form>
     </div>
