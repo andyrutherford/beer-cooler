@@ -22,18 +22,17 @@ exports.forgotPassword = async (req, res, next) => {
       await user.save();
 
       const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
+        host: 'smtp.gmail.com',
         auth: {
-          user: 'oceane38@ethereal.email',
-          pass: 'Qd85UAQTxQFCeyEAV7',
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASSWORD,
         },
       });
 
       const mailOptions = {
         from: `password_reset@beercooler.com`,
         to: `${user.email}`,
-        subject: 'Rest your Password',
+        subject: 'Reset your Password',
         text:
           `You are receiving this because you (or someone else) has requested the reset of the password for your account.\n\n` +
           `Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:\n\n` +
@@ -66,15 +65,16 @@ exports.resetPassword = async (req, res, next) => {
 
     if (!user) {
       console.log('There was a problem, please try again');
-      res.send('Problem');
-    } else {
-      console.log('user found');
-      res.status(200).json({
-        email: user.email,
-        message: 'password reset successful',
-      });
+      return res.send('Problem');
     }
-  } catch (error) {}
+    console.log('user found');
+    res.status(200).json({
+      email: user.email,
+      message: 'password reset successful',
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 exports.updatePassword = async (req, res, next) => {

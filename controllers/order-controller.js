@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 // @route   POST /api/v1/orders/guest-new
 // @access  PUBLIC
 exports.placeGuestOrder = async (req, res, next) => {
-  console.log('* place guest order controller *');
   const { address, payment, cooler } = req.body;
   try {
     let order = new Order({
@@ -34,7 +33,6 @@ exports.placeGuestOrder = async (req, res, next) => {
 // @route   POST /api/v1/orders/new
 // @access  PRIVATE
 exports.placeOrder = async (req, res, next) => {
-  console.log('* place order controller *');
   const userId = req.user.id;
   const { address, payment, cooler } = req.body;
   try {

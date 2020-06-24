@@ -20,11 +20,10 @@ router.route('/update').put(updatePassword);
 // var transporter = nodemailer.createTransport(transport);
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
-  port: 587,
+  host: 'smtp.gmail.com',
   auth: {
-    user: 'hailey81@ethereal.email',
-    pass: 'j4FaJ1NW8XnQx2EX1j',
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 

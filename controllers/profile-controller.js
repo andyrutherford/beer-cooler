@@ -194,7 +194,7 @@ exports.addCoolerItem = async (req, res, next) => {
       { $set: { cooler: newCooler } },
       { new: true, upsert: true }
     );
-
+    console.log(profile);
     res.json({ success: true, profile });
   } catch (error) {
     if (error.name === 'ValidationError') {
