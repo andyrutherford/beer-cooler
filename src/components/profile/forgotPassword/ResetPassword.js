@@ -43,7 +43,8 @@ export const ResetPassword = ({ match }) => {
       }
     };
     requestReset();
-  }, [match.params.token, formData]);
+    //eslint-disable-next-line
+  }, []);
 
   const onChange = (e) => {
     setFormData({

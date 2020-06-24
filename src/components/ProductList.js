@@ -20,13 +20,13 @@ const ProductList = ({
     <p>Loading...</p>
   ) : (
     <section>
-      <ul className='product-list card-deck'>
+      <ul className='product-list card-deck mx-auto'>
         {products.map((p) => (
           <ProductItem key={p.id} item={p} />
         ))}
       </ul>
 
-      <nav className='pagination-nav'>
+      <nav className='pagination-nav mt-3'>
         <ul className='pagination'>
           <li onClick={() => getProducts(1)} className='page-item'>
             <a href='#!' className='page-link'>

@@ -5,11 +5,11 @@ import { savePayment } from '../../actions/profile-action';
 
 export const CheckoutPayment = ({ savePayment, payment, guest }) => {
   const [formData, setFormData] = useState({
-    cardName: payment.cardName ? payment.cardName : '',
-    cardNumber: payment.cardNumber ? payment.cardNumber : '',
-    cardCvc: payment.cardCvc ? payment.cardCvC : '',
-    expMonth: payment.expMonth ? payment.expMonth : '',
-    expYear: payment.expYear ? payment.expYear : '',
+    cardName: payment.cardName || '',
+    cardNumber: payment.cardNumber || '',
+    cardCvc: payment.cardCvc || '',
+    expMonth: payment.expMonth || '',
+    expYear: payment.expYear || '',
     message: '',
   });
   const { cardName, cardNumber, cardCvc, expMonth, expYear } = formData;
