@@ -24,11 +24,9 @@ const ForgotPassword = () => {
       return setError('Please enter a valid email.');
     } else {
       try {
-        console.log(email);
         const res = await axios.post('http://localhost:3000/password/forgot', {
           email,
         });
-        console.log(res.data);
 
         if (res.data === 'no user found') {
           setLoading(false);
@@ -53,7 +51,7 @@ const ForgotPassword = () => {
       {success ? (
         <p>
           Please check your email for further instructions on how to reset your
-          password.
+          password. If you don't see it, check your Spam folder.
         </p>
       ) : (
         <form onSubmit={onSubmit} className='mb-2'>

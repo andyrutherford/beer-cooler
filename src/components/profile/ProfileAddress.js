@@ -12,7 +12,7 @@ export const ProfileAddress = ({
   order,
 }) => {
   const [addressData, setAddressData] = useState({
-    fullName: address ? address.fullName : '',
+    fullName: address.fullName,
     address1: address ? address.address1 : '',
     address2: address ? address.address2 : '',
     city: address ? address.city : '',
