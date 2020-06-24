@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { getOrderById } from '../../actions/order-action';
 import { formatDate } from '../../utils/formatDate';
@@ -38,6 +38,20 @@ export const OrderComplete = ({
     <>
       {order && (
         <div>
+          {isAuthenticated && (
+            <div className='d-flex justify-content-between mb-3'>
+              <Link to='/my-profile'>
+                <button className='btn btn-primary'>
+                  <i className='fas fa-user' /> My Profile
+                </button>
+              </Link>
+              <Link to='/my-orders'>
+                <button className='btn btn-primary'>
+                  <i className='fas fa-list-alt'></i> My Orders
+                </button>
+              </Link>
+            </div>
+          )}
           {newOrder && (
             <div>
               <h1 className='display-4'>
