@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { logoutUser } from '../../actions/auth-action';
 
-const Navbar = ({ cooler, logoutUser, isAuthenticated, user }) => {
+const Navbar = ({ cooler, logoutUser, isAuthenticated, user, loading }) => {
   const logoutHandler = () => {
     logoutUser();
   };
@@ -70,7 +70,7 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, user }) => {
           <i className='fas fa-beer'></i> BeerCooler{' '}
         </Link>
       </h2>
-      {isAuthenticated ? authLinks : guestLinks}
+      {isAuthenticated ? authLinks : !loading && guestLinks}
     </nav>
   );
 };
@@ -79,6 +79,7 @@ const mapStateToProps = (state) => ({
   cooler: state.cooler.cooler.length,
   isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user,
+  loading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, { logoutUser })(Navbar);

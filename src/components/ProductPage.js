@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getProductById } from '../actions/products-action';
 import { coolerAddProduct } from '../actions/cooler-action';
 import Breadcrumb from '../components/layout/Breadcrumb';
+import Spinner from './layout/Spinner';
 
 export const ProductPage = ({
   isAuthenticated,
@@ -11,12 +12,17 @@ export const ProductPage = ({
   coolerAddProduct,
   match,
   item,
+  loading,
 }) => {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     getProductById(parseInt(match.params.id));
   }, [getProductById, match.params.id]);
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   const addToCoolerHandler = (e) => {
     e.preventDefault();
@@ -28,7 +34,7 @@ export const ProductPage = ({
     <>
       <Breadcrumb />
       {item && (
-        <section className=' card product-page'>
+        <section className='card product-page'>
           <img src={item.image_url} alt={item.name} />
           <div>
             {' '}
@@ -88,6 +94,7 @@ export const ProductPage = ({
 
 const mapStateToProps = (state) => ({
   item: state.products.selectedProduct,
+  loading: state.products.loading,
   isAuthenticated: state.auth.isAuthenticated,
 });
 

@@ -16,6 +16,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         selectedProduct: action.payload,
+        loading: false,
       };
     case 'CLEAR_SELECTED_PRODUCT':
       return {

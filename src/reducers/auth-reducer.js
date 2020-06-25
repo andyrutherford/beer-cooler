@@ -30,6 +30,7 @@ export default function (state = initialState, action) {
       localStorage.setItem('token', action.payload.token);
       return {
         ...state,
+        loading: false,
       };
     case 'DELETE_USER':
     case 'LOGOUT_USER':
@@ -39,9 +40,15 @@ export default function (state = initialState, action) {
         token: null,
         user: null,
         isAuthenticated: false,
+        loading: false,
       };
+    case 'AUTH_ERROR':
     case 'LOGIN_USER_ERROR':
     case 'SIGNUP_USER_ERROR':
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return state;
   }

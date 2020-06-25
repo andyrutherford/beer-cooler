@@ -4,11 +4,16 @@ import { connect } from 'react-redux';
 import { getAllUserOrders } from '../../actions/order-action';
 
 import OrderHistoryList from './OrderHistoryList';
+import Spinner from '../layout/Spinner';
 
-const OrderHistory = ({ getAllUserOrders, history }) => {
+const OrderHistory = ({ getAllUserOrders, history, loading }) => {
   useEffect(() => {
     getAllUserOrders();
   }, [getAllUserOrders]);
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div>
@@ -25,13 +30,11 @@ const OrderHistory = ({ getAllUserOrders, history }) => {
       )}
     </div>
   );
-
-  //   If user has orders display order list
-  //      If no orders, show message
 };
 
 const mapStateToProps = (state) => ({
   history: state.order.history,
+  loading: state.order.loading,
 });
 
 export default connect(mapStateToProps, { getAllUserOrders })(OrderHistory);
