@@ -36,7 +36,7 @@ export const signupUser = (userData) => async (dispatch) => {
     dispatch(loadUser());
   } catch (error) {
     dispatch({
-      type: 'SIGNUP_USER_ERROR',
+      type: 'AUTH_ERROR',
     });
 
     dispatch(setAlert(error.response.data.error));
