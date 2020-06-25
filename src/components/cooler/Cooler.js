@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CoolerList from './CoolerList';
+import Spinner from '../layout/Spinner';
 
 import { coolerRemoveAll } from '../../actions/cooler-action';
 import { getCurrentProfile } from '../../actions/profile-action';

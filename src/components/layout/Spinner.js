@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import spinner from './spinner.gif';
 
-export default ({ message = 'Loading...' }) => (
+export default ({ message = '' }) => (
   <Fragment>
     <img
       src={spinner}

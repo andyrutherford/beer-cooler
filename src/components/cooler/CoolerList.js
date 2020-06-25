@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import CoolerItem from './CoolerItem';
+import Spinner from '../layout/Spinner';
 import { getCooler } from '../../actions/cooler-action';
 
 export const CoolerList = ({
@@ -9,12 +10,17 @@ export const CoolerList = ({
   getCooler,
   coolerRemoveAll,
   cooler: { cooler },
+  loading,
 }) => {
   useEffect(() => {
     if (isAuthenticated) {
       getCooler(isAuthenticated);
     }
   }, [getCooler, isAuthenticated]);
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   if (cooler.length === 0) {
     return (
@@ -37,6 +43,7 @@ export const CoolerList = ({
 
 const mapStateToProps = (state) => ({
   cooler: state.cooler,
+  loading: state.cooler.loading,
   isAuthenticated: state.auth.isAuthenticated,
 });
 
