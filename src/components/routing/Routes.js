@@ -16,6 +16,7 @@ import ForgotPassword from '../profile/forgotPassword/ForgotPassword';
 import ResetPassword from '../profile/forgotPassword/ResetPassword';
 import Profile from '../profile/Profile';
 import OrderHistory from '../order/OrderHistory';
+import Spinner from '../layout/Spinner';
 
 export const Routes = () => {
   return (
@@ -34,6 +35,7 @@ export const Routes = () => {
         <Route exact path='/checkout' component={Checkout} />
         <Route exact path='/review-order' component={ReviewOrder} />
         <Route exact path='/my-orders/:id' component={OrderComplete} />
+        <Route exact path='/spinner' component={Spinner} />
       </Switch>
     </section>
   );

@@ -407,7 +407,7 @@ export const ProfileAddress = ({
 
         <button className='btn btn-primary'>
           <i className='fas fa-save'></i>
-          {order ? ' Confirm' : ' Save'} Address
+          {guest || order ? ' Confirm' : ' Save'} Address
         </button>
       </form>
     </div>

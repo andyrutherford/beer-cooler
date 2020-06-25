@@ -22,10 +22,10 @@ export const OrderComplete = ({
 
   // Make sure isAuth is true from userLoaded before getting order
   useEffect(() => {
-    if (!order && isAuthenticated) {
+    if (isAuthenticated) {
       getOrderById(match.params.id);
     }
-  }, [isAuthenticated, order, getOrderById, match]);
+  }, [isAuthenticated, getOrderById, match]);
 
   useEffect(() => {
     if (newOrder) {

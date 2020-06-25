@@ -7,9 +7,11 @@ import { OrderAddress } from '../order/OrderAddress';
 import { OrderPayment } from '../order/OrderPayment';
 import { OrderItems } from '../order/OrderItems';
 
+import Spinner from '../layout/Spinner';
+import { setAlert } from '../../actions/alert-action';
+
 export const ReviewOrder = ({
   checkout,
-  review,
   address,
   payment,
   cooler,
@@ -18,7 +20,7 @@ export const ReviewOrder = ({
   coolerReview,
 }) => {
   const history = useHistory();
-  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (checkout === false) {
@@ -26,9 +28,13 @@ export const ReviewOrder = ({
     }
   }, [checkout, history]);
 
+  if (loading) {
+    return <Spinner message='Submitting your order...' />;
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    setMessage('Processing your order...');
+    setLoading(true);
 
     const coolerItems = cooler.map((i) => ({
       name: i.name,
@@ -47,12 +53,13 @@ export const ReviewOrder = ({
     try {
       const res = await coolerPlaceOrder(newOrder, checkoutAsGuest);
       coolerReview();
+
       setTimeout(() => {
-        setMessage('');
         history.push(`/my-orders/${res.order._id}`, { newOrder: true });
       }, 3000);
     } catch (error) {
       console.log(error);
+      setAlert('A problem occurred.  Please try again.');
     }
   };
 
@@ -89,7 +96,6 @@ export const ReviewOrder = ({
             Place Your Order <i className='fas fa-chevron-right'></i>
           </button>
         </Link>
-        {message && <p>{message}</p>}
       </div>
     </div>
   );
