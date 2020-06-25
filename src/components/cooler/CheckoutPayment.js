@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import { savePayment } from '../../actions/profile-action';
+import { setAlert } from '../../actions/alert-action';
 
-export const CheckoutPayment = ({ savePayment, payment, guest }) => {
+export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
   const [formData, setFormData] = useState({
     cardName: payment.cardName || '',
     cardNumber: payment.cardNumber || '',
     cardCvc: payment.cardCvc || '',
     expMonth: payment.expMonth || '',
     expYear: payment.expYear || '',
-    message: '',
   });
   const { cardName, cardNumber, cardCvc, expMonth, expYear } = formData;
 
@@ -52,16 +52,9 @@ export const CheckoutPayment = ({ savePayment, payment, guest }) => {
       error: '',
     });
     if (cardName && cardNumber && cardCvc && expMonth && expYear) {
-      setFormData({
-        ...formData,
-        message: 'Payment information saved.',
-      });
       savePayment(formData, guest);
     } else {
-      setFormData({
-        ...formData,
-        message: 'All payment fields are required.',
-      });
+      setAlert('All payment fields are required.');
     }
   };
 
@@ -184,4 +177,6 @@ const mapStateToProps = (state) => ({
   payment: state.profile.payment,
 });
 
-export default connect(mapStateToProps, { savePayment })(CheckoutPayment);
+export default connect(mapStateToProps, { savePayment, setAlert })(
+  CheckoutPayment
+);

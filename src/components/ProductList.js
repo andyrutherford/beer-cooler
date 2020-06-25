@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import ProductItem from './ProductItem';
+import Spinner from './layout/Spinner';
 
 import { getProducts, clearSelectedProduct } from '../actions/products-action';
 
@@ -17,7 +18,7 @@ const ProductList = ({
   }, [getProducts, clearSelectedProduct]);
 
   return loading ? (
-    <p>Loading...</p>
+    <Spinner />
   ) : (
     <section>
       <ul className='product-list card-deck mx-auto'>
