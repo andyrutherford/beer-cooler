@@ -1,3 +1,15 @@
+import {
+  USER_LOADED,
+  SIGNUP_USER,
+  LOGIN_USER,
+  PASSWORD_CHANGE_SUCCESS,
+  DELETE_USER,
+  LOGOUT_USER,
+  AUTH_ERROR,
+  LOGIN_USER_ERROR,
+  SIGNUP_USER_ERROR,
+} from '../actions/types';
+
 const initialState = {
   token: localStorage.getItem('token'),
   user: {
@@ -10,15 +22,15 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case 'USER_LOADED':
+    case USER_LOADED:
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
         user: action.payload,
       };
-    case 'SIGNUP_USER':
-    case 'LOGIN_USER':
+    case SIGNUP_USER:
+    case LOGIN_USER:
       return {
         ...state,
         token: action.payload.token,
@@ -26,14 +38,14 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
         loading: false,
       };
-    case 'CHANGE_PASSWORD_SUCCESS':
+    case PASSWORD_CHANGE_SUCCESS:
       localStorage.setItem('token', action.payload.token);
       return {
         ...state,
         loading: false,
       };
-    case 'DELETE_USER':
-    case 'LOGOUT_USER':
+    case DELETE_USER:
+    case LOGOUT_USER:
       localStorage.removeItem('token');
       return {
         ...state,
@@ -42,9 +54,9 @@ export default function (state = initialState, action) {
         isAuthenticated: false,
         loading: false,
       };
-    case 'AUTH_ERROR':
-    case 'LOGIN_USER_ERROR':
-    case 'SIGNUP_USER_ERROR':
+    case AUTH_ERROR:
+    case LOGIN_USER_ERROR:
+    case SIGNUP_USER_ERROR:
       return {
         ...state,
         loading: false,

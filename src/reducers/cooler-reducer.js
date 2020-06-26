@@ -1,3 +1,21 @@
+import {
+  GET_COOLER,
+  COOLER_GET_QUANTITY,
+  COOLER_ADD_PRODUCT,
+  COOLER_REMOVE_PRODUCT,
+  COOLER_CHECKOUT,
+  COOLER_REVIEW,
+  COOLER_CHECKOUT_AS_GUEST,
+  COOLER_CHECKOUT_AS_MEMBER,
+  COOLER_ADDRESS_VALID,
+  COOLER_PAYMENT_VALID,
+  COOLER_ADDRESS_INVALID,
+  COOLER_PAYMENT_INVALID,
+  COOLER_PLACE_ORDER,
+  COOLER_REMOVE_ALL,
+  COOLER_UPDATE_QUANTITY,
+} from '../actions/types';
+
 const initialState = {
   cooler: [],
   quantity: 0,
@@ -11,13 +29,13 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case 'GET_COOLER':
+    case GET_COOLER:
       return {
         ...state,
         cooler: action.payload,
         loading: false,
       };
-    case 'COOLER_GET_QUANTITY':
+    case COOLER_GET_QUANTITY:
       return {
         ...state,
         quantity:
@@ -25,7 +43,7 @@ export default function (state = initialState, action) {
             ? state.cooler.map((i) => i.quantity).reduce((a, b) => a + b)
             : 0,
       };
-    case 'COOLER_ADD_PRODUCT':
+    case COOLER_ADD_PRODUCT:
       // If item is already in cooler, increment quantity
       const itemExists = state.cooler.find((i) => i.id === action.payload.id);
 
@@ -46,52 +64,57 @@ export default function (state = initialState, action) {
           cooler: state.cooler.concat(action.payload),
         };
       }
-    case 'COOLER_REMOVE_PRODUCT':
+    case COOLER_REMOVE_PRODUCT:
       return {
         ...state,
         cooler: state.cooler.filter((i) => i.id !== action.payload),
       };
-    case 'COOLER_CHECKOUT':
+    case COOLER_CHECKOUT:
       return {
         ...state,
         checkout: true,
       };
-    case 'COOLER_REVIEW':
+    case COOLER_REVIEW:
       return {
         ...state,
         review: true,
       };
-    case 'COOLER_CHECKOUT_AS_GUEST':
+    case COOLER_CHECKOUT_AS_GUEST:
       return {
         ...state,
         checkoutAsGuest: true,
       };
-    case 'COOLER_CHECKOUT_AS_MEMBER':
+    case COOLER_CHECKOUT_AS_MEMBER:
       return {
         ...state,
         checkoutAsGuest: false,
       };
-    case 'COOLER_ADDRESS_VALID':
+    case COOLER_ADDRESS_VALID:
       return {
         ...state,
         addressValid: true,
       };
-    case 'COOLER_ADDRESS_INVALID':
+    case COOLER_ADDRESS_INVALID:
       return {
         ...state,
         addressValid: false,
       };
-    case 'COOLER_PAYMENT_VALID':
+    case COOLER_PAYMENT_VALID:
       return {
         ...state,
         paymentValid: true,
       };
-    case 'COOLER_PLACE_ORDER':
+    case COOLER_PAYMENT_INVALID:
+      return {
+        ...state,
+        paymentValid: false,
+      };
+    case COOLER_PLACE_ORDER:
       return {
         ...state,
         review: true,
       };
-    case 'COOLER_REMOVE_ALL':
+    case COOLER_REMOVE_ALL:
       return {
         ...state,
         cooler: [],
@@ -99,7 +122,7 @@ export default function (state = initialState, action) {
         checkout: false,
         loading: false,
       };
-    case 'COOLER_UPDATE_QUANTITY':
+    case COOLER_UPDATE_QUANTITY:
       const update = state.cooler.find((i) => i.id === action.payload.id);
       update.quantity = action.payload.quantity;
       return {

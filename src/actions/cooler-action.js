@@ -1,17 +1,33 @@
 import { setAlert } from './alert-action';
 import api from '../utils/api';
 
+import {
+  GET_COOLER,
+  COOLER_ERROR,
+  COOLER_GET_QUANTITY,
+  COOLER_ADD_PRODUCT,
+  COOLER_REMOVE_PRODUCT,
+  COOLER_CHECKOUT,
+  COOLER_REVIEW,
+  COOLER_CHECKOUT_AS_GUEST,
+  COOLER_CHECKOUT_AS_MEMBER,
+  COOLER_PLACE_ORDER,
+  LOAD_CURRENT_ORDER,
+  COOLER_REMOVE_ALL,
+  COOLER_UPDATE_QUANTITY,
+} from './types';
+
 export const getCooler = () => async (dispatch) => {
   try {
     const res = await api.get('/profile/cooler');
     dispatch({
-      type: 'GET_COOLER',
+      type: GET_COOLER,
       payload: res.data.profileCooler,
     });
   } catch (error) {
     console.log(error);
     dispatch({
-      type: 'COOLER_ERROR',
+      type: COOLER_ERROR,
     });
     setAlert('A problem has occurred.');
   }
@@ -19,7 +35,7 @@ export const getCooler = () => async (dispatch) => {
 
 export const coolerGetQuantity = () => (dispatch) => {
   dispatch({
-    type: 'COOLER_GET_QUANTITY',
+    type: COOLER_GET_QUANTITY,
   });
 };
 
@@ -35,7 +51,7 @@ export const coolerAddProduct = (beer, quantity, isAuthenticated) => async (
   // If user is not logged in, add item to frontend cooler only
   if (!isAuthenticated) {
     dispatch({
-      type: 'COOLER_ADD_PRODUCT',
+      type: COOLER_ADD_PRODUCT,
       payload: product,
     });
     dispatch(setAlert(`${quantity}x ${beer.name} added to cooler.`));
@@ -46,14 +62,14 @@ export const coolerAddProduct = (beer, quantity, isAuthenticated) => async (
   try {
     await api.post('/profile/cooler', productData);
     dispatch({
-      type: 'COOLER_ADD_PRODUCT',
+      type: COOLER_ADD_PRODUCT,
       payload: product,
     });
     dispatch(setAlert(`${quantity}x ${beer.name} added to cooler.`));
   } catch (error) {
     console.log(error);
     dispatch({
-      type: 'COOLER_ERROR',
+      type: COOLER_ERROR,
     });
     setAlert('A problem has occurred.');
   }
@@ -64,14 +80,14 @@ export const coolerRemoveProduct = (id, name) => async (dispatch) => {
     await api.delete(`/profile/cooler/${id}`);
     dispatch(setAlert(`${name} has been removed.`));
     dispatch({
-      type: 'COOLER_REMOVE_PRODUCT',
+      type: COOLER_REMOVE_PRODUCT,
       payload: id,
     });
     dispatch(coolerGetQuantity());
   } catch (error) {
     console.log(error);
     dispatch({
-      type: 'COOLER_ERROR',
+      type: COOLER_ERROR,
     });
     setAlert('A problem has occurred.');
   }
@@ -79,17 +95,17 @@ export const coolerRemoveProduct = (id, name) => async (dispatch) => {
 
 export const coolerRemoveAll = (guest) => async (dispatch) => {
   if (guest) {
-    return dispatch({ type: 'COOLER_REMOVE_ALL' });
+    return dispatch({ type: COOLER_REMOVE_ALL });
   }
   try {
     await api.delete('/profile/cooler');
     dispatch({
-      type: 'COOLER_REMOVE_ALL',
+      type: COOLER_REMOVE_ALL,
     });
   } catch (error) {
     console.log(error);
     dispatch({
-      type: 'COOLER_ERROR',
+      type: COOLER_ERROR,
     });
     dispatch(setAlert('A problem has occurred.'));
   }
@@ -97,25 +113,25 @@ export const coolerRemoveAll = (guest) => async (dispatch) => {
 
 export const coolerCheckout = () => (dispatch) => {
   dispatch({
-    type: 'COOLER_CHECKOUT',
+    type: COOLER_CHECKOUT,
   });
 };
 
 export const coolerReview = () => (dispatch) => {
   dispatch({
-    type: 'COOLER_REVIEW',
+    type: COOLER_REVIEW,
   });
 };
 
 export const coolerCheckoutAsGuest = () => (dispatch) => {
   dispatch({
-    type: 'COOLER_CHECKOUT_AS_GUEST',
+    type: COOLER_CHECKOUT_AS_GUEST,
   });
 };
 
 export const coolerCheckoutAsMember = () => (dispatch) => {
   dispatch({
-    type: 'COOLER_CHECKOUT_AS_MEMBER',
+    type: COOLER_CHECKOUT_AS_MEMBER,
   });
 };
 
@@ -128,10 +144,10 @@ export const coolerPlaceOrder = (order, checkoutAsGuest) => async (
       order
     );
     dispatch({
-      type: 'COOLER_PLACE_ORDER',
+      type: COOLER_PLACE_ORDER,
     });
     dispatch({
-      type: 'LOAD_CURRENT_ORDER',
+      type: LOAD_CURRENT_ORDER,
       payload: res.data.order,
     });
 
@@ -143,13 +159,13 @@ export const coolerPlaceOrder = (order, checkoutAsGuest) => async (
 
 export const clearCoolerLogout = () => (dispatch) => {
   dispatch({
-    type: 'COOLER_REMOVE_ALL',
+    type: COOLER_REMOVE_ALL,
   });
 };
 
 export const coolerUpdateQuantity = (id, quantity) => (dispatch) => {
   dispatch({
-    type: 'COOLER_UPDATE_QUANTITY',
+    type: COOLER_UPDATE_QUANTITY,
     payload: { id, quantity },
   });
   dispatch(coolerGetQuantity());

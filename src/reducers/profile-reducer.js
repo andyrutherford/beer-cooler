@@ -1,3 +1,11 @@
+import {
+  GET_PROFILE,
+  CLEAR_PROFILE,
+  PROFILE_ERROR,
+  UPDATE_ADDRESS,
+  UPDATE_PAYMENT,
+} from '../actions/types';
+
 const initialState = {
   address: {
     fullName: '',
@@ -21,7 +29,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case 'GET_PROFILE': {
+    case GET_PROFILE: {
       return {
         ...state,
         address: action.payload.address ? action.payload.address : {},
@@ -30,19 +38,19 @@ export default function (state = initialState, action) {
         loading: false,
       };
     }
-    case 'UPDATE_ADDRESS': {
+    case UPDATE_ADDRESS: {
       return {
         ...state,
         address: action.payload,
       };
     }
-    case 'PROFILE_ERROR': {
+    case PROFILE_ERROR: {
       return {
         ...state,
         error: action.payload,
       };
     }
-    case 'CLEAR_PROFILE': {
+    case CLEAR_PROFILE: {
       return {
         ...state,
         address: {
@@ -65,7 +73,7 @@ export default function (state = initialState, action) {
         cooler: [],
       };
     }
-    case 'SAVE_PAYMENT': {
+    case UPDATE_PAYMENT: {
       return {
         ...state,
         payment: action.payload,

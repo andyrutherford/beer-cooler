@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 
+import { SET_ALERT, REMOVE_ALERT } from './types';
+
 export const setAlert = (alert) => (dispatch) => {
   const id = uuidv4();
   alert = toast(alert, {
@@ -13,13 +15,13 @@ export const setAlert = (alert) => (dispatch) => {
     progress: undefined,
   });
   dispatch({
-    type: 'SET_ALERT',
+    type: SET_ALERT,
     payload: { alert, id },
   });
 
   setTimeout(() => {
     dispatch({
-      type: 'REMOVE_ALERT',
+      type: REMOVE_ALERT,
       payload: id,
     });
   }, 5000);
