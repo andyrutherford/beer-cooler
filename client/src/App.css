@@ -146,15 +146,6 @@ ul {
   background: none;
 }
 
-.badge {
-  font-size: 0.8rem;
-  padding: 0.1rem;
-  text-align: center;
-  margin: 0.3rem;
-  background: var(--light-color);
-  color: #333;
-}
-
 .alert {
   padding: 0.8rem;
   margin: 1rem 0;
@@ -425,6 +416,11 @@ button {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
+}
+
+.product-page img {
+  height: 600px;
+  margin: auto;
 }
 
 /* Cooler */

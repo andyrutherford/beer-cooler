@@ -34,57 +34,75 @@ export const ProductPage = ({
     <>
       <Breadcrumb />
       {item && (
-        <section className='card product-page'>
-          <img src={item.image_url} alt={item.name} />
-          <div>
-            {' '}
-            <h1 className='card-title'>{item.name}</h1>
-            <h6 className='card-subtitle mb-2 text-muted font-weight-light font-italic'>
-              {item.tagline}
-            </h6>
-            <p className='mt-5'>{item.description}</p>
-            <p>{item.brewers_tips}</p>
-            <ul className='list-group list-group-flush'>
-              <li className='list-group-item'>
-                First Brewed {item.first_brewed}
-              </li>
-              <li className='list-group-item'>{item.abv} ABV</li>
-              <li className='list-group-item'>{item.ibu} IBU</li>
-              <li className='list-group-item'>
-                Food Pairings:
-                <ul className='list-group list-group'>
-                  {item.food_pairing.map((item, index) => (
-                    <li className='list-group-item' key={index}>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            </ul>
-            <form
-              className='mt-5 input-group input-group-lg'
-              onSubmit={addToCoolerHandler}
-            >
-              <div className='form-row'>
-                <div className='col'>
-                  <input
-                    value={quantity}
-                    min={1}
-                    onChange={(e) => setQuantity(e.target.value)}
-                    type='number'
-                    className='form-control'
-                    placeholder='Quantity'
-                  />
-                </div>
-                <div className='col'>
-                  <input
-                    className='btn btn-primary'
-                    type='submit'
-                    value='Add to Cooler'
-                  />
-                </div>
+        <section className='card'>
+          <div className='product-page'>
+            <img src={item.image_url} alt={item.name} />
+            <div>
+              <h1 className='card-title'>{item.name}</h1>
+              <h6 className='card-subtitle mb-2 text-muted font-weight-light font-italic'>
+                {item.tagline}
+              </h6>
+              <div>
+                <h4 className='d-inline-block mr-2'>
+                  <span class='badge badge-info font-weight-light'>
+                    {item.abv} ABV
+                  </span>
+                </h4>
+                <h4 className='d-inline-block mr-2'>
+                  <span class='badge badge-info font-weight-light'>
+                    {item.ibu} IBU
+                  </span>
+                </h4>
+                <h4 className='d-inline-block mr-2'>
+                  <span class='badge badge-info font-weight-light'>
+                    {item.ph} PH
+                  </span>
+                </h4>
               </div>
-            </form>
+              <p className='mt-3'>{item.description}</p>
+              <p>{item.brewers_tips}</p>
+              <ul className='list-group list-group-flush'>
+                <li className='list-group-item'>
+                  First Brewed {item.first_brewed}
+                </li>
+
+                <li className='list-group-item'>
+                  Food Pairings:
+                  <ul className='list-group list-group'>
+                    {item.food_pairing.map((item, index) => (
+                      <li className='list-group-item' key={index}>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              </ul>
+
+              <form
+                className='mt-5 input-group input-group-lg'
+                onSubmit={addToCoolerHandler}
+              >
+                <div className='form-row'>
+                  <div className='col'>
+                    <input
+                      value={quantity}
+                      min={1}
+                      onChange={(e) => setQuantity(e.target.value)}
+                      type='number'
+                      className='form-control'
+                      placeholder='Quantity'
+                    />
+                  </div>
+                  <div className='col'>
+                    <input
+                      className='btn btn-primary'
+                      type='submit'
+                      value='Add to Cooler'
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </section>
       )}
