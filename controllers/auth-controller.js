@@ -115,7 +115,12 @@ exports.loginUser = async (req, res, next) => {
       });
     }
 
+    user.resetPasswordExpires = null;
+    user.resetPasswordToken = '';
+    await user.save();
+
     const name = user.name;
+    console.log(name);
     const payload = {
       user: {
         email: user.email,
@@ -253,3 +258,7 @@ exports.deleteUser = async (req, res, next) => {
     }
   }
 };
+
+// TODO
+// make sure only one profile exists for any given user
+// delete password reset token after password reset
