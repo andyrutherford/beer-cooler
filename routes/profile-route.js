@@ -12,6 +12,7 @@ const {
   removeCoolerItem,
   updateAddress,
   savePayment,
+  updateCoolerItemQuantity,
 } = require('../controllers/profile-controller');
 
 const authMiddleware = require('../middleware/auth');
@@ -23,6 +24,7 @@ router.route('/').post(authMiddleware, createUserProfile);
 router.route('/').get(getAllProfiles);
 router.route('/user/:user_id').get(getProfileById);
 router.route('/cooler').post(authMiddleware, addCoolerItem);
+router.route('/cooler').put(authMiddleware, updateCoolerItemQuantity);
 router.route('/cooler').delete(authMiddleware, removeAllCoolerItems);
 router.route('/cooler/:id').delete(authMiddleware, removeCoolerItem);
 router.route('/cooler').get(authMiddleware, getCoolerItems);

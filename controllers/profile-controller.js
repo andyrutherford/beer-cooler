@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const Profile = require('../models/Profile');
-const User = require('../models/User');
 
 // @desc    Get current users profile
 // @route   GET api/v1/profile/me
 exports.getUserProfile = async (req, res, next) => {
   const userId = req.user.id;
+  console.log(userId);
   try {
     const profile = await Profile.findOne({
       user: userId,
@@ -194,7 +194,47 @@ exports.addCoolerItem = async (req, res, next) => {
       { $set: { cooler: newCooler } },
       { new: true, upsert: true }
     );
-    console.log(profile);
+    res.json({ success: true, profile });
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    } else
+      return res.status(500).json({
+        success: false,
+        error: error,
+      });
+  }
+};
+
+// @desc    Update quantity of cooler item
+// @route   PUT api/v1/profile/cooler
+// @access  Private
+exports.updateCoolerItemQuantity = async (req, res, next) => {
+  const userId = req.user.id;
+  const { itemId, quantity } = req.body;
+
+  try {
+    const profile = await Profile.findOneAndUpdate({
+      user: userId,
+    });
+
+    const item = profile.cooler.find((i) => i.id === itemId);
+    if (!item) {
+      return res
+        .status(404)
+        .json({ success: false, msg: 'Item does not exist.' });
+    }
+
+    item.quantity = quantity;
+    const itemIndex = profile.cooler.findIndex((i) => i.id === itemId);
+    profile.cooler.splice(itemIndex, 1, item);
+
+    await profile.save();
+
     res.json({ success: true, profile });
   } catch (error) {
     if (error.name === 'ValidationError') {
