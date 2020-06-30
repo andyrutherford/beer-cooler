@@ -29,14 +29,19 @@ exports.forgotPassword = async (req, res, next) => {
         },
       });
 
+      const mailURL =
+        process.env.NODE_ENV === 'development'
+          ? `http://localhost:3000/reset_password/${token}`
+          : `https://beer-cooler-2635.herokuapp.com/reset_password/${token}`;
+
       const mailOptions = {
-        from: `password_reset@beercooler.com`,
-        to: `${user.email}`,
+        from: process.env.EMAIL_USER,
+        to: user.email,
         subject: 'Reset your Password',
         text:
           `You are receiving this because you (or someone else) has requested the reset of the password for your account.\n\n` +
           `Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:\n\n` +
-          `http://localhost:3000/reset_password/${token}\n\n` +
+          `${mailURL} \n\n` +
           `If you did not request this, please ignore this email and your password will remain unchanged.\n`,
       };
 

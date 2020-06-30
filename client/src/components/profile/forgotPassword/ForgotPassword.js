@@ -28,9 +28,6 @@ const ForgotPassword = () => {
           email,
         });
 
-        console.log('res ', res);
-        console.log('res.data ', res.data);
-
         if (res.data === 'no user found') {
           setLoading(false);
           return setError('An account was not found with the provided email.');
