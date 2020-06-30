@@ -28,16 +28,20 @@ const ForgotPassword = () => {
           email,
         });
 
+        console.log('res ', res);
+        console.log('res.data ', res.data);
+
         if (res.data === 'no user found') {
           setLoading(false);
-          setError('An account was not found with the provided email.');
-        } else if (res.data === 'recovery email sent') {
+          return setError('An account was not found with the provided email.');
+        }
+        if (res.data === 'recovery email sent') {
           setLoading(false);
           setSuccess(true);
         }
       } catch (error) {
         setLoading(false);
-        console.log(error.data);
+        console.log(error);
       }
     }
   };
