@@ -32,7 +32,7 @@ exports.forgotPassword = async (req, res, next) => {
       const mailURL =
         process.env.NODE_ENV === 'development'
           ? `http://localhost:3000/reset_password/${token}`
-          : `https://beer-cooler-2635.herokuapp.com/reset_password/${token}`;
+          : `${process.env.PRODUCTION_URL}/reset_password/${token}`;
 
       const mailOptions = {
         from: process.env.EMAIL_USER,
