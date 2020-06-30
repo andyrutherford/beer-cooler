@@ -14,6 +14,7 @@ import {
   COOLER_PLACE_ORDER,
   COOLER_REMOVE_ALL,
   COOLER_UPDATE_QUANTITY,
+  COOLER_ERROR,
 } from '../actions/types';
 
 const initialState = {
@@ -130,6 +131,10 @@ export default function (state = initialState, action) {
         cooler: state.cooler.map((i) =>
           i.id !== action.payload.id ? i : update
         ),
+      };
+    case COOLER_ERROR:
+      return {
+        ...state,
       };
     default:
       return state;

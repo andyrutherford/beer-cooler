@@ -18,7 +18,7 @@ export const CoolerList = ({
     }
   }, [getCooler, isAuthenticated]);
 
-  if (loading) {
+  if (loading && isAuthenticated) {
     return <Spinner />;
   }
 

@@ -7,12 +7,18 @@ import {
   coolerRemoveProduct,
 } from '../../actions/cooler-action';
 
-const CoolerItem = ({ item, coolerUpdateQuantity, coolerRemoveProduct }) => {
+const CoolerItem = ({
+  item,
+  coolerUpdateQuantity,
+  coolerRemoveProduct,
+  isAuth,
+}) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
   const updateQuantityHandler = (e) => {
     e.preventDefault();
-    coolerUpdateQuantity(item.id, parseInt(quantity));
+    const guest = !isAuth;
+    coolerUpdateQuantity(item.id, item.name, parseInt(quantity), guest);
   };
 
   const removeProductHandler = (e) => {
@@ -61,6 +67,11 @@ const CoolerItem = ({ item, coolerUpdateQuantity, coolerRemoveProduct }) => {
   );
 };
 
-export default connect(null, { coolerUpdateQuantity, coolerRemoveProduct })(
-  CoolerItem
-);
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, {
+  coolerUpdateQuantity,
+  coolerRemoveProduct,
+})(CoolerItem);

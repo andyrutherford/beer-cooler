@@ -4,7 +4,6 @@ import api from '../utils/api';
 import {
   GET_COOLER,
   COOLER_ERROR,
-  COOLER_GET_QUANTITY,
   COOLER_ADD_PRODUCT,
   COOLER_REMOVE_PRODUCT,
   COOLER_CHECKOUT,
@@ -25,18 +24,9 @@ export const getCooler = () => async (dispatch) => {
       payload: res.data.profileCooler,
     });
   } catch (error) {
-    console.log(error);
-    dispatch({
-      type: COOLER_ERROR,
-    });
-    setAlert('A problem has occurred.');
+    console.log(error.message);
+    dispatch({ type: COOLER_ERROR });
   }
-};
-
-export const coolerGetQuantity = () => (dispatch) => {
-  dispatch({
-    type: COOLER_GET_QUANTITY,
-  });
 };
 
 export const coolerAddProduct = (beer, quantity, isAuthenticated) => async (
@@ -67,11 +57,8 @@ export const coolerAddProduct = (beer, quantity, isAuthenticated) => async (
     });
     dispatch(setAlert(`${quantity}x ${beer.name} added to cooler.`));
   } catch (error) {
-    console.log(error);
-    dispatch({
-      type: COOLER_ERROR,
-    });
-    setAlert('A problem has occurred.');
+    console.log(error.message);
+    dispatch({ type: COOLER_ERROR });
   }
 };
 
@@ -83,13 +70,9 @@ export const coolerRemoveProduct = (id, name) => async (dispatch) => {
       type: COOLER_REMOVE_PRODUCT,
       payload: id,
     });
-    dispatch(coolerGetQuantity());
   } catch (error) {
-    console.log(error);
-    dispatch({
-      type: COOLER_ERROR,
-    });
-    setAlert('A problem has occurred.');
+    console.log(error.message);
+    dispatch({ type: COOLER_ERROR });
   }
 };
 
@@ -103,11 +86,8 @@ export const coolerRemoveAll = (guest) => async (dispatch) => {
       type: COOLER_REMOVE_ALL,
     });
   } catch (error) {
-    console.log(error);
-    dispatch({
-      type: COOLER_ERROR,
-    });
-    dispatch(setAlert('A problem has occurred.'));
+    console.log(error.message);
+    dispatch({ type: COOLER_ERROR });
   }
 };
 
@@ -154,6 +134,7 @@ export const coolerPlaceOrder = (order, checkoutAsGuest) => async (
     return res.data;
   } catch (error) {
     console.log(error.message);
+    dispatch({ type: COOLER_ERROR });
   }
 };
 
@@ -163,10 +144,26 @@ export const clearCoolerLogout = () => (dispatch) => {
   });
 };
 
-export const coolerUpdateQuantity = (id, quantity) => (dispatch) => {
-  dispatch({
-    type: COOLER_UPDATE_QUANTITY,
-    payload: { id, quantity },
-  });
-  dispatch(coolerGetQuantity());
+export const coolerUpdateQuantity = (id, name, quantity, guest) => async (
+  dispatch
+) => {
+  if (guest) {
+    dispatch({
+      type: COOLER_UPDATE_QUANTITY,
+      payload: { id, quantity },
+    });
+    return dispatch(setAlert(`The quantity of ${name} has been updated.`));
+  }
+
+  try {
+    await api.put('/profile/cooler', { itemId: id, quantity });
+    dispatch({
+      type: COOLER_UPDATE_QUANTITY,
+      payload: { id, quantity },
+    });
+    dispatch(setAlert(`The quantity of ${name} has been updated.`));
+  } catch (error) {
+    console.log(error.message);
+    dispatch({ type: COOLER_ERROR });
+  }
 };
