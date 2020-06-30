@@ -16,7 +16,7 @@ export const ResetPassword = ({ match }) => {
   useEffect(() => {
     const requestReset = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/password/reset', {
+        const res = await axios.get('/password/reset', {
           params: {
             resetPasswordToken: match.params.token,
           },
@@ -74,7 +74,7 @@ export const ResetPassword = ({ match }) => {
     }
 
     try {
-      const res = await axios.put('http://localhost:3000/password/update', {
+      const res = await axios.put('/password/update', {
         email: formData.email,
         password: formData.password,
       });
