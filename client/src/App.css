@@ -673,6 +673,9 @@ button {
   .product-list {
     grid-template-columns: repeat(2, 50%);
   }
+  .product-page {
+    display: block;
+  }
 }
 
 @media (max-width: 500px) {

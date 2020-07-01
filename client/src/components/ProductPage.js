@@ -35,8 +35,14 @@ export const ProductPage = ({
       <Breadcrumb />
       {item && (
         <section className='card'>
-          <div className='product-page card-body'>
-            <img src={item.image_url} alt={item.name} />
+          <div className='product-page card-body align-items-center'>
+            <div className='mb-3'>
+              <img
+                className='d-block m-auto'
+                src={item.image_url}
+                alt={item.name}
+              />
+            </div>
             <div>
               <h1 className='card-title'>{item.name}</h1>
               <h6 className='card-subtitle mb-2 text-muted font-weight-light font-italic'>

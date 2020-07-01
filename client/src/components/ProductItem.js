@@ -21,7 +21,7 @@ const ProductItem = ({ item, coolerAddProduct, isAuthenticated }) => {
         </Link>
 
         <Link to={`/beers/${item.id}`}>
-          <h5 className='card-title product-item'>{item.name}</h5>
+          <h5 className='card-title product-item mb-0'>{item.name}</h5>
         </Link>
       </div>
       <div className='card-footer'>
