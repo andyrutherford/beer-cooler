@@ -91,7 +91,7 @@ const Login = ({
             Your password must contain a minimum of 6 characters.
           </small>
         </div>
-        <div className='form-actions d-flex justify-content-between'>
+        <div className='auth-form-actions d-flex justify-content-between'>
           <Link
             to='/forgot_password'
             className='btn pull-left btn-link text-muted pl-0'

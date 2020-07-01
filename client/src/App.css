@@ -685,9 +685,24 @@ button {
   .product-list {
     display: block;
   }
-
   .navbar h2,
   .navbar ul {
     margin: auto;
+  }
+  .auth-form-actions {
+    flex-direction: column;
+  }
+  .auth-form-actions a {
+    order: 2;
+  }
+  .auth-form-actions div {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    order: 1;
+  }
+
+  .auth-form-actions div a {
+    padding-left: 0;
   }
 }
