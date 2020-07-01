@@ -676,10 +676,18 @@ button {
   .product-page {
     display: block;
   }
+  .nav-link-text {
+    display: none;
+  }
 }
 
 @media (max-width: 500px) {
   .product-list {
     display: block;
+  }
+
+  .navbar h2,
+  .navbar ul {
+    margin: auto;
   }
 }

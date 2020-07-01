@@ -12,25 +12,27 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, user, loading }) => {
     <ul>
       <li>
         <NavLink to='/my-profile'>
-          <i className='fas fa-lg fa-user' /> {user && user.name}
+          <i className='fas fa-lg fa-user' />{' '}
+          <span className='nav-link-text'>{user && user.name}</span>
         </NavLink>
       </li>
       <li>
         {cooler === 0 ? (
           <NavLink to='/cooler'>
-            <i className='fas fa-lg fa-shopping-basket'></i> My Cooler
+            <i className='fas fa-lg fa-shopping-basket'></i>{' '}
+            <span className='nav-link-text'>My Cooler</span>
           </NavLink>
         ) : (
           <NavLink to='/cooler'>
-            <i className='fas fa-lg fa-shopping-basket'></i> My Cooler ({cooler}
-            )
+            <i className='fas fa-lg fa-shopping-basket'></i>{' '}
+            <span className='nav-link-text'>My Cooler</span> ({cooler})
           </NavLink>
         )}
       </li>
       <li>
         <Link to='/' onClick={logoutHandler}>
           <i className='fas fa-lg fa-sign-out-alt' />{' '}
-          <span className='hide-sm'>Logout</span>
+          <span className='nav-link-text'>Logout</span>
         </Link>
       </li>
     </ul>
@@ -40,23 +42,26 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, user, loading }) => {
     <ul>
       <li>
         <NavLink to='/login'>
-          <i className='fas fa-sign-in-alt'></i> Login
+          <i className='fas fa-sign-in-alt'></i>{' '}
+          <span className='nav-link-text'>Login</span>
         </NavLink>
       </li>
       <li>
         <NavLink to='/signup'>
-          <i className='fas fa-user-plus'></i> Signup
+          <i className='fas fa-user-plus'></i>{' '}
+          <span className='nav-link-text'>Signup</span>
         </NavLink>
       </li>
       <li>
         {cooler === 0 ? (
           <Link to='/cooler'>
-            <i className='fas fa-lg fa-shopping-basket'></i> My Cooler
+            <i className='fas fa-lg fa-shopping-basket'></i>{' '}
+            <span className='nav-link-text'>My Cooler</span>
           </Link>
         ) : (
           <Link to='/cooler'>
-            <i className='fas fa-lg fa-shopping-basket'></i> My Cooler ({cooler}
-            )
+            <i className='fas fa-lg fa-shopping-basket'></i>{' '}
+            <span className='nav-link-text'>My Cooler</span> ({cooler})
           </Link>
         )}
       </li>
