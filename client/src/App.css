@@ -399,8 +399,8 @@ button {
 
 .product-item img {
   padding: 5px;
-  width: 50%;
-  max-height: 250px;
+  width: 109px;
+  height: 250px;
   margin: auto;
 }
 
@@ -659,5 +659,24 @@ button {
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
+  }
+}
+
+/* Media Queries */
+
+@media (max-width: 1070px) {
+  .product-list {
+    grid-template-columns: repeat(3, 33%);
+  }
+}
+@media (max-width: 800px) {
+  .product-list {
+    grid-template-columns: repeat(2, 50%);
+  }
+}
+
+@media (max-width: 500px) {
+  .product-list {
+    display: block;
   }
 }

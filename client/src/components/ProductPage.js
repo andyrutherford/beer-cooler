@@ -35,7 +35,7 @@ export const ProductPage = ({
       <Breadcrumb />
       {item && (
         <section className='card'>
-          <div className='product-page'>
+          <div className='product-page card-body'>
             <img src={item.image_url} alt={item.name} />
             <div>
               <h1 className='card-title'>{item.name}</h1>
@@ -94,11 +94,9 @@ export const ProductPage = ({
                     />
                   </div>
                   <div className='col'>
-                    <input
-                      className='btn btn-primary'
-                      type='submit'
-                      value='Add to Cooler'
-                    />
+                    <button className='btn btn-primary'>
+                      <i className='fas fa-cart-plus'></i> Add to Cooler
+                    </button>
                   </div>
                 </div>
               </form>
