@@ -68,7 +68,7 @@ export const Checkout = ({
               onClick={onSubmit}
               disabled={!(addressValid && paymentValid)}
             >
-              Review Your Order <i className='fas fa-chevron-right'></i>
+              Review Order <i className='fas fa-chevron-right'></i>
             </button>
           </Link>
         </div>

@@ -19,7 +19,7 @@ export const OrderHistoryList = ({ history }) => {
           key={i._id}
         >
           <span>
-            <Link to={`/my-orders/${i._id}`}>Order #{i.orderId}</Link> -{' '}
+            <Link to={`/my-orders/${i._id}`}>#{i.orderId}</Link> -{' '}
             {getQuantity(i)} Items
           </span>
 

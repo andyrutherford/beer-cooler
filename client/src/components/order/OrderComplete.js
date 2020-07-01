@@ -35,18 +35,18 @@ export const OrderComplete = ({
   }, [newOrder, isAuthenticated, coolerRemoveAll]);
 
   return (
-    <>
+    <div className='order-container'>
       {order && (
         <div>
           {isAuthenticated && (
             <div className='d-flex justify-content-between mb-3'>
               <Link to='/my-profile'>
-                <button className='btn btn-primary'>
+                <button className='btn btn-link'>
                   <i className='fas fa-user' /> My Profile
                 </button>
               </Link>
               <Link to='/my-orders'>
-                <button className='btn btn-primary'>
+                <button className='btn btn-link'>
                   <i className='fas fa-list-alt'></i> My Orders
                 </button>
               </Link>
@@ -54,7 +54,7 @@ export const OrderComplete = ({
           )}
           {newOrder && (
             <div>
-              <h1 className='display-4'>
+              <h1 className='display-5'>
                 <i className='fas fa-check'></i> Your order has been placed
               </h1>
               <p>Your order is still processing, and will be shipped soon.</p>
@@ -67,7 +67,7 @@ export const OrderComplete = ({
               {formatDate(order.date)}
             </p>
           </div>
-          <div className='d-flex justify-content-between'>
+          <div className='d-block d-sm-flex justify-content-center'>
             <div>
               <div className='card'>
                 <OrderAddress address={order.address} />
@@ -82,7 +82,7 @@ export const OrderComplete = ({
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

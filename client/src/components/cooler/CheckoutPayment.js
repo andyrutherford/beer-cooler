@@ -64,20 +64,22 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
         <i className='fas fa-wallet'></i> Payment
       </h2>
       <form onSubmit={onSubmit}>
-        <div className='d-flex justify-content-between'>
-          <div className='form-group w-50 pr-2'>
-            <label className='control-label'>Name on Card</label>
-            <div className='controls'>
-              <input
-                name='cardName'
-                type='text'
-                className='form-control'
-                onChange={onChange}
-                value={cardName}
-              />
+        <div className='d-block d-sm-flex justify-content-between'>
+          <div className='form-group w-sm-50'>
+            <div className='form-group'>
+              <label className='control-label'>Name on Card</label>
+              <div className='controls'>
+                <input
+                  name='cardName'
+                  type='text'
+                  className='form-control'
+                  onChange={onChange}
+                  value={cardName}
+                />
+              </div>
             </div>
-            <div className='d-flex justify-content-between'>
-              <div className='form-group w-75 pr-2'>
+            <div className='row d-flex justify-content-between'>
+              <div className='col-9 form-group'>
                 <label className='control-label'>Card Number</label>
                 <div className='controls'>
                   <input
@@ -89,7 +91,7 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
                   />
                 </div>
               </div>
-              <div className='form-group w-25 pr-2'>
+              <div className='col-3 form-group pl-0'>
                 <label className='control-label'>CVC</label>
                 <div className='controls'>
                   <input
@@ -102,8 +104,8 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
                 </div>
               </div>
             </div>
-            <div className='d-flex justify-content-between'>
-              <div className='form-group w-50 pr-2'>
+            <div className='row d-flex justify-content-between'>
+              <div className='form-group col w-50 pr-2'>
                 <label className='control-label'>Exp. Month (MM)</label>
                 <div className='controls'>
                   <input
@@ -116,7 +118,7 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
                   />
                 </div>
               </div>
-              <div className='form-group w-50 pr-2'>
+              <div className='form-group col w-50 pl-2'>
                 <label className='control-label'>Exp. Year (YY)</label>
                 <div className='controls'>
                   <input
@@ -130,7 +132,7 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
               </div>
             </div>
             <div className='form-group d-flex justify-content-between'>
-              <button className='btn btn-primary'>
+              <button className='btn btn-primary my-auto'>
                 <i className='fas fa-save'></i> Confirm Payment
               </button>
               {formData.message &&
@@ -144,27 +146,10 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
             </div>
           </div>
 
-          <div className='col-sm-6'>
-            <div className='alert alert-info'>
-              Please choose your method of payment and hit continue. You will
-              then be sent down to pay using your selected payment option.
-            </div>
-            <br />
-            <div className='btn-group-vertical btn-block'>
-              <a
-                className='btn btn-default text-left'
-                data-toggle='tab'
-                href='#stripe'
-              >
-                Stripe/Credit Card
-              </a>
-              <a
-                className='btn btn-default text-left'
-                data-toggle='tab'
-                href='#paypal'
-              >
-                Cash on Delivery (COD)
-              </a>
+          <div className='my-auto w-sm-50'>
+            <div className='alert'>
+              Please confirm your address and payment before reviewing your
+              order.
             </div>
           </div>
         </div>

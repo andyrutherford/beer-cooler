@@ -16,10 +16,12 @@ export const Profile = ({ getCurrentProfile, auth, address }) => {
   return (
     <div>
       <div className='d-flex justify-content-between align-items-center'>
-        <h1 className='large'>
+        <h1 className='large my-auto'>
           <i className='fas fa-user-circle'></i> My Profile
         </h1>
-        <Link to='/my-orders'>My Order History</Link>
+        <Link className='my-auto mr-0' to='/my-orders'>
+          My Order History
+        </Link>
       </div>
 
       <form>

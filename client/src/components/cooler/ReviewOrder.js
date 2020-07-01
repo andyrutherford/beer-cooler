@@ -68,7 +68,7 @@ export const ReviewOrder = ({
       <h1 className='large '>
         <i className='fas fa-shopping-cart'></i> Review Your Order
       </h1>
-      <div className='d-flex justify-content-between'>
+      <div className='d-block d-sm-flex justify-content-center'>
         <div>
           <div className='card'>
             <OrderAddress address={address} review={true} />

@@ -27,11 +27,11 @@ const CoolerItem = ({
   };
 
   return (
-    <li className='card cooler-item'>
-      <div className='cooler-item-image'>
+    <li className='card cooler-item mb-4'>
+      <div className='card-body cooler-item-image m-auto'>
         <img src={item.image_url} alt={item.name} />
       </div>
-      <div className='card-body'>
+      <div className='card-body d-flex flex-column justify-content-between'>
         <h2 className='card-title'>
           <Link to={`/beers/${item.id}`}>{item.name}</Link>
         </h2>
@@ -41,25 +41,24 @@ const CoolerItem = ({
         <p>ABV: {item.abv}</p>
         <p className='card-text'>{item.description}</p>
         <form onSubmit={updateQuantityHandler}>
-          <div className='form-row'>
-            <label className='col'>Quantity: </label>
-            <div className='col'>
-              <input
-                type='number'
-                className='form-control'
-                value={quantity}
-                min={1}
-                onChange={(e) => setQuantity(e.target.value)}
-              />
-            </div>
-            <div className='col'>
-              <input className='btn btn-primary' type='submit' value='Update' />
-            </div>
-            <div className='col'>
-              <button className='btn btn-danger' onClick={removeProductHandler}>
-                Remove
-              </button>
-            </div>
+          <div className='form-row m-auto'>
+            <label className='align-self-center mr-2 mb-0'>Quantity: </label>
+
+            <input
+              type='number'
+              className='form-control col-3 mr-2'
+              value={quantity}
+              min={1}
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+
+            <button className='btn btn-primary mr-2' type='submit'>
+              <i className='fas fa-check'></i>
+            </button>
+
+            <button className='btn btn-danger' onClick={removeProductHandler}>
+              <i className='fas fa-trash-alt'></i>
+            </button>
           </div>
         </form>
       </div>

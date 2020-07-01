@@ -67,8 +67,8 @@ export const ProfileAddress = ({
               />
             </div>
           </div>{' '}
-          <div className='d-flex justify-content-between'>
-            <div className='form-group w-50 pr-2'>
+          <div className='row d-block d-sm-flex justify-content-between'>
+            <div className='form-group col w-sm-50'>
               <label className='control-label'>Address Line 1</label>
               <div className='controls'>
                 <input
@@ -84,7 +84,7 @@ export const ProfileAddress = ({
               </div>
             </div>
 
-            <div className='form-group w-50 pl-2'>
+            <div className='form-group col w-sm-50'>
               <label className='control-label'>Address Line 2</label>
               <div className='controls'>
                 <input
@@ -100,8 +100,8 @@ export const ProfileAddress = ({
               </div>
             </div>
           </div>
-          <div className='d-flex justify-content-between'>
-            <div className='form-group w-50 pr-2'>
+          <div className='row d-flex justify-content-between'>
+            <div className='form-group col w-50 pr-2'>
               <label className='control-label'>City / Town</label>
               <div className='controls'>
                 <input
@@ -113,8 +113,8 @@ export const ProfileAddress = ({
                 />
               </div>
             </div>
-            <div className='form-group w-50 pl-2'>
-              <label className='control-label'>State / Province / Region</label>
+            <div className='form-group col w-50 pl-2'>
+              <label className='control-label'>State / Province</label>
               <div className='controls'>
                 <input
                   name='state'
@@ -126,8 +126,8 @@ export const ProfileAddress = ({
               </div>
             </div>
           </div>
-          <div className='d-flex justify-content-between'>
-            <div className='form-group w-50 pr-2'>
+          <div className='row d-flex justify-content-between'>
+            <div className='form-group col w-50 pr-2'>
               <label className='control-label'>Zip / Postal Code</label>
               <div className='controls'>
                 <input
@@ -139,7 +139,7 @@ export const ProfileAddress = ({
                 />
               </div>
             </div>
-            <div className='form-group w-50 pl-2'>
+            <div className='form-group col w-50 pl-2'>
               <label className='control-label'>Country</label>
               <div className='controls'>
                 <select

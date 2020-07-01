@@ -16,7 +16,7 @@ const ProductItem = ({ item, coolerAddProduct, isAuthenticated }) => {
   return (
     <div className='card product-item'>
       <div className='card-body d-flex flex-column justify-content-between'>
-        <Link to={`/beers/${item.id}`}>
+        <Link to={`/beers/${item.id}`} className='m-auto'>
           <img src={item.image_url} alt={item.name} />
         </Link>
 

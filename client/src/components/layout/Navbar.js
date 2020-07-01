@@ -12,26 +12,26 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, user, loading }) => {
     <ul>
       <li>
         <NavLink to='/my-profile'>
-          <i className='fas fa-lg fa-user' />{' '}
+          <i className='fas fa-user' />{' '}
           <span className='nav-link-text'>{user && user.name}</span>
         </NavLink>
       </li>
       <li>
         {cooler === 0 ? (
           <NavLink to='/cooler'>
-            <i className='fas fa-lg fa-shopping-basket'></i>{' '}
+            <i className='fas fa-shopping-basket'></i>{' '}
             <span className='nav-link-text'>My Cooler</span>
           </NavLink>
         ) : (
           <NavLink to='/cooler'>
-            <i className='fas fa-lg fa-shopping-basket'></i>{' '}
+            <i className='fas fa-shopping-basket'></i>{' '}
             <span className='nav-link-text'>My Cooler</span> ({cooler})
           </NavLink>
         )}
       </li>
       <li>
         <Link to='/' onClick={logoutHandler}>
-          <i className='fas fa-lg fa-sign-out-alt' />{' '}
+          <i className='fas fa-sign-out-alt' />{' '}
           <span className='nav-link-text'>Logout</span>
         </Link>
       </li>
@@ -55,12 +55,12 @@ const Navbar = ({ cooler, logoutUser, isAuthenticated, user, loading }) => {
       <li>
         {cooler === 0 ? (
           <Link to='/cooler'>
-            <i className='fas fa-lg fa-shopping-basket'></i>{' '}
+            <i className='fas fa-shopping-basket'></i>{' '}
             <span className='nav-link-text'>My Cooler</span>
           </Link>
         ) : (
           <Link to='/cooler'>
-            <i className='fas fa-lg fa-shopping-basket'></i>{' '}
+            <i className='fas fa-shopping-basket'></i>{' '}
             <span className='nav-link-text'>My Cooler</span> ({cooler})
           </Link>
         )}
