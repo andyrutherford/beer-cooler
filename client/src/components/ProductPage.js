@@ -50,17 +50,17 @@ export const ProductPage = ({
               </h6>
               <div>
                 <h4 className='d-inline-block mr-2'>
-                  <span class='badge badge-info font-weight-light'>
+                  <span className='badge badge-info font-weight-light'>
                     {item.abv} ABV
                   </span>
                 </h4>
                 <h4 className='d-inline-block mr-2'>
-                  <span class='badge badge-info font-weight-light'>
+                  <span className='badge badge-info font-weight-light'>
                     {item.ibu} IBU
                   </span>
                 </h4>
                 <h4 className='d-inline-block mr-2'>
-                  <span class='badge badge-info font-weight-light'>
+                  <span className='badge badge-info font-weight-light'>
                     {item.ph} PH
                   </span>
                 </h4>
@@ -69,14 +69,15 @@ export const ProductPage = ({
               <p>{item.brewers_tips}</p>
               <ul className='list-group list-group-flush'>
                 <li className='list-group-item'>
-                  First Brewed {item.first_brewed}
+                  <i className='fas fa-glass-cheers'></i> First Brewed{' '}
+                  {item.first_brewed}
                 </li>
 
                 <li className='list-group-item'>
-                  Food Pairings:
+                  <i className='fas fa-utensils'></i> Food Pairings:
                   <ul className='list-group list-group'>
                     {item.food_pairing.map((item, index) => (
-                      <li className='list-group-item' key={index}>
+                      <li className='list-group-item text-muted' key={index}>
                         {item}
                       </li>
                     ))}
@@ -89,13 +90,14 @@ export const ProductPage = ({
                 onSubmit={addToCoolerHandler}
               >
                 <div className='form-row'>
-                  <div className='col'>
+                  <div className='col-3'>
                     <input
                       value={quantity}
                       min={1}
+                      max={999}
                       onChange={(e) => setQuantity(e.target.value)}
                       type='number'
-                      className='form-control'
+                      className='form-control quantity-input'
                       placeholder='Quantity'
                     />
                   </div>

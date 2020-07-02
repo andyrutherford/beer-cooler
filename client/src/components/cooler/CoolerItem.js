@@ -14,11 +14,13 @@ const CoolerItem = ({
   isAuth,
 }) => {
   const [quantity, setQuantity] = useState(item.quantity);
+  const [quantityChanged, setQuantityChanged] = useState(false);
 
   const updateQuantityHandler = (e) => {
     e.preventDefault();
     const guest = !isAuth;
     coolerUpdateQuantity(item.id, item.name, parseInt(quantity), guest);
+    setQuantityChanged(false);
   };
 
   const removeProductHandler = (e) => {
@@ -38,26 +40,36 @@ const CoolerItem = ({
         <h6 className='card-subtitle mb-2 text-muted font-weight-light font-italic'>
           {item.tagline}
         </h6>
-        <p>ABV: {item.abv}</p>
-        <p className='card-text'>{item.description}</p>
+        <p className='d-none d-sm-block'>{item.abv} ABV</p>
+        <p className='card-text d-none d-sm-block'>{item.description}</p>
         <form onSubmit={updateQuantityHandler}>
           <div className='form-row m-auto'>
             <label className='align-self-center mr-2 mb-0'>Quantity: </label>
 
             <input
               type='number'
-              className='form-control col-3 mr-2'
+              className='form-control quantity-input col-3 col-lg-2 mr-2'
               value={quantity}
               min={1}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e) => {
+                setQuantityChanged(true);
+                setQuantity(e.target.value);
+              }}
             />
 
-            <button className='btn btn-primary mr-2' type='submit'>
-              <i className='fas fa-check'></i>
+            <button
+              className='btn btn-link mr-2 p-2'
+              type='submit'
+              disabled={!quantityChanged}
+            >
+              <i className='fas fa-check fa-lg'></i>
             </button>
 
-            <button className='btn btn-danger' onClick={removeProductHandler}>
-              <i className='fas fa-trash-alt'></i>
+            <button
+              className='btn text-danger btn-link p-2'
+              onClick={removeProductHandler}
+            >
+              <i className='fas fa-trash-alt fa-lg'></i>
             </button>
           </div>
         </form>

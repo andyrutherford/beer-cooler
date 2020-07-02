@@ -27,17 +27,18 @@ const ProductItem = ({ item, coolerAddProduct, isAuthenticated }) => {
       <div className='card-footer'>
         <form onSubmit={addToCoolerHandler}>
           <div className='form-row justify-content-center'>
-            <div className='col-8 col-xs-9'>
+            <div className='col-4 col-md-5 col-lg-6'>
               <input
                 value={quantity}
                 min={1}
+                max={999}
                 onChange={(e) => setQuantity(e.target.value)}
                 type='number'
-                className='form-control'
+                className='form-control quantity-input'
                 placeholder='Quantity'
               />
             </div>
-            <div className='col-4 col-xs-2'>
+            <div className='col-4'>
               <button className='btn btn-primary' type='submit'>
                 <i className='fas fa-cart-plus'></i>
               </button>
