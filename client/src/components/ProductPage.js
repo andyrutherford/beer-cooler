@@ -85,7 +85,7 @@ export const ProductPage = ({
               </ul>
 
               <form
-                className='mt-5 input-group input-group-lg'
+                className='mt-4 input-group input-group-lg'
                 onSubmit={addToCoolerHandler}
               >
                 <div className='form-row'>

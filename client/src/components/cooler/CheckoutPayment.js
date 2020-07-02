@@ -4,7 +4,14 @@ import { connect } from 'react-redux';
 import { savePayment } from '../../actions/profile-action';
 import { setAlert } from '../../actions/alert-action';
 
-export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
+export const CheckoutPayment = ({
+  savePayment,
+  setAlert,
+  payment,
+  paymentValid,
+  addressValid,
+  guest,
+}) => {
   const [formData, setFormData] = useState({
     cardName: payment.cardName || '',
     cardNumber: payment.cardNumber || '',
@@ -12,9 +19,13 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
     expMonth: payment.expMonth || '',
     expYear: payment.expYear || '',
   });
+
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
+
   const { cardName, cardNumber, cardCvc, expMonth, expYear } = formData;
 
   const onChange = (e) => {
+    setPaymentConfirmed(false);
     if (e.target.name === 'cardNumber') {
       if (e.target.value.length <= 16) {
         setFormData({
@@ -53,8 +64,25 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
     });
     if (cardName && cardNumber && cardCvc && expMonth && expYear) {
       savePayment(formData, guest);
+      setPaymentConfirmed(true);
     } else {
       setAlert('All payment fields are required.');
+    }
+  };
+
+  const submitButton = () => {
+    if (paymentConfirmed) {
+      return (
+        <span>
+          <i className='fas fa-check'></i> Payment Confirmed
+        </span>
+      );
+    } else {
+      return (
+        <span>
+          <i className='fas fa-save'></i> Confirm Payment
+        </span>
+      );
     }
   };
 
@@ -64,10 +92,10 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
         <i className='fas fa-wallet'></i> Payment
       </h2>
       <form onSubmit={onSubmit}>
-        <div className='d-block d-sm-flex justify-content-between'>
-          <div className='form-group w-sm-50'>
+        <div className='d-block d-md-flex justify-content-between'>
+          <div className='form-group col px-0 w-sm-50'>
             <div className='form-group'>
-              <label className='control-label'>Name on Card</label>
+              <label>Name on Card</label>
               <div className='controls'>
                 <input
                   name='cardName'
@@ -80,7 +108,7 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
             </div>
             <div className='row d-flex justify-content-between'>
               <div className='col-9 form-group'>
-                <label className='control-label'>Card Number</label>
+                <label>Card Number</label>
                 <div className='controls'>
                   <input
                     name='cardNumber'
@@ -92,7 +120,7 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
                 </div>
               </div>
               <div className='col-3 form-group pl-0'>
-                <label className='control-label'>CVC</label>
+                <label>CVC</label>
                 <div className='controls'>
                   <input
                     name='cardCvc'
@@ -106,7 +134,7 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
             </div>
             <div className='row d-flex justify-content-between'>
               <div className='form-group col w-50 pr-2'>
-                <label className='control-label'>Exp. Month (MM)</label>
+                <label>Exp. Month (MM)</label>
                 <div className='controls'>
                   <input
                     name='expMonth'
@@ -119,7 +147,7 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
                 </div>
               </div>
               <div className='form-group col w-50 pl-2'>
-                <label className='control-label'>Exp. Year (YY)</label>
+                <label>Exp. Year (YY)</label>
                 <div className='controls'>
                   <input
                     name='expYear'
@@ -133,7 +161,7 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
             </div>
             <div className='form-group d-flex justify-content-between'>
               <button className='btn btn-primary my-auto'>
-                <i className='fas fa-save'></i> Confirm Payment
+                {submitButton()}
               </button>
               {formData.message &&
                 formData.message === 'Payment information saved.' && (
@@ -146,10 +174,41 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
             </div>
           </div>
 
-          <div className='my-auto w-sm-50'>
-            <div className='alert'>
+          <div className='my-auto col w-sm-50'>
+            <div className='alert my-4'>
               Please confirm your address and payment before reviewing your
               order.
+              <ul className='p-3'>
+                {addressValid ? (
+                  <li>
+                    <i className='fas fa-check text-success'></i>{' '}
+                    <span className='text-muted'>
+                      <s>Confirm your address</s>
+                    </span>
+                  </li>
+                ) : (
+                  <span>
+                    <i className='fas fa-exclamation-circle text-danger'></i>{' '}
+                    Confirm your address
+                  </span>
+                )}
+
+                <li>
+                  {paymentValid ? (
+                    <span>
+                      <i className='fas fa-check text-success'></i>{' '}
+                      <span className='text-muted'>
+                        <s>Confirm your payment</s>
+                      </span>
+                    </span>
+                  ) : (
+                    <span>
+                      <i className='fas fa-exclamation-circle text-danger'></i>{' '}
+                      Confirm your payment
+                    </span>
+                  )}
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -160,6 +219,8 @@ export const CheckoutPayment = ({ savePayment, setAlert, payment, guest }) => {
 
 const mapStateToProps = (state) => ({
   payment: state.profile.payment,
+  paymentValid: state.cooler.paymentValid,
+  addressValid: state.cooler.addressValid,
 });
 
 export default connect(mapStateToProps, { savePayment, setAlert })(

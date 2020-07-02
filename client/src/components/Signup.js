@@ -21,7 +21,7 @@ const Signup = ({ signupUser, setAlert, isAuthenticated }) => {
     }
   }, [isAuthenticated, history, setAlert]);
 
-  const fill = () => {
+  const testAccount = () => {
     setUserData({
       name: 'John',
       email: 'john@gmail.com',
@@ -67,8 +67,11 @@ const Signup = ({ signupUser, setAlert, isAuthenticated }) => {
     <div className='signup-form'>
       <h1>
         <i className='fas fa-user-plus'></i> Create an account{' '}
-        <button onClick={fill}>Fill</button>
       </h1>
+      Just testing?{' '}
+      <button className='btn btn-link p-0' onClick={testAccount}>
+        Quickly create a test account
+      </button>
       <form onSubmit={onSubmitHandler} className='mt-4 mb-2'>
         <div className='form-group'>
           <input

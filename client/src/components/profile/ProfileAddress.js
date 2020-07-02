@@ -20,8 +20,10 @@ export const ProfileAddress = ({
     postCode: address ? address.postCode : '',
     country: address ? address.country : '',
   });
+  const [addressConfirmed, setAddressConfirmed] = useState(false);
 
   const onChange = (e) => {
+    setAddressConfirmed(false);
     setAddressData({
       ...addressData,
       [e.target.name]: e.target.value,
@@ -45,6 +47,25 @@ export const ProfileAddress = ({
       }
     }
     updateAddress(addressData, guest);
+    setAddressConfirmed(true);
+  };
+
+  const submitButton = () => {
+    if (addressConfirmed) {
+      return (
+        <span>
+          <i className='fas fa-check'></i> Address
+          {guest || order ? ' Confirmed' : ' Saved'}
+        </span>
+      );
+    } else {
+      return (
+        <span>
+          <i className='fas fa-save'></i>{' '}
+          {guest || order ? ' Confirm' : ' Save'} Address
+        </span>
+      );
+    }
   };
 
   return (
@@ -56,7 +77,7 @@ export const ProfileAddress = ({
             <i className='fas fa-address-card'></i> My Address
           </h2>
           <div className='form-group'>
-            <label className='control-label'>Full Name</label>
+            <label>Full Name</label>
             <div className='controls'>
               <input
                 name='fullName'
@@ -69,7 +90,7 @@ export const ProfileAddress = ({
           </div>{' '}
           <div className='row d-block d-sm-flex justify-content-between'>
             <div className='form-group col w-sm-50'>
-              <label className='control-label'>Address Line 1</label>
+              <label>Address Line 1</label>
               <div className='controls'>
                 <input
                   name='address1'
@@ -85,7 +106,7 @@ export const ProfileAddress = ({
             </div>
 
             <div className='form-group col w-sm-50'>
-              <label className='control-label'>Address Line 2</label>
+              <label>Address Line 2</label>
               <div className='controls'>
                 <input
                   name='address2'
@@ -101,8 +122,8 @@ export const ProfileAddress = ({
             </div>
           </div>
           <div className='row d-flex justify-content-between'>
-            <div className='form-group col w-50 pr-2'>
-              <label className='control-label'>City / Town</label>
+            <div className='form-group col w-50'>
+              <label>City / Town</label>
               <div className='controls'>
                 <input
                   name='city'
@@ -113,8 +134,8 @@ export const ProfileAddress = ({
                 />
               </div>
             </div>
-            <div className='form-group col w-50 pl-2'>
-              <label className='control-label'>State / Province</label>
+            <div className='form-group col w-50'>
+              <label>State / Province</label>
               <div className='controls'>
                 <input
                   name='state'
@@ -127,8 +148,8 @@ export const ProfileAddress = ({
             </div>
           </div>
           <div className='row d-flex justify-content-between'>
-            <div className='form-group col w-50 pr-2'>
-              <label className='control-label'>Zip / Postal Code</label>
+            <div className='form-group col w-50'>
+              <label>Zip / Postal Code</label>
               <div className='controls'>
                 <input
                   name='postCode'
@@ -139,8 +160,8 @@ export const ProfileAddress = ({
                 />
               </div>
             </div>
-            <div className='form-group col w-50 pl-2'>
-              <label className='control-label'>Country</label>
+            <div className='form-group col w-50'>
+              <label>Country</label>
               <div className='controls'>
                 <select
                   id='country'
@@ -405,10 +426,7 @@ export const ProfileAddress = ({
           </div>
         </fieldset>
 
-        <button className='btn btn-primary'>
-          <i className='fas fa-save'></i>
-          {guest || order ? ' Confirm' : ' Save'} Address
-        </button>
+        <button className='btn btn-primary'>{submitButton()}</button>
       </form>
     </div>
   );

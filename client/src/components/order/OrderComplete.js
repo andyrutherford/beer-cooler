@@ -55,14 +55,15 @@ export const OrderComplete = ({
           {newOrder && (
             <div>
               <h1 className='display-5'>
-                <i className='fas fa-check'></i> Your order has been placed
+                <i className='fas fa-check text-success'></i> Your order has
+                been placed
               </h1>
               <p>Your order is still processing, and will be shipped soon.</p>
             </div>
           )}
           <div className='card card-body'>
             <h1>Order #{order.orderId}</h1>
-            <p className='text-muted'>
+            <p className='text-muted mb-0'>
               <i className='far fa-calendar-alt'></i> Submitted on{' '}
               {formatDate(order.date)}
             </p>

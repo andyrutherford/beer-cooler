@@ -53,24 +53,26 @@ export const Checkout = ({
         <CheckoutPayment guest={false} />
       )}
       <div className='form-actions d-flex justify-content-between'>
-        <Link to='/cooler' className='btn pull-left btn-link text-muted pl-0'>
+        <Link to='/cooler' className='btn pull-left btn-link text-muted'>
           Back
         </Link>
         <div>
-          <Link to='/' className='btn btn-link text-muted mr-3'>
+          <Link to='/' className='btn btn-link text-muted'>
             Reset
           </Link>
 
-          <Link to='/review-order'>
-            <button
-              type='submit'
-              className='btn btn-primary mb-1'
-              onClick={onSubmit}
-              disabled={!(addressValid && paymentValid)}
-            >
-              Review Order <i className='fas fa-chevron-right'></i>
-            </button>
-          </Link>
+          {addressValid && paymentValid && (
+            <Link to='/review-order' className='ml-2'>
+              <button
+                type='submit'
+                className='btn btn-primary mb-1'
+                onClick={onSubmit}
+                disabled={!(addressValid && paymentValid)}
+              >
+                Review Order <i className='fas fa-chevron-right'></i>
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>
