@@ -491,6 +491,11 @@ button {
   .cooler-item img {
     width: 20%;
   }
+
+  .product-page img {
+    height: 500px;
+    margin: auto;
+  }
 }
 
 @media (max-width: 500px) {
